@@ -1,0 +1,10 @@
+#Tue Mar 11 13:39:47 CST 2014
+encoding/src/test/java=UTF-8
+org.eclipse.jdt.core.compiler.compliance=1.6
+encoding/src/main/resources=UTF-8
+org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+encoding/src/main/java=UTF-8
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
+eclipse.preferences.version=1
+encoding/src/test/resources=UTF-8
+org.eclipse.jdt.core.compiler.source=1.6
