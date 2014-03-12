@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Built-By: Xipeng
-Build-Jdk: 1.7.0_21
-Created-By: Maven Integration for Eclipse
-

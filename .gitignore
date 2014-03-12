@@ -1,5 +1,6 @@
 # Maven #
 target
+/fnlp-dev/target
 
 # IDEA #
 *.iml
@@ -12,3 +13,4 @@ target
 #large files#
 /data
 /tmp
+
