@@ -1,0 +1,43 @@
+## 本文件由TreeExtractor类使用
+## 格式由四部分组成，由%%隔开
+## 第一部分为标签词性
+## 第二部分为抽取模版
+## 第三部分为限制
+## 第四部分为同义词声明
+## “##”开头为注释部分
+
+%%
+##标签词性
+#stock# 实体名
+#time# 时间短语
+今天 时间短语
+
+%%
+##抽取模版
+查#time##stock#股价
+查#time##stock#的股价
+#time##stock#的股价
+#time##stock#的行情
+查#stock#的股价
+#stock#的股价
+#time##stock#的股价怎样
+#stock#是涨是跌
+#stock#涨了吗
+#stock#的价格
+#stock#的
+#time#的
+
+%%
+##限制
+#stock# NOT_CONTAIN_CONTENT 查 查看 查询 看 问
+#stock# NOT_CONTAIN_POS 时间短语
+#time# ONLY_CONTAIN_POS 时间短语
+ 
+
+%%
+##同义词声明
+价格 股价 成交价
+查 查看 查询 看 问
+股价 股票 行情
+怎样 样 怎样
+涨 跌

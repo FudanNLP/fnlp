@@ -1,0 +1,6 @@
+%pos[-2]%pos[-1]%y[0]
+%word[-1]%word[0]%y[0]
+%len[0]%y[0]
+%word[-1]%pos[-1]%y[0]
+%pos[-2]%word[-1]%y[0]
+
