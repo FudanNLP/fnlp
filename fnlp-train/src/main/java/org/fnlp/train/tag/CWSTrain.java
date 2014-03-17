@@ -122,7 +122,7 @@ public class CWSTrain {
 		// d.loadWithWeigth("D:/xpqiu/项目/自选/CLP2010/CWS/av-b-lut.txt",
 		// "AV");
 		CharClassDictionary dsurname = new CharClassDictionary();
-		dsurname.load("./data/knowledge/百家姓.txt", "姓");
+		dsurname.load("../data/knowledge/百家姓.txt", "姓");
 		templets.add(new CharClassTemplet(templets.gid++, new CharClassDictionary[]{dsurname}));
 		// templets.add(new DictionaryTemplet(d, gid++, 0, 1));
 		// templets.add(new DictionaryTemplet(d, gid++, -1,0, 1));

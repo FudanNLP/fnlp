@@ -12,17 +12,18 @@ public class PrepareDep {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+		String datapath = "../data";
 		
 		FNLPCorpus corpus = new FNLPCorpus();
 		//读FNLP数据
-		corpus.read("./data/FNLPDATA/ctb7.dat", null);
+		corpus.read(datapath + "/FNLPDATA/ctb7.dat", null);
 		//读自有数据
-		corpus.readOurCorpus("./data/ourdata",".txt","UTF8");
+		corpus.readOurCorpus(datapath + "/ourdata",".txt","UTF8");
 		
-		String path = "./data/FNLPDATA/all.pos";
+		String path = datapath + "/FNLPDATA/all.pos";
 		corpus.writeOne(path);
 		
-		String param = "-iter 25 -c 0.1 "+path+" ./models/dep.m";
+		String param = "-iter 50 -c 0.01 "+path+" ../models/dep.m";
 		JointParerTrainer.main(param.split(" +"));
 //		Malt2ParerTester.main(param.split(" +"));
 		

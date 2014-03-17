@@ -23,7 +23,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>org.fnlp</groupId>
+    	<groupId>org.fnlp.core</groupId>
     	<artifactId>fnlp-core</artifactId>
     	<version>${project.version}</version>
     </dependency>

@@ -20,12 +20,14 @@ public class PrepareSeg {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		String datapath = "../data";
 
-		String dictfile = "./data/FNLPDATA/dict.seg";
+		String dictfile = datapath + "/FNLPDATA/dict.seg";
 		//合并训练文件
-		String allfiles = "./data/FNLPDATA/all.seg";
-		String segfile = "./data/FNLPDATA/temp.seg";
-		String segfile_w = "./data/FNLPDATA/temp-w.seg";
+		String allfiles = datapath + "/FNLPDATA/all.seg";
+		String segfile = datapath + "/FNLPDATA/temp.seg";
+		String segfile_w = datapath + "/FNLPDATA/temp-w.seg";
 		//清理
 		(new File(dictfile)).delete();
 		(new File(allfiles)).delete();
@@ -34,11 +36,13 @@ public class PrepareSeg {
 
 		FNLPCorpus corpus = new FNLPCorpus();
 		//读自有数据
-		corpus.readOurCorpus("./data/ourdata",".txt","UTF8");
+		corpus.readOurCorpus(datapath + "/ourdata",".txt","UTF8");
 		//读分词文件
-		corpus.readCWS("./data/FNLPDATA/seg",".txt","UTF8");	
+		corpus.readCWS(datapath + "/FNLPDATA/seg",".txt","UTF8");	
+		//读分词+词性文件
+		corpus.readPOS(datapath + "/FNLPDATA/pos",".txt","UTF8");	
 		//读FNLP数据
-		corpus.read("./data/FNLPDATA/ctb7.dat", null);
+		corpus.read(datapath + "/FNLPDATA/ctb7.dat", null);
 
 
 		
@@ -49,24 +53,24 @@ public class PrepareSeg {
 		//词典转BMES
 		//搜狗词典
 		DICT dict = new DICT();
-		String sougou = "data/FNLPDATA/dict/SogouLabDic.dic.raw";
+		String sougou = datapath + "/FNLPDATA/dict/SogouLabDic.dic.raw";
 
 		dict.readSougou(sougou,2,3,"sougou");
 		//互动词典
-		String hudong = "data/FNLPDATA/dict/hudong.dic.all";
+		String hudong = datapath + "/FNLPDATA/dict/hudong.dic.all";
 		dict.readSougou(hudong,2,3,"");
 		//添加其他词典
-		dict.readDictionary("data/FNLPDATA/dict",".dic");
+		dict.readDictionary(datapath + "/FNLPDATA/dict",".dic");
 		
 		//添加其他词典
-		dict.readDictionaryWithFrequency("data/FNLPDATA/dict",".dic.freq");
+		dict.readDictionaryWithFrequency(datapath + "/FNLPDATA/dict",".dic.freq");
 		
 		
 
 
 		//添加词性字典
-		dict.readPOSDICT("data/FNLPDATA/词性字典", ".txt");
-		dict.readPOSDICT("data/FNLPDATA/dict-sogou-input/txt", ".txt");
+		dict.readPOSDICT(datapath + "/FNLPDATA/词性字典", ".txt");
+		dict.readPOSDICT(datapath + "/FNLPDATA/dict-sogou-input/txt", ".txt");
 
 		dict.toBMES(dictfile,3);
 		new File(dictfile).deleteOnExit();
@@ -77,19 +81,19 @@ public class PrepareSeg {
 			allfile.delete();
 		}
 		FileCombine fc=new FileCombine(); 
-		List<File> files = MyFiles.getAllFiles("./data/FNLPDATA/", ".seg");
-		fc.combineFiles(files, "./data/FNLPDATA/all.seg");  
+		List<File> files = MyFiles.getAllFiles(datapath + "/FNLPDATA/", ".seg");
+		fc.combineFiles(files, datapath + "/FNLPDATA/all.seg");  
 
 		//生成新字典		
-		dictfile = "./data/FNLPDATA/all.seg";
-		String dicfile = "./data/FNLPDATA/all.dict";
+		dictfile = datapath + "/FNLPDATA/all.seg";
+		String dicfile = datapath + "/FNLPDATA/all.dict";
 		DICT.BMES2DICT(dictfile,dicfile);
 
 
 		System.out.println(new Date().toString());
 		System.out.println("Done!");
 
-		String param = "-iter 100 -c 0.01  ./data/template-seg ./data/FNLPDATA/all.seg ./models/seg.m";
+		String param = "-iter 100 -c 0.01  ../data/template-seg ../data/FNLPDATA/all.seg ../models/seg.m";
 		CWSTrain.main(param.split(" +"));
 
 

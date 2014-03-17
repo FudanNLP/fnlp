@@ -65,6 +65,8 @@ public class Sentence extends Instance {
 			throw new IllegalArgumentException(
 					"index should be less than length or great than 0!");
 		Target target = (Target)this.target;
+		if(target==null)
+			return "";
 		return target.getDepClass(n);
 	}
 //>>>

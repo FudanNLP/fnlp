@@ -244,7 +244,47 @@ public class FNLPCorpus {
 		
 	}
 	/**
+	 * 读分词/词性的文件
+	 * 文件格式为：
+	 * word1/pos1 word2/pos2 ... wordn/posn
+	 * @param path
+	 * @param suffix
+	 * @param charset
+	 * @throws IOException
+	 */
+	public void readPOS(String path, String suffix, String charset) throws IOException {
+		List<File> files = MyFiles.getAllFiles(path, suffix);//".txt"
+		
+		Iterator<File> it = files.iterator();
+		while(it.hasNext()){
+			BufferedReader bfr =null;
+			File file = it.next();
+			try {
+				FileInputStream in = new FileInputStream(file);
+				bfr = new BufferedReader(new UnicodeReader(in,charset));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			FNLPDoc doc = new FNLPDoc();
+			doc.name = file.getName();
+			
+			String line = null;
+			while ((line = bfr.readLine()) != null) {
+				line = line.trim();
+				if (line.matches("^$"))
+					continue;
+				FNLPSent sent = new FNLPSent();
+				sent.parseTagedLine(line);
+				doc.add(sent);
+			}			
+			add(doc);
+		}
+	}
+	
+	/**
 	 * 读只分词的文件
+	 * 文件格式为：
+	 * word1 word2 ... wordn
 	 * @param path
 	 * @param suffix
 	 * @param charset
@@ -272,7 +312,7 @@ public class FNLPCorpus {
 				if (line.matches("^$"))
 					continue;
 				FNLPSent sent = new FNLPSent();
-				sent.put(line);
+				sent.parseSegedLine(line);
 				doc.add(sent);
 			}			
 			add(doc);

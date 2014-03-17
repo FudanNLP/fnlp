@@ -1,8 +1,12 @@
 package org.fnlp.train.prepare;
 
-import java.io.File;
+import gnu.trove.iterator.TIntIntIterator;
+import gnu.trove.iterator.TObjectIntIterator;
+import gnu.trove.list.array.TFloatArrayList;
+import gnu.trove.map.hash.TIntIntHashMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.Arrays;
 
 import org.fnlp.ml.classifier.linear.Linear;
@@ -12,15 +16,8 @@ import org.fnlp.ml.types.alphabet.StringFeatureAlphabet;
 import org.fnlp.nlp.pipe.seq.templet.TempletGroup;
 import org.fnlp.nlp.tag.ModelIO;
 import org.fnlp.util.MyArrays;
-import org.fnlp.util.MyCollection;
 import org.fnlp.util.MyStrings;
 import org.fnlp.util.exception.LoadModelException;
-
-import gnu.trove.iterator.TIntIntIterator;
-import gnu.trove.iterator.TObjectIntIterator;
-import gnu.trove.list.array.TFloatArrayList;
-import gnu.trove.map.hash.TIntIntHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * 优化模型文件，去掉无用的特征

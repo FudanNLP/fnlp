@@ -139,7 +139,7 @@ public class POSTrain {
 		templets.add(new StringTypeTemplet(templets.gid++));
 
 		CharClassDictionary dsurname = new CharClassDictionary();
-		dsurname.load("./data/knowledge/百家姓.txt", "姓");
+		dsurname.load("../data/knowledge/百家姓.txt", "姓");
 		templets.add(new CharClassTemplet(templets.gid++, new CharClassDictionary[]{dsurname}));
 
 		if (cl != null)

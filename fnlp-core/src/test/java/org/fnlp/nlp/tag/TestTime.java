@@ -21,27 +21,27 @@ public class TestTime {
 
 
 	public static void main(String[] args) throws Exception{
-		file = "../FudanNLP/example-data/data-tag.txt";
+		file = "../example-data/data-tag.txt";
 		strs = MyCollection.loadList(file,null);
 		for(m=1;m<=4;m++){
 			System.out.println(m);
 			MemoryStatic.start();
 			switch(m){
 			case 1: 
-				stag = new CWSTagger("./models/seg.m");
+				stag = new CWSTagger("../models/seg.m");
 				System.out.println("分词");
 				break;
 			case 2: 
-				ttag = new POSTagger("models/seg.m","models/pos.m");
+				ttag = new POSTagger("../models/seg.m","../models/pos.m");
 				System.out.println("词性标注");
 				break;
 			case 3: 
-				ttag = new POSTagger("models/seg.m","models/pos.m"); 
-				parser = new JointParser("models/dep.m");
+				ttag = new POSTagger("../models/seg.m","../models/pos.m"); 
+				parser = new JointParser("../models/dep.m");
 				System.out.println("句法分析");
 				break;
 			case 4:
-				normalizer = new TimeNormalizer("./models/TimeExp.m");
+				normalizer = new TimeNormalizer("../models/TimeExp.m");
 				System.out.println("时间");
 				break;
 			}

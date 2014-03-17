@@ -141,8 +141,29 @@ public class FNLPSent {
 	 * 处理只分词的字符串
 	 * @param line
 	 */
-	public void put(String line) {
+	public void parseSegedLine(String line) {
 		words = line.split("(\\s|　| |\\t)+");		
+	}
+	
+	/**
+	 * 处理分词+词性的字符串
+	 * 格式为：
+	 * word1/pos1 word2/pos2 ... wordn/posn
+	 * @param line
+	 */
+	public void parseTagedLine(String line) {
+		String[] toks = line.split("(\\s|　| |\\t)+");
+		words = new String[toks.length];
+		tags = new String[toks.length];
+		for(int i=0;i<toks.length;i++){
+			String[] tt = toks[i].split("/");
+			if(tt.length!=2)
+				System.err.println("Wrong Format");
+			words[i] = tt[0];
+			tags[i]=tt[1];
+		}
+		
+		
 	}
 
 	public boolean hasTag() {

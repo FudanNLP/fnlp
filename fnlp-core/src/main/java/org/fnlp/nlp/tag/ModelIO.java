@@ -21,6 +21,7 @@ package org.fnlp.nlp.tag;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,6 +42,11 @@ public class ModelIO {
 	public static Linear cl;
 
 	public static void saveTo(String modelfile, TempletGroup templets, Linear cl) throws IOException {
+		File  f = new File(modelfile);
+		File p = f.getParentFile();
+		if(p!=null&&!p.exists()){
+			p.mkdirs();
+		}
 		ObjectOutputStream out = new ObjectOutputStream(
 				new BufferedOutputStream(new GZIPOutputStream(
 						new FileOutputStream(modelfile))));

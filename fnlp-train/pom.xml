@@ -23,33 +23,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>org.fnlp</groupId>
+    	<groupId>org.fnlp.core</groupId>
     	<artifactId>fnlp-core</artifactId>
     	<version>${project.version}</version>
     </dependency>
   </dependencies>
-  <build>  
- <plugins>  
-  <plugin>  
-   <groupId>org.codehaus.mojo</groupId>  
-   <artifactId>exec-maven-plugin</artifactId>  
-   <version>1.1.1</version>  
-   <executions>  
-    <execution>  
-     <phase>train</phase>  
-     <goals>  
-      <goal>train-seg</goal>  
-     </goals>  
-     <configuration>  
-      <mainClass>org.fnlp.train.prepare.PrepareSeg</mainClass>  
-      <arguments>  
-       <argument>arg0</argument>  
-       <argument>arg1</argument>  
-      </arguments>  
-     </configuration>  
-    </execution>  
-   </executions>  
-  </plugin>  
- </plugins>  
-</build>
 </project>
