@@ -22,7 +22,7 @@ public class BatchTrain {
 		System.out.println("Done!");
 		System.out.println("Seg Total Time: "+(time1-time0)/60000.0f+"min");
 		System.out.println("Tag Total Time: "+(time2-time1)/60000.0f+"min");
-		System.out.println("Dep Total Time: "+(time3-time3)/60000.0f+"min");
+		System.out.println("Dep Total Time: "+(time3-time2)/60000.0f+"min");
 		
 
 	}

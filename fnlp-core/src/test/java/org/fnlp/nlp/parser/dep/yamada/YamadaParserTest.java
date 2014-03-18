@@ -1,17 +1,12 @@
 package org.fnlp.nlp.parser.dep.yamada;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-
+import org.fnlp.nlp.cn.tag.POSTaggerX;
+import org.fnlp.nlp.parser.dep.YamadaParser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import org.fnlp.nlp.cn.tag.POSTaggerX;
-import org.fnlp.nlp.parser.dep.YamadaParser;
 
 public class YamadaParserTest {
 
