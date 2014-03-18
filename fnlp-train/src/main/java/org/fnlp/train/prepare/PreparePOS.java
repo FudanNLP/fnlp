@@ -32,6 +32,8 @@ public class PreparePOS {
 		FNLPCorpus corpus = new FNLPCorpus();
 		//读FNLP数据
 		corpus.read(datapath + "/FNLPDATA/ctb7.dat", null);
+		//读分词+词性文件
+		corpus.readPOS(datapath + "/FNLPDATA/pos",".txt","UTF8");	
 		//读自有数据
 		corpus.readOurCorpus(datapath + "/ourdata",".txt","UTF8");
 		
@@ -64,8 +66,8 @@ public class PreparePOS {
 		
 		FileCombine fc=new FileCombine(); 
 		List<File> files = MyFiles.getAllFiles(datapath + "/FNLPDATA/", ".pos");
-		List<File> files2 = MyFiles.getAllFiles(datapath + "/FNLPDATA/pos/", ".txt");
-		files.addAll(files2);
+//		List<File> files2 = MyFiles.getAllFiles(datapath + "/FNLPDATA/pos/", ".txt");
+//		files.addAll(files2);
 		fc.combineFiles(files, allfiles);  
 		
 		

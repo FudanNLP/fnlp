@@ -12,11 +12,13 @@ import org.fnlp.util.MyCollection;
 import org.fnlp.util.MyFiles;
 
 public class POSTaggerTest {
-	String s1;
-	POSTagger pos;
+	static String s1;
+	static POSTagger pos;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		s1 = MyFiles.loadString("../example-data/data-tag.txt");
+		pos = new POSTagger("../models/seg.m", "../models/pos.m");
 	}
 
 	@AfterClass
@@ -25,8 +27,7 @@ public class POSTaggerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		s1 = MyFiles.loadString("./example-data/data-tag.txt");
-		pos = new POSTagger("./models/seg.m", "./models/pos.m");
+		
 	}
 
 	@After
