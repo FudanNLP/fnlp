@@ -1,7 +1,10 @@
 FNLP (formerly FudanNLP)
 ====
 之前的FudanNLP项目地址为：http://code.google.com/p/fudannlp
-
+主要改变：
+1.  FudanNLP改为FNLP.
+2. package名由edu.fudan换成了 org.fnlp
+3. 用maven管理
 
 介绍(Introduction)
 -----------------------------------  
@@ -11,11 +14,11 @@ FNLP(formerly FudanNLP)主要是为中文自然语言处理而开发的工具包
 
 FNLP is developed for Chinese natural language processing (NLP), which also includes some machine learning algorithms and [DataSet data sets] to achieve the NLP tasks. FudanNLP is distributed under LGPL3.0.
 
-If you're new to FNLP, check out the [QuickStart Quick Start (使用说明)] page, [http://vdisk.weibo.com/s/iyiB0 FNLP Book] or [https://fudannlp.googlecode.com/svn/FudanNLP-1.5-API/java-docs/index.html  Java-docs].
+If you're new to FNLP, check out the [Quick Start (使用说明)](http://www.fnlp.org/fnlp-intro) page, or [Java-docs](https://fudannlp.googlecode.com/svn/FudanNLP-1.5-API/java-docs/index.html).
 
-You can also use the [http://jkx.fudan.edu.cn/nlp Demo Website(演示网站)] so that you may check the functionality prior to downloading.
+You can also use the [Demo Website(演示网站)](http://jkx.fudan.edu.cn/nlp) so that you may check the functionality prior to downloading.
 
-有遇到FNLP不能处理的例子，请到这里提交: [http://code.google.com/p/fudannlp/wiki/CollaborativeCollection 协同数据收集]，有问题请查看[FAQ]或到[http://q.weibo.com/960122 微群]、QQ群（253541693）讨论。*
+有遇到FNLP不能处理的例子，请到这里提交: [协同数据收集](http://code.google.com/p/fudannlp/wiki/CollaborativeCollection)，有问题请查看[FAQ](http://www.fnlp.org/fnlp-faq)或到 QQ群（253541693）讨论。
 
 
 功能(Functions)
