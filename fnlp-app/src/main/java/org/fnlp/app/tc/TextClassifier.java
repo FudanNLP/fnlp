@@ -1,20 +1,20 @@
 package org.fnlp.app.tc;
 
-import edu.fudan.data.reader.Reader;
-import edu.fudan.ml.classifier.LabelParser.Type;
-import edu.fudan.ml.classifier.Predict;
-import edu.fudan.ml.classifier.TPredict;
-import edu.fudan.ml.classifier.linear.Linear;
-import edu.fudan.ml.classifier.linear.OnlineTrainer;
-import edu.fudan.ml.types.Instance;
-import edu.fudan.ml.types.InstanceSet;
-import edu.fudan.ml.types.alphabet.AlphabetFactory;
-import edu.fudan.nlp.pipe.NGram;
-import edu.fudan.nlp.pipe.Pipe;
-import edu.fudan.nlp.pipe.SeriesPipes;
-import edu.fudan.nlp.pipe.StringArray2IndexArray;
-import edu.fudan.nlp.pipe.Target2Label;
-import edu.fudan.util.exception.LoadModelException;
+import org.fnlp.data.reader.Reader;
+import org.fnlp.ml.classifier.LabelParser.Type;
+import org.fnlp.ml.classifier.Predict;
+import org.fnlp.ml.classifier.TPredict;
+import org.fnlp.ml.classifier.linear.Linear;
+import org.fnlp.ml.classifier.linear.OnlineTrainer;
+import org.fnlp.ml.types.Instance;
+import org.fnlp.ml.types.InstanceSet;
+import org.fnlp.ml.types.alphabet.AlphabetFactory;
+import org.fnlp.nlp.pipe.NGram;
+import org.fnlp.nlp.pipe.Pipe;
+import org.fnlp.nlp.pipe.SeriesPipes;
+import org.fnlp.nlp.pipe.StringArray2IndexArray;
+import org.fnlp.nlp.pipe.Target2Label;
+import org.fnlp.util.exception.LoadModelException;
 
 /**
  * 文本分类简单封装

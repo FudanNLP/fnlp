@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.apache.lucene.analysis.TokenStream;
 
-import edu.fudan.nlp.cn.Tags;
+import org.fnlp.nlp.cn.Tags;
 
 public final class POSTaggingFilter extends FilteringTokenFilter {
 

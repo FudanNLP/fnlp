@@ -7,9 +7,9 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.util.Version;
 
-import edu.fudan.nlp.cn.CNFactory;
-import edu.fudan.nlp.cn.CNFactory.Models;
-import edu.fudan.util.exception.LoadModelException;
+import org.fnlp.nlp.cn.CNFactory;
+import org.fnlp.nlp.cn.CNFactory.Models;
+import org.fnlp.util.exception.LoadModelException;
 /**
  * 基于FudanNLP的Lucene分析器
  * @author xpqiu
