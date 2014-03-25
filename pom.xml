@@ -36,6 +36,7 @@
   	<module>fnlp-core</module>
   	<module>fnlp-dev</module>
   	<module>fnlp-train</module>
+    <module>fnlp-demo</module>
   </modules>
   <build>
     <plugins>
