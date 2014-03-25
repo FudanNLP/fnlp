@@ -1,46 +1,46 @@
 FNLP (formerly FudanNLP)
 ====
-Ö®Ç°µÄFudanNLPÏîÄ¿µØÖ·Îª£ºhttp://code.google.com/p/fudannlp
+ä¹‹å‰çš„FudanNLPé¡¹ç›®åœ°å€ä¸ºï¼šhttp://code.google.com/p/fudannlp
 
 
-½éÉÜ(Introduction)
+ä»‹ç»(Introduction)
 -----------------------------------  
-FNLP(formerly FudanNLP)Ö÷ÒªÊÇÎªÖĞÎÄ×ÔÈ»ÓïÑÔ´¦Àí¶ø¿ª·¢µÄ¹¤¾ß°ü£¬Ò²°üº¬ÎªÊµÏÖÕâĞ©ÈÎÎñµÄ»úÆ÷Ñ§Ï°Ëã·¨ºÍÊı¾İ¼¯¡£
-±¾¹¤¾ß°ü¼°Æä°üº¬Êı¾İ¼¯Ê¹ÓÃLGPL3.0Ğí¿ÉÖ¤¡£
+FNLP(formerly FudanNLP)ä¸»è¦æ˜¯ä¸ºä¸­æ–‡è‡ªç„¶è¯­è¨€å¤„ç†è€Œå¼€å‘çš„å·¥å…·åŒ…ï¼Œä¹ŸåŒ…å«ä¸ºå®ç°è¿™äº›ä»»åŠ¡çš„æœºå™¨å­¦ä¹ ç®—æ³•å’Œæ•°æ®é›†ã€‚
+æœ¬å·¥å…·åŒ…åŠå…¶åŒ…å«æ•°æ®é›†ä½¿ç”¨LGPL3.0è®¸å¯è¯ã€‚
 
 
 FNLP is developed for Chinese natural language processing (NLP), which also includes some machine learning algorithms and [DataSet data sets] to achieve the NLP tasks. FudanNLP is distributed under LGPL3.0.
 
-If you're new to FNLP, check out the [QuickStart Quick Start (Ê¹ÓÃËµÃ÷)] page, [http://vdisk.weibo.com/s/iyiB0 FNLP Book] or [https://fudannlp.googlecode.com/svn/FudanNLP-1.5-API/java-docs/index.html  Java-docs].
+If you're new to FNLP, check out the [QuickStart Quick Start (ä½¿ç”¨è¯´æ˜)] page, [http://vdisk.weibo.com/s/iyiB0 FNLP Book] or [https://fudannlp.googlecode.com/svn/FudanNLP-1.5-API/java-docs/index.html  Java-docs].
 
-You can also use the [http://jkx.fudan.edu.cn/nlp Demo Website(ÑİÊ¾ÍøÕ¾)] so that you may check the functionality prior to downloading.
+You can also use the [http://jkx.fudan.edu.cn/nlp Demo Website(æ¼”ç¤ºç½‘ç«™)] so that you may check the functionality prior to downloading.
 
-ÓĞÓöµ½FNLP²»ÄÜ´¦ÀíµÄÀı×Ó£¬Çëµ½ÕâÀïÌá½»: [http://code.google.com/p/fudannlp/wiki/CollaborativeCollection Ğ­Í¬Êı¾İÊÕ¼¯]£¬ÓĞÎÊÌâÇë²é¿´[FAQ]»òµ½[http://q.weibo.com/960122 Î¢Èº]¡¢QQÈº£¨253541693£©ÌÖÂÛ¡£*
+æœ‰é‡åˆ°FNLPä¸èƒ½å¤„ç†çš„ä¾‹å­ï¼Œè¯·åˆ°è¿™é‡Œæäº¤: [http://code.google.com/p/fudannlp/wiki/CollaborativeCollection ååŒæ•°æ®æ”¶é›†]ï¼Œæœ‰é—®é¢˜è¯·æŸ¥çœ‹[FAQ]æˆ–åˆ°[http://q.weibo.com/960122 å¾®ç¾¤]ã€QQç¾¤ï¼ˆ253541693ï¼‰è®¨è®ºã€‚*
 
 
-¹¦ÄÜ(Functions)
+åŠŸèƒ½(Functions)
 ----
-		ĞÅÏ¢¼ìË÷£º ÎÄ±¾·ÖÀà ĞÂÎÅ¾ÛÀà
-		ÖĞÎÄ´¦Àí£º ÖĞÎÄ·Ö´Ê ´ÊĞÔ±ê×¢ ÊµÌåÃûÊ¶±ğ ¹Ø¼ü´Ê³éÈ¡ ÒÀ´æ¾ä·¨·ÖÎö Ê±¼ä¶ÌÓïÊ¶±ğ
-		½á¹¹»¯Ñ§Ï°£º ÔÚÏßÑ§Ï° ²ã´Î·ÖÀà ¾ÛÀà ¾«È·ÍÆÀí
+		ä¿¡æ¯æ£€ç´¢ï¼š æ–‡æœ¬åˆ†ç±» æ–°é—»èšç±»
+		ä¸­æ–‡å¤„ç†ï¼š ä¸­æ–‡åˆ†è¯ è¯æ€§æ ‡æ³¨ å®ä½“åè¯†åˆ« å…³é”®è¯æŠ½å– ä¾å­˜å¥æ³•åˆ†æ æ—¶é—´çŸ­è¯­è¯†åˆ«
+		ç»“æ„åŒ–å­¦ä¹ ï¼š åœ¨çº¿å­¦ä¹  å±‚æ¬¡åˆ†ç±» èšç±» ç²¾ç¡®æ¨ç†
 
 
-<font color="#FF0000"> 2014.3.11 ÏîÄ¿¸üÃûÎªFNLP,Ç¨ÒÆÖÁGitHub </font> [ChangeLog ¸üĞÂÈÕÖ¾(ChangeLog)] 
+<font color="#FF0000"> 2014.3.11 é¡¹ç›®æ›´åä¸ºFNLP,è¿ç§»è‡³GitHub </font> [ChangeLog æ›´æ–°æ—¥å¿—(ChangeLog)] 
 
 
  
-[ĞÔÄÜ²âÊÔ(Benchmark)] (Benchmark)
-[¿ª·¢¼Æ»®(Development Plan)] (DevPlan)
-[¿ª·¢ÈËÔ±ÁĞ±í(Developers)](People)
+[æ€§èƒ½æµ‹è¯•(Benchmark)] (Benchmark)
+[å¼€å‘è®¡åˆ’(Development Plan)] (DevPlan)
+[å¼€å‘äººå‘˜åˆ—è¡¨(Developers)](People)
 
-Ê¹ÓÃ(Usages)
+ä½¿ç”¨(Usages)
 ----
-»¶Ó­´ó¼ÒÌá¹©·ÇJavaÓïÑÔµÄ½Ó¿Ú¡£
+æ¬¢è¿å¤§å®¶æä¾›éJavaè¯­è¨€çš„æ¥å£ã€‚
 
-ÒıÓÃ(Citation)
+å¼•ç”¨(Citation)
 ----
 If you would like to acknowledge our efforts, please cite the following paper.
-Èç¹ûÎÒÃÇµÄ¹¤×÷¶ÔÄúÓĞ°ïÖú£¬ÇëÒıÓÃÏÂÃæÂÛÎÄ¡£
+å¦‚æœæˆ‘ä»¬çš„å·¥ä½œå¯¹æ‚¨æœ‰å¸®åŠ©ï¼Œè¯·å¼•ç”¨ä¸‹é¢è®ºæ–‡ã€‚
 
 		Xipeng Qiu, Qi Zhang and Xuanjing Huang, FudanNLP: A Toolkit for Chinese Natural Language Processing, In Proceedings of Annual Meeting of the Association for Computational Linguistics (ACL), 2013.*
 
@@ -52,6 +52,6 @@ If you would like to acknowledge our efforts, please cite the following paper.
 		year = {2013},
 		}
 
-ÔÚ[ÕâÀï](http://jkx.fudan.edu.cn/~xpqiu/) »ò  [DBLP](http://scholar.google.com/citations?sortby=pubdate&hl=en&user=Pq4Yp_kAAAAJ&view_op=list_works Google Scholar] »ò [http://www.informatik.uni-trier.de/~ley/pers/hd/q/Qiu:Xipeng.html) ¿ÉÒÔÕÒµ½¸ü¶àµÄÏà¹ØÂÛÎÄ¡£
+åœ¨[è¿™é‡Œ](http://jkx.fudan.edu.cn/~xpqiu/) æˆ–  [DBLP](http://scholar.google.com/citations?sortby=pubdate&hl=en&user=Pq4Yp_kAAAAJ&view_op=list_works Google Scholar] æˆ– [http://www.informatik.uni-trier.de/~ley/pers/hd/q/Qiu:Xipeng.html) å¯ä»¥æ‰¾åˆ°æ›´å¤šçš„ç›¸å…³è®ºæ–‡ã€‚
 
 We used [JProfiler](http://www.ej-technologies.com/products/jprofiler/overview.html ) to help optimize the code.
