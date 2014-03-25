@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 
 import org.fnlp.ml.types.InstanceSet;
 /**
- * 调用Penn2Malt转换
+ * CTB转为FNLP格式
  * @author Xipeng
  *
  */
