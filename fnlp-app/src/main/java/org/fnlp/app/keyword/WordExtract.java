@@ -10,8 +10,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import edu.fudan.nlp.cn.tag.CWSTagger;
-import edu.fudan.nlp.corpus.StopWords;
+import org.fnlp.nlp.cn.tag.CWSTagger;
+import org.fnlp.nlp.corpus.StopWords;
 
 /**
  * 基于TextRank的关键词抽取

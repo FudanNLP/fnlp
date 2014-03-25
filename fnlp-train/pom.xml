@@ -24,7 +24,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.fnlp.core</groupId>
+			<groupId>org.fnlp</groupId>
 			<artifactId>fnlp-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>

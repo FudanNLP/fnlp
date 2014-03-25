@@ -2,8 +2,8 @@ package org.fnlp.app.keyword;
 
 import java.util.Map;
 
-import edu.fudan.nlp.cn.tag.CWSTagger;
-import edu.fudan.nlp.corpus.StopWords;
+import org.fnlp.nlp.cn.tag.CWSTagger;
+import org.fnlp.nlp.corpus.StopWords;
 
 public abstract class AbstractExtractor {
 
