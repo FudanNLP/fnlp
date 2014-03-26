@@ -17,7 +17,7 @@ public class TimeExpressionRecognition {
 				"今天我本想去世博会，但是人太多了，直到晚上9点人还是那么多。" +
 				"考虑到明天和后天人还是那么多，决定下周日再去。";
 		TimeNormalizer normalizer;
-		normalizer = new TimeNormalizer("./models/TimeExp.m");
+		normalizer = new TimeNormalizer("../models/time.m");
 		normalizer.parse(target);
 		TimeUnit[] unit = normalizer.getTimeUnit();
 		for(int i = 0; i < unit.length; i++){

@@ -33,9 +33,6 @@ public final class SentenceTokenizer extends Tokenizer {
     super(reader);
   }
 
-  public SentenceTokenizer(AttributeSource source, Reader reader) {
-    super(source, reader);
-  }
 
   public SentenceTokenizer(AttributeFactory factory, Reader reader) {
     super(factory, reader);
@@ -93,6 +90,7 @@ public final class SentenceTokenizer extends Tokenizer {
 
   @Override
   public void reset() throws IOException {
+	  super.reset();
     tokenStart = tokenEnd = 0;
   }
 

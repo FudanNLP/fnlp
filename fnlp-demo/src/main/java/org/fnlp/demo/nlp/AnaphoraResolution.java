@@ -29,7 +29,7 @@ public class AnaphoraResolution {
 		String str5[][][] = new String[1][2][str3.length];
 		str5[0][0] = str3;
 		str5[0][1] = str4;
-		Anaphora aa2 = new Anaphora("./models/ar.m");
+		Anaphora aa2 = new Anaphora("../models/ar.m");
 		LinkedList<EntityGroup> res3 = aa2.resolve(str5,str2);
 		System.out.println(res3);
 	}

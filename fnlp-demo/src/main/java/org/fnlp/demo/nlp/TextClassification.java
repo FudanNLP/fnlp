@@ -27,12 +27,12 @@ public class TextClassification {
 	/**
 	 * 训练数据路径
 	 */
-	private static String trainDataPath = "./example-data/text-classification/";
+	private static String trainDataPath = "../example-data/text-classification/";
 
 	/**
 	 * 模型文件
 	 */
-	private static String modelFile = "./example-data/text-classification/model.gz";
+	private static String modelFile = "../example-data/text-classification/model.gz";
 
 	public static void main(String[] args) throws Exception {
 

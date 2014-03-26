@@ -1,7 +1,5 @@
 package org.fnlp.demo.nlp;
 
-import java.util.ArrayList;
-
 import org.fnlp.ml.types.Dictionary;
 import org.fnlp.nlp.cn.tag.CWSTagger;
 import org.fnlp.nlp.cn.tag.POSTagger;
@@ -24,8 +22,8 @@ public class PartsOfSpeechTag {
 	public static void main(String[] args) throws Exception {
 
 		
-		CWSTagger cws = new CWSTagger("./models/seg.m");
-		tag = new POSTagger(cws,"models/pos.m");
+		CWSTagger cws = new CWSTagger("../models/seg.m");
+		tag = new POSTagger(cws,"../models/pos.m");
 		
 		System.out.println("得到支持的词性标签集合");
 		System.out.println(tag.getSupportedTags());
@@ -45,13 +43,13 @@ public class PartsOfSpeechTag {
 		System.out.println(s);		
 		System.out.println();
 		
-		CWSTagger cws2 = new CWSTagger("./models/seg.m", new Dictionary("./models/dict.txt"));
+		CWSTagger cws2 = new CWSTagger("../models/seg.m", new Dictionary("../models/dict.txt"));
 		
 		//bool值指定该dict是否用于cws分词（分词和词性可以使用不同的词典）
 		tag = new POSTagger(cws2, "models/pos.m"
-				, new Dictionary("./models/dict.txt"), true);//true就替换了之前的dict.txt
+				, new Dictionary("../models/dict.txt"), true);//true就替换了之前的dict.txt
 		tag.removeDictionary(false);//不移除分词的词典
-		tag.setDictionary(new Dictionary("./models/dict.txt"), false);//设置POS词典，分词使用原来设置
+		tag.setDictionary(new Dictionary("../models/dict.txt"), false);//设置POS词典，分词使用原来设置
 		
 		String str2 = "媒体计算研究所成立了，高级数据挖掘很难。乐phone很好！";
 		String s2 = tag.tag(str2);
@@ -67,7 +65,7 @@ public class PartsOfSpeechTag {
 		System.out.println(s22);
 		System.out.println();
 		
-		POSTagger tag1 = new POSTagger("./models/pos.m");
+		POSTagger tag1 = new POSTagger("../models/pos.m");
 		String str1 = "媒体计算 研究所 成立 了 , 高级 数据挖掘 很 难";
 		String[] w = str1.split(" ");
 		String[] s1 = tag1.tagSeged(w);
@@ -77,7 +75,7 @@ public class PartsOfSpeechTag {
 		}
 		System.out.println("\n");
 		
-		POSTagger tag3 = new POSTagger("./models/pos.m", new Dictionary("./models/dict.txt"));
+		POSTagger tag3 = new POSTagger("../models/pos.m", new Dictionary("../models/dict.txt"));
 		String str3 = "媒体计算 研究所 成立 了 , 高级 数据挖掘 很 难 ";
 		String[] w3 = str3.split(" ");
 		String[] s3 = tag3.tagSeged(w3);
@@ -90,8 +88,8 @@ public class PartsOfSpeechTag {
 		//????????????????????????????
 		
 		System.out.println("重新构造");
-		cws = new CWSTagger("./models/seg.m");
-		tag = new POSTagger(cws,"models/pos.m");
+		cws = new CWSTagger("../models/seg.m");
+		tag = new POSTagger(cws,"../models/pos.m");
 		str = "媒体计算研究所成立了, 高级数据挖掘很难";
 		System.out.println(tag.tag(str));
 		String[][] sa = tag.tag2Array(str);
@@ -102,7 +100,7 @@ public class PartsOfSpeechTag {
 			System.out.println();
 		}
 		
-		String s4 = tag.tagFile("./example-data/data-tag.txt");
+		String s4 = tag.tagFile("../example-data/data-tag.txt");
 		System.out.println("\n处理文件：");
 		System.out.println(s4);
 	}

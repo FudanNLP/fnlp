@@ -92,10 +92,10 @@ public class MyDocumentWriter {
 		
 	}
 	public static void main(String args[]) throws Exception{
-		FileGroupReader.tag = new POSTagger("./models/seg.m", "./models/pos.m");
+		FileGroupReader.tag = new POSTagger("../models/seg.m", "../models/pos.m");
 		
-		MyDocumentWriter dr1 = new MyDocumentWriter("./tmp/ar");
-		dr1.writeOut("./tmp/ar-train.txt");
+		MyDocumentWriter dr1 = new MyDocumentWriter("../tmp/ar");
+		dr1.writeOut("../tmp/ar-train.txt");
 		System.out.print("已经写入文档");
 	}
 }

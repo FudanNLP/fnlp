@@ -62,12 +62,12 @@ import org.fnlp.nlp.pipe.Target2Label;
 		/**
 		 * 训练文件
 		 */
-		private String trainFile = "./tmp/ar-train.txt";
+		private String trainFile = "../tmp/ar-train.txt";
 		
 		/**
 		 * 模型文件
 		 */
-		private static  String modelFile =  "./models/ar.m";
+		private static  String modelFile =  "../models/ar.m";
 
 		public static void main(String[] args) throws Exception {
 
@@ -76,7 +76,7 @@ import org.fnlp.nlp.pipe.Target2Label;
 			Linear cl =Linear.loadFrom(modelFile);
 			int i = 0;int j = 0;double ij = 0.0;int kk = 0;int jj = 0;int nn = 0;int n = 0;
 			InstanceSet test = new InstanceSet(cl.getPipe(),cl.getAlphabetFactory());
-			SimpleFileReader sfr = new SimpleFileReader("./tmp/ar-train.txt",true);
+			SimpleFileReader sfr = new SimpleFileReader("../tmp/ar-train.txt",true);
 			
 			ArrayList<Instance> list1 = new ArrayList<Instance>();
 			while (sfr.hasNext())
