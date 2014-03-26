@@ -15,8 +15,8 @@ public class KeyWordExtraction {
 	public static void main(String[] args) throws Exception {
 		
 		
-		StopWords sw= new StopWords("models/stopwords");
-		CWSTagger seg = new CWSTagger("models/seg.m");
+		StopWords sw= new StopWords("../models/stopwords");
+		CWSTagger seg = new CWSTagger("../models/seg.m");
 		AbstractExtractor key = new WordExtract(seg,sw);
 		
 		System.out.println(key.extract("甬温线特别重大铁路交通事故车辆经过近24小时的清理工作，26日深夜已经全部移出事故现场，之前埋下的D301次动车车头被挖出运走", 20, true));

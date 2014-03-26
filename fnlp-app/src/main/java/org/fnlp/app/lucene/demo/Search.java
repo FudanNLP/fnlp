@@ -16,10 +16,10 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.fnlp.app.lucene.FNLPAnalyzer;
+import org.fnlp.nlp.cn.CNFactory;
+import org.fnlp.nlp.cn.CNFactory.Models;
+import org.fnlp.util.exception.LoadModelException;
 
-import edu.fudan.nlp.cn.CNFactory;
-import edu.fudan.nlp.cn.CNFactory.Models;
-import edu.fudan.util.exception.LoadModelException;
 
 public class Search {
 	/**
@@ -29,19 +29,19 @@ public class Search {
 	 * @throws LoadModelException 
 	 */
 	public static void main(String[] args) throws IOException, ParseException, LoadModelException {
-		String indexPath = "D:\\myapp\\indexDir";
+		String indexPath = "../tmp/lucene";
 		System.out.println("Index directory '" + indexPath);
 		Date start = new Date();
 		Directory dir = FSDirectory.open(new File(indexPath));
 		//需要先初始化 CNFactory
-		CNFactory factory = CNFactory.getInstance("./models",Models.SEG_TAG);
-		Analyzer analyzer = new FNLPAnalyzer(Version.LUCENE_40);
+		CNFactory factory = CNFactory.getInstance("../models",Models.SEG_TAG);
+		Analyzer analyzer = new FNLPAnalyzer(Version.LUCENE_47);
 		// Now search the index:
 		DirectoryReader ireader = DirectoryReader.open(dir);
 		IndexSearcher isearcher = new IndexSearcher(ireader);
 		// Parse a simple query that searches for "text":
-		QueryParser parser = new QueryParser(Version.LUCENE_40, "content", analyzer);
-		Query query = parser.parse("中国");
+		QueryParser parser = new QueryParser(Version.LUCENE_47, "content", analyzer);
+		Query query = parser.parse("保修费用");
 		ScoreDoc[] hits = isearcher.search(query, null, 1000).scoreDocs;
 		
 		System.out.println("Hello World");

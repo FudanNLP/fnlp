@@ -17,10 +17,10 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import org.fnlp.app.lucene.FNLPAnalyzer;
+import org.fnlp.nlp.cn.CNFactory;
+import org.fnlp.nlp.cn.CNFactory.Models;
+import org.fnlp.util.exception.LoadModelException;
 
-import edu.fudan.nlp.cn.CNFactory;
-import edu.fudan.nlp.cn.CNFactory.Models;
-import edu.fudan.util.exception.LoadModelException;
 
 public class BuildIndex {
 
@@ -30,14 +30,14 @@ public class BuildIndex {
 	 * @throws LoadModelException 
 	 */
 	public static void main(String[] args) throws IOException, LoadModelException {
-		String indexPath = "D:\\myapp\\indexDir";
+		String indexPath = "../tmp/lucene";
 		System.out.println("Indexing to directory '" + indexPath  + "'...");
 		Date start = new Date();
 		Directory dir = FSDirectory.open(new File(indexPath));//Dirctory dir-->FSDirectory
 		//需要先初始化 CNFactory
-		CNFactory factory = CNFactory.getInstance("./models",Models.SEG_TAG);
-		Analyzer analyzer = new FNLPAnalyzer(Version.LUCENE_40);
-		IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_40, analyzer);
+		CNFactory factory = CNFactory.getInstance("../models",Models.SEG_TAG);
+		Analyzer analyzer = new FNLPAnalyzer(Version.LUCENE_47);
+		IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_47, analyzer);
 		iwc.setOpenMode(OpenMode.CREATE_OR_APPEND);
 		IndexWriter writer = new IndexWriter(dir, iwc);
 

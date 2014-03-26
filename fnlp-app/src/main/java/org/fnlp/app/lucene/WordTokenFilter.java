@@ -12,9 +12,7 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
-import edu.fudan.nlp.cn.CNFactory;
-import edu.fudan.nlp.cn.tag.CWSTagger;
-import edu.fudan.nlp.cn.tag.POSTagger;
+import org.fnlp.nlp.cn.CNFactory;
 
 public final class WordTokenFilter extends TokenFilter {
 

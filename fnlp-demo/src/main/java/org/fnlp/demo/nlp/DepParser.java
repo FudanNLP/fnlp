@@ -16,7 +16,7 @@ public class DepParser {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		parser = new JointParser("models/dep.m");
+		parser = new JointParser("../models/dep.m");
 		
 		System.out.println("得到支持的依存关系类型集合");
 		System.out.println(parser.getSupportedTypes());
@@ -31,7 +31,7 @@ public class DepParser {
 	 * @throws Exception 
 	 */
 	private static void test(String word) throws Exception {		
-		POSTagger tag = new POSTagger("models/seg.m","models/pos.m");
+		POSTagger tag = new POSTagger("../models/seg.m","../models/pos.m");
 		String[][] s = tag.tag2Array(word);
 		try {
 			DependencyTree tree = parser.parse2T(s[0],s[1]);
