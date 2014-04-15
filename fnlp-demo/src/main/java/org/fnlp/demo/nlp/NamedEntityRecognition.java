@@ -35,7 +35,7 @@ public class NamedEntityRecognition {
 	/**
 	 * 主程序
 	 * @param args
-	 * @throws IOException 
+	 * @throws Exception
 	 * @throws  
 	 */
 	public static void main(String[] args) throws Exception {
