@@ -42,7 +42,14 @@ public class Cluster implements Serializable {
 		prop = pc;
 		left = c1;
 		right = c2;
-		rep = c1.rep+":"+c2.rep;		
+		if(c1==null && c2==null)
+			rep = null;
+		else if(c1==null)
+			rep = c2.rep;
+		else if(c2==null)
+			rep = c1.rep;
+		else			
+			rep = c1.rep+":"+c2.rep;	
 	}
 
 	String getN() {
