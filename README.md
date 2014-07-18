@@ -58,3 +58,5 @@ If you would like to acknowledge our efforts, please cite the following paper.
 在[这里](http://jkx.fudan.edu.cn/~xpqiu/) 或  [DBLP](http://scholar.google.com/citations?sortby=pubdate&hl=en&user=Pq4Yp_kAAAAJ&view_op=list_works Google Scholar] 或 [http://www.informatik.uni-trier.de/~ley/pers/hd/q/Qiu:Xipeng.html) 可以找到更多的相关论文。
 
 We used [JProfiler](http://www.ej-technologies.com/products/jprofiler/overview.html ) to help optimize the code.
+
+本页面的文字允许在知识共享 署名-相同方式共享 3.0协议和GNU自由文档许可证下修改和再使用。
