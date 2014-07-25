@@ -2,7 +2,7 @@ FNLP (formerly FudanNLP)
 ====
 之前的FudanNLP项目地址为：http://code.google.com/p/fudannlp
 主要改变：
-1.  FudanNLP改为FNLP.
+1. FudanNLP改为FNLP.
 2. package名由edu.fudan换成了 org.fnlp
 3. 用maven管理
 
