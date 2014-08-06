@@ -19,16 +19,7 @@
 
 package org.fnlp.ml.classifier;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Vector;
-
-import org.fnlp.util.MyCollection;
 
 /**
  * KNN分类器结果记录
