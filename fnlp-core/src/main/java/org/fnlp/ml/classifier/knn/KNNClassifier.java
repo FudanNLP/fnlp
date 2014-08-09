@@ -73,8 +73,6 @@ public class KNNClassifier extends AbstractClassifier implements Serializable{
 	public Predict classify(Instance instance, int n){
 		VotePredict<Integer> predK=new VotePredict<Integer>(k);
 
-		System.out.println(instance.getSource());
-		System.out.println(instance.getData());
 		for(int i = 0; i < prototypes.size(); i++){
 			Instance curInst = prototypes.get(i);
 			float score;

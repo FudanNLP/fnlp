@@ -57,6 +57,10 @@ public class LabelParser {
 		case STRING: 
 			pred = new Predict<String>(n);
 			for(int i=0;i<n;i++){
+				if(res.getLabel(i)==null){
+					pred.set(i, "null", 0f);
+					continue;
+				}
 				int idx =  (Integer) res.getLabel(i);
 				String l = labels.lookupString(idx);
 				pred.set(i, l, res.getScore(i));

@@ -18,13 +18,9 @@ public class BayesTrainer{
 		ItemFrequency tf=new ItemFrequency(af.getFeatureSize(),af.getLabelSize());
 		int numSamples = trainset.size();
 		for(int i=0;i<numSamples;i++){
-			System.out.println(i);
 			Instance inst=trainset.get(i);
 			oneStepCount(inst,tf);
 		}
-		System.out.println("tf.featureSize="+tf.getFeatureSize());
-		for(int i=0;i<100;i++)
-			System.out.print(i+","+tf.getFeatureFrequency(i)+(i%10==0?"\n":" "));
 		BayesClassifier classifier=new BayesClassifier();
 		classifier.setTf(tf);
 		classifier.setFactory(af);
@@ -33,13 +29,11 @@ public class BayesTrainer{
 	private boolean oneStepCount(Instance inst,ItemFrequency tf) {
 		if(inst==null)
 			return false;
-		System.out.println(inst.getSource());
 		int[] type;
 		Object t=inst.getTarget();
 		if(t instanceof Integer){
 			type=new int[1];
 			type[0]=Integer.parseInt(t.toString());
-			System.out.println(type[0]);
 		}
 		else{
 			return false;

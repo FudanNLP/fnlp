@@ -44,9 +44,9 @@ import org.fnlp.util.MyFiles;
  */
 public class DocumentReader extends Reader {
 
-	List<File> files;
-	Instance cur;
-	Charset charset;
+	protected List<File> files;
+	protected Instance cur;
+	protected Charset charset;
 	
 	public DocumentReader(String path) {
 		this(path, "UTF-8");

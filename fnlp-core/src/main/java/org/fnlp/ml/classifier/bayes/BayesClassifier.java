@@ -47,14 +47,17 @@ public class BayesClassifier extends AbstractClassifier implements Serializable{
 		}
 		HashSparseVector data = (HashSparseVector) obj;
 		TIntFloatIterator it = data.data.iterator();
-		float featureSize=tf.getFeatureSize();
+		float feaSize=tf.getFeatureSize();
 		while (it.hasNext()) {
 			it.advance();
 			if(it.key()==0)
 				continue;
 			for(int type=0;type<typeSize;type++){
 				//System.out.println(score[type]+" "+tf.getItemFrequency(it.key(), type)+" "+tf.getTypeFrequency(type)+" "+it.value());
-				score[type]+=Math.log(Math.pow((tf.getItemFrequency(it.key(), type)+1.0)/(tf.getTypeFrequency(type)+featureSize),it.value()));
+				//score[type]+=Math.log(Math.pow((tf.getItemFrequency(it.key(), type)+1.0)/(tf.getTypeFrequency(type)+featureSize),it.value()));
+				float itemF=tf.getItemFrequency(it.key(), type);
+				float typeF=tf.getTypeFrequency(type);
+				score[type]+=it.value()*Math.log((itemF+1.0)/(typeF+feaSize));
 			}
 		}
 		
