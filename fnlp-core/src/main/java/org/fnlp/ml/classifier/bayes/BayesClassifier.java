@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -26,11 +27,13 @@ import org.fnlp.ml.types.alphabet.AlphabetFactory;
 import org.fnlp.ml.types.sv.HashSparseVector;
 import org.fnlp.nlp.pipe.Pipe;
 import org.fnlp.util.exception.LoadModelException;
+import org.junit.Ignore;
 
 public class BayesClassifier extends AbstractClassifier implements Serializable{
 	protected AlphabetFactory factory;
 	protected ItemFrequency tf;
 	protected Pipe pipe;
+	protected boolean isUseful[];
 
 	@Override
 	public Predict classify(Instance instance, int n) {
@@ -52,13 +55,13 @@ public class BayesClassifier extends AbstractClassifier implements Serializable{
 			it.advance();
 			if(it.key()==0)
 				continue;
-			for(int type=0;type<typeSize;type++){
-				//System.out.println(score[type]+" "+tf.getItemFrequency(it.key(), type)+" "+tf.getTypeFrequency(type)+" "+it.value());
-				//score[type]+=Math.log(Math.pow((tf.getItemFrequency(it.key(), type)+1.0)/(tf.getTypeFrequency(type)+featureSize),it.value()));
-				float itemF=tf.getItemFrequency(it.key(), type);
-				float typeF=tf.getTypeFrequency(type);
-				score[type]+=it.value()*Math.log((itemF+1.0)/(typeF+feaSize));
-			}
+			int feature=it.key();
+			if(isUseful==null||isUseful[feature])
+				for(int type=0;type<typeSize;type++){
+					float itemF=tf.getItemFrequency(feature, type);
+					float typeF=tf.getTypeFrequency(type);
+					score[type]+=it.value()*Math.log((itemF+1.0)/(typeF+feaSize));
+				}
 		}
 		
 		Predict<Integer> res=new Predict<Integer>(n);
@@ -117,6 +120,109 @@ public class BayesClassifier extends AbstractClassifier implements Serializable{
 			throw new LoadModelException(e,file);
 		}
 		return cl;
+	}
+	public void fS_CS(float percent){featureSelectionChiSquare(percent);}
+	public void featureSelectionChiSquare(float percent){
+		int feaSize=tf.getFeatureSize();
+		int typeSize=tf.getTypeSize();
+		isUseful=new boolean[feaSize];
+		Arrays.fill(isUseful, false);
+		for(int j=0;j<typeSize;j++){
+			Heap<Integer> heap=new Heap<Integer>((int)(feaSize*percent),true);
+			for(int i=0;i<feaSize;i++){
+				double A,B,C,D,AC,AB,N;
+				N=tf.getTotal();
+				A=tf.getItemFrequency(i, j);
+				AB=tf.getFeatureFrequency(i);
+				AC=tf.getTypeFrequency(j);
+				B=AB-A;
+				C=AC-A;
+				D=N-AB-C;
+				double score=(A*D-B*C)*(A*D-B*C)/AB/(C+D);
+				heap.insert(score, i);
+			}
+			ArrayList<Integer> data=heap.getData();
+			for(int i=1;i<data.size();i++)
+				isUseful[data.get(i)]=true;
+		}
+		int total=0;
+		for(int i=0;i<feaSize;i++){
+			if(isUseful[i])
+				total++;
+		}
+		System.out.println("Feature Selection"+total+"/"+feaSize);
+	}
+	public void fS_CS_Max(float percent){featureSelectionChiSquareMax(percent);}
+	public void featureSelectionChiSquareMax(float percent){
+		int feaSize=tf.getFeatureSize();
+		int typeSize=tf.getTypeSize();
+		isUseful=new boolean[feaSize];
+		Arrays.fill(isUseful, false);
+		Heap<Integer> heap=new Heap<Integer>((int)(feaSize*percent),true);
+		for(int i=0;i<feaSize;i++){
+			double max=0;
+			for(int j=0;j<typeSize;j++){
+				double A,B,C,D,AC,AB,N;
+				N=tf.getTotal();
+				A=tf.getItemFrequency(i, j);
+				AB=tf.getFeatureFrequency(i);
+				AC=tf.getTypeFrequency(j);
+				B=AB-A;
+				C=AC-A;
+				D=N-AB-C;
+				double score=(A*D-B*C)*(A*D-B*C)/AB/(C+D)/AC/(B+D);
+				if(score>max)
+					max=score;
+			}
+
+			heap.insert(max, i);
+		}
+		ArrayList<Integer> data=heap.getData();
+		for(int i=1;i<data.size();i++)
+			isUseful[data.get(i)]=true;
+		int total=0;
+		for(int i=0;i<feaSize;i++){
+			if(isUseful[i])
+				total++;
+		}
+		System.out.println("Feature Selection"+total+"/"+feaSize);
+	}
+	public void fS_IG(float percent){featureSelectionInformationGain(percent);}
+	public void featureSelectionInformationGain(float percent){
+		int feaSize=tf.getFeatureSize();
+		int typeSize=tf.getTypeSize();
+		isUseful=new boolean[feaSize];
+		Arrays.fill(isUseful, false);
+		Heap<Integer> heap=new Heap<Integer>((int)(feaSize*percent),true);
+		for(int i=0;i<feaSize;i++){
+			double ig=0;
+			for(int j=0;j<typeSize;j++){
+				double A,B,C,D,AC,AB,N;
+				N=tf.getTotal();
+				A=tf.getItemFrequency(i, j);
+				AB=tf.getFeatureFrequency(i);
+				AC=tf.getTypeFrequency(j);
+				B=AB-A;
+				C=AC-A;
+				D=N-AB-C;
+				ig+=-AC/N*Math.log(AC/N);
+				ig+=AB/N*A/N*Math.log(A/N);
+				ig+=(1-AB/N)*C/N*Math.log(C/N);;
+			}
+			heap.insert(ig, i);
+		}
+		ArrayList<Integer> data=heap.getData();
+		for(int i=1;i<data.size();i++)
+			isUseful[data.get(i)]=true;
+		int total=0;
+		for(int i=0;i<feaSize;i++){
+			if(isUseful[i])
+				total++;
+		}
+		System.out.println("Feature Selection"+total+"/"+feaSize);
+	}
+	public void noFeatureSelection(){
+		isUseful=null;
 	}
 	public ItemFrequency getTf() {
 		return tf;

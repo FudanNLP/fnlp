@@ -13,14 +13,16 @@ public final class ItemFrequency implements Serializable{
 	private int[] itemFrequency;
 	private int[] typeFrequency;
 	private int[] featureFrequency;
+	private int total=0;
 	
 	public ItemFrequency(int featureSize,int typeSize){
 		this.setFeatureSize(featureSize);
 		this.setTypeSize(typeSize);
-		size=featureSize*(typeSize);
+		size=featureSize*typeSize;
 		itemFrequency=new int[size];
 		typeFrequency=new int[typeSize];
 		featureFrequency=new int[featureSize];
+		total=0;
 	}
 	public int getTypeSize() {
 		return typeSize;
@@ -59,6 +61,7 @@ public final class ItemFrequency implements Serializable{
 		featureFrequency[feature]+=diff;
 		typeFrequency[type]+=diff;
 		itemFrequency[index]=frequency;
+		total+=diff;
 	}
 	public void addItemFrequency(int index,int diff){
 		addItemFrequency(index%featureSize,index/featureSize,index,diff);
@@ -70,5 +73,12 @@ public final class ItemFrequency implements Serializable{
 		featureFrequency[feature]+=diff;
 		typeFrequency[type]+=diff;
 		itemFrequency[index]+=diff;
+		total+=diff;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
 	}
 }
