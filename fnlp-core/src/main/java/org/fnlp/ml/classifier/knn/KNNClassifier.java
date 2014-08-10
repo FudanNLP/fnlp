@@ -52,22 +52,22 @@ public class KNNClassifier extends AbstractClassifier implements Serializable{
 		this.sim = sim;
 		this.factory=factory;
 		this.k = k;
-		int count1 =0,count2=0;
-		int total = prototypes.size();
-		System.out.println("实例数量："+total);
-		for(int i=0;i<total;i++){
-			Instance inst = prototypes.get(i);
-			TPredict pred = classify(inst, 1);
-			if(pred.getLabel(0).equals(inst.getTarget()))
-				count1++;
-			prototypes.remove(i);
-			TPredict pred2 = classify(inst, 1);
-			if(pred2.getLabel(0).equals(inst.getTarget()))
-				count2++;
-			prototypes.add(i, inst);
-		}
-		System.out.println("Leave-zero-out正确率："+count1*1.0f/total);
-		System.out.println("Leave-one-out正确率："+count2*1.0f/total);
+//		int count1 =0,count2=0;
+//		int total = prototypes.size();
+//		System.out.println("实例数量："+total);
+//		for(int i=0;i<total;i++){
+//			Instance inst = prototypes.get(i);
+//			TPredict pred = classify(inst, 1);
+//			if(pred.getLabel(0).equals(inst.getTarget()))
+//				count1++;
+//			prototypes.remove(i);
+//			TPredict pred2 = classify(inst, 1);
+//			if(pred2.getLabel(0).equals(inst.getTarget()))
+//				count2++;
+//			prototypes.add(i, inst);
+//		}
+//		System.out.println("Leave-zero-out正确率："+count1*1.0f/total);
+//		System.out.println("Leave-one-out正确率："+count2*1.0f/total);
 		// TODO Auto-generated constructor stub
 	}
 	public Predict classify(Instance instance, int n){

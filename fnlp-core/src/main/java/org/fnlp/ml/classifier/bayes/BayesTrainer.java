@@ -18,6 +18,8 @@ public class BayesTrainer{
 		ItemFrequency tf=new ItemFrequency(af.getFeatureSize(),af.getLabelSize());
 		int numSamples = trainset.size();
 		for(int i=0;i<numSamples;i++){
+			if(i%1000==0)
+				System.out.println((i+0.0)/numSamples);
 			Instance inst=trainset.get(i);
 			oneStepCount(inst,tf);
 		}

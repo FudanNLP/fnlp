@@ -27,15 +27,18 @@ public class TextClassificationTest {
 	/**
 	 * 训练数据路径
 	 */
-	private static String trainDataPath = "D:/Documents/dataset/SogouC.mini/Sample/";
+	private static String dataPath="C:/dataset/SogouC/";
+	private static String trainDataPath = dataPath+"ClassFile/";
+	//private static String dataPath="C:/dataset/SogouC.mini/";
+	//private static String trainDataPath = dataPath+"Sample/";
 	//private static String trainDataPath = "D:/Documents/dataset/SogouC.reduced/Reduced/";
 
 	/**
 	 * 模型文件
 	 */
-	private static String bayesModelFile = "D:/Documents/dataset/SogouC.mini/modelBayes.gz";
-	private static String knnModelFile = "D:/Documents/dataset/SogouC.mini/modelKnn.gz";
-	private static String linearModelFile = "D:/Documents/dataset/SogouC.mini/modelLinear.gz";
+	private static String bayesModelFile = dataPath+"modelBayes.gz";
+	private static String knnModelFile = dataPath+"modelKnn.gz";
+	private static String linearModelFile = dataPath+"modelLinear.gz";
 	//private static String modelFile = "D:/Documents/dataset/SogouC.reduced/modelBayes.gz";
 
 	public static void main(String[] args) throws Exception {
@@ -52,43 +55,46 @@ public class TextClassificationTest {
 		Pipe targetpp = new Target2Label(af.DefaultLabelAlphabet());	
 		//建立pipe组合
 		SeriesPipes pp = new SeriesPipes(new Pipe[]{ngrampp,targetpp,sparsepp});
-		
+
+		System.out.print("\nReading data......\n");
 		InstanceSet instset = new InstanceSet(pp,af);	
 		Reader reader = new MyDocumentReader(trainDataPath,"gbk");
 		instset.loadThruStagePipes(reader);
+		System.out.print("..Reading data complete\n");
 		
 		//将数据集分为训练是和测试集
-		float percent = 0.8f;
+		System.out.print("Sspliting....");
+		float percent = 0.9f;
 		InstanceSet[] splitsets = instset.split(percent);
 		
 		InstanceSet trainset = splitsets[0];
-		InstanceSet testset = splitsets[1];		
-		System.out.println("\n=======================Message 1========================");
+		InstanceSet testset = splitsets[1];	
+		System.out.print("..Spliting complete!\n");
+
+		System.out.print("Training...\n");
 		BayesTrainer trainer=new BayesTrainer();
 		BayesClassifier classifier= (BayesClassifier) trainer.train(trainset);
 		pp.removeTargetPipe();
 		classifier.setPipe(pp);
 		af.setStopIncrement(true);
+		System.out.print("..Training complete!\n");
+		System.out.print("Saving model...\n");
 		classifier.saveTo(bayesModelFile);	
 		classifier = null;
+		System.out.print("..Saving model complete!\n");
 		/**
 		 * 测试
 		 */
-		System.out.println("测试  Bayes");
-		System.out.println("===================");
+		System.out.print("Loading model...\n");
 		BayesClassifier bayes;
-		bayes =BayesClassifier.loadFrom(bayesModelFile);;
-		Pipe p = bayes.getPipe();
+		bayes =BayesClassifier.loadFrom(bayesModelFile);
+//		bayes =classifier;
+		System.out.print("..Loading model complete!\n");
+		
+		System.out.println("Testing Bayes...");
 		int count=0;
 		for(int i=0;i<testset.size();i++){
 			Instance data = testset.getInstance(i);
-			data.setData(data.getSource());
-			try {
-				//特征转换
-				p.addThruPipe(data);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			Integer gold = (Integer) data.getTarget();
 			Predict<String> pres=bayes.classify(data, Type.STRING, 3);
 			String pred_label=pres.getLabel();
@@ -106,21 +112,14 @@ public class TextClassificationTest {
 			}
 		}
 		int bayesCount=count;
+		System.out.println("..Testing Bayes complete!");
 		System.out.println("Bayes Precision:"+((float)bayesCount/testset.size())+"("+bayesCount+"/"+testset.size()+")");
 
-		for(int i=0;i<trainset.size();i++){
-			Instance inst=trainset.get(i);
-			inst.setData(inst.getSource());
-			inst.setTarget(af.DefaultLabelAlphabet().lookupString((int)inst.getTarget()));
-		}		
-		for(int i=0;i<testset.size();i++){
-			Instance inst=testset.get(i);
-			inst.setData(inst.getSource());
-			inst.setTarget(af.DefaultLabelAlphabet().lookupString((int)inst.getTarget()));
-		}
+
 		/**
 		 * Knn
 		 */
+		System.out.print("\nKnn\n");
 		//建立字典管理器
 		AlphabetFactory af2 = AlphabetFactory.buildFactory();
 		//使用n元特征
@@ -131,41 +130,47 @@ public class TextClassificationTest {
 		targetpp = new Target2Label(af2.DefaultLabelAlphabet());	
 		//建立pipe组合
 		pp = new SeriesPipes(new Pipe[]{ngrampp,targetpp,sparsepp});
-		
+
+		System.out.print("Init dataset...");
 		trainset.setAlphabetFactory(af2);	
 		trainset.setPipes(pp);	
 		testset.setAlphabetFactory(af2);	
-		testset.setPipes(pp);	
+		testset.setPipes(pp);			
 		for(int i=0;i<trainset.size();i++){
 			Instance inst=trainset.get(i);
+			inst.setData(inst.getSource());
+			int target_id=Integer.parseInt(inst.getTarget().toString());
+			inst.setTarget(af.DefaultLabelAlphabet().lookupString(target_id));
 			pp.addThruPipe(inst);
 		}		
 		for(int i=0;i<testset.size();i++){
 			Instance inst=testset.get(i);
-			targetpp.addThruPipe(inst);
+			inst.setData(inst.getSource());
+			int target_id=Integer.parseInt(inst.getTarget().toString());
+			inst.setTarget(af.DefaultLabelAlphabet().lookupString(target_id));
+			pp.addThruPipe(inst);
 		}
-		
+
+		System.out.print("complete!\n");
+		System.out.print("Training Knn...\n");
 		SparseVectorSimilarity sim=new SparseVectorSimilarity();
 		pp.removeTargetPipe();
-		KNNClassifier knn=new KNNClassifier(trainset, pp, sim, af2, 9);	
+		KNNClassifier knn=new KNNClassifier(trainset, pp, sim, af2, 7);	
 		af2.setStopIncrement(true);	
+		System.out.print("..Training compelte!\n");
+		System.out.print("Saving model...\n");
 		knn.saveTo(knnModelFile);	
 		knn = null;
+		System.out.print("..Saving model compelte!\n");
 
 		
-		System.out.println("测试  Knn");
-		System.out.println("===================");
+		System.out.print("Loading model...\n");
 		knn =KNNClassifier.loadFrom(knnModelFile);
+		System.out.print("..Loading model compelte!\n");
+		System.out.println("Testing Knn...\n");
 		count=0;
 		for(int i=0;i<testset.size();i++){
 			Instance data = testset.getInstance(i);
-			try {
-				//特征转换
-				p.addThruPipe(data);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
 			Integer gold = (Integer) data.getTarget();
 			Predict<String> pres=(Predict<String>) knn.classify(data, Type.STRING, 3);
 			String pred_label=pres.getLabel();
@@ -182,6 +187,9 @@ public class TextClassificationTest {
 			}
 		}
 		int knnCount=count;
+		System.out.println("..Testing Knn Complete");
+		System.out.println("Bayes Precision:"+((float)bayesCount/testset.size())+"("+bayesCount+"/"+testset.size()+")");
+		System.out.println("Knn Precision:"+((float)knnCount/testset.size())+"("+knnCount+"/"+testset.size()+")");
 		
 		//建立字典管理器
 		AlphabetFactory af3 = AlphabetFactory.buildFactory();
@@ -202,22 +210,17 @@ public class TextClassificationTest {
 		for(int i=0;i<trainset.size();i++){
 			Instance inst=trainset.get(i);
 			inst.setData(inst.getSource());
-			inst.setTarget(af2.DefaultLabelAlphabet().lookupString((int)inst.getTarget()));
+			int target_id=Integer.parseInt(inst.getTarget().toString());
+			inst.setTarget(af.DefaultLabelAlphabet().lookupString(target_id));
+			pp.addThruPipe(inst);
 		}		
 		for(int i=0;i<testset.size();i++){
 			Instance inst=testset.get(i);
 			inst.setData(inst.getSource());
-			inst.setTarget(af2.DefaultLabelAlphabet().lookupString((int)inst.getTarget()));
+			int target_id=Integer.parseInt(inst.getTarget().toString());
+			inst.setTarget(af.DefaultLabelAlphabet().lookupString(target_id));
+			pp.addThruPipe(inst);
 		}			
-
-		for(int i=0;i<trainset.size();i++){
-			Instance inst=trainset.get(i);
-			pp.addThruPipe(inst);
-		}		
-		for(int i=0;i<testset.size();i++){
-			Instance inst=testset.get(i);
-			pp.addThruPipe(inst);
-		}
 		
 		/**
 		 * 建立分类器
