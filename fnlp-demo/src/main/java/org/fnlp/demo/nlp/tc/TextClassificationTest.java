@@ -27,11 +27,12 @@ public class TextClassificationTest {
 	/**
 	 * 训练数据路径
 	 */
-	private static String dataPath="C:/dataset/SogouC/";
-	private static String trainDataPath = dataPath+"ClassFile/";
+	//private static String dataPath="C:/dataset/SogouC/";
+	//private static String trainDataPath = dataPath+"ClassFile/";
 	//private static String dataPath="C:/dataset/SogouC.mini/";
 	//private static String trainDataPath = dataPath+"Sample/";
-	//private static String trainDataPath = "D:/Documents/dataset/SogouC.reduced/Reduced/";
+	private static String dataPath="D:/Documents/dataset/SogouC.mini/";
+	private static String trainDataPath = dataPath+"Sample/";
 
 	/**
 	 * 模型文件

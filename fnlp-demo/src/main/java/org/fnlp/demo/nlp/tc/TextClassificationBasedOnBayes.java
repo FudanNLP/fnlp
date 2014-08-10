@@ -33,71 +33,75 @@ public class TextClassificationBasedOnBayes {
 	/**
 	 * 训练数据路径
 	 */
-	private static String trainDataPath = "../example-data/text-classification/";
+	//private static String dataPath="C:/dataset/SogouC/";
+	//private static String trainDataPath = dataPath+"ClassFile/";
+	//private static String dataPath="C:/dataset/SogouC.mini/";
+	//private static String trainDataPath = dataPath+"Sample/";
+	private static String dataPath="D:/Documents/dataset/SogouC.mini/";
+	private static String trainDataPath = dataPath+"Sample/";
 
 	/**
 	 * 模型文件
 	 */
-	private static String modelFile = "../example-data/text-classification/modelBayes.gz";
+	private static String bayesModelFile = dataPath+"modelBayes.gz";
 
 	public static void main(String[] args) throws Exception {
-		//建立字典管理器
-		AlphabetFactory af = AlphabetFactory.buildFactory();
-		
-		//使用n元特征
-		Pipe ngrampp = new NGram(new int[] {1,2});
 		//分词
 //		CWSTagger tag = new CWSTagger("../models/seg.m");
 //		Pipe segpp=new CNPipe(tag);
-		//将字符特征转换成字典索引
-		Pipe indexpp = new StringArray2IndexArray(af);	
+		/**
+		 * Bayes
+		 */
+		//建立字典管理器
+		AlphabetFactory af = AlphabetFactory.buildFactory();
+		//使用n元特征
+		Pipe ngrampp = new NGram(new int[] {2,3});
+		//将字符特征转换成字典索引;	
 		Pipe sparsepp=new StringArray2SV(af);
 		//将目标值对应的索引号作为类别
 		Pipe targetpp = new Target2Label(af.DefaultLabelAlphabet());	
 		//建立pipe组合
 		SeriesPipes pp = new SeriesPipes(new Pipe[]{ngrampp,targetpp,sparsepp});
-		
-		InstanceSet instset = new InstanceSet(pp,af);
-		
-		//用不同的Reader读取相应格式的文件
-		Reader reader = new FileReader(trainDataPath,"UTF-8",".data");
-		
-		//读入数据，并进行数据处理
+
+		System.out.print("\nReading data......\n");
+		InstanceSet instset = new InstanceSet(pp,af);	
+		Reader reader = new MyDocumentReader(trainDataPath,"gbk");
 		instset.loadThruStagePipes(reader);
+		System.out.print("..Reading data complete\n");
+		
 		//将数据集分为训练是和测试集
-		float percent = 0.8f;
+		System.out.print("Sspliting....");
+		float percent = 0.9f;
 		InstanceSet[] splitsets = instset.split(percent);
 		
 		InstanceSet trainset = splitsets[0];
 		InstanceSet testset = splitsets[1];	
-		
-		System.out.println("\n=======================Message 1========================");
-		System.out.println("featureSize: "+af.getFeatureSize());
-		System.out.println("labelSize: "+af.getLabelSize());
-		System.out.println("instsetSize: "+instset.size());
+		System.out.print("..Spliting complete!\n");
+
+		System.out.print("Training...\n");
 		BayesTrainer trainer=new BayesTrainer();
 		BayesClassifier classifier= (BayesClassifier) trainer.train(trainset);
-
 		pp.removeTargetPipe();
 		classifier.setPipe(pp);
 		af.setStopIncrement(true);
-		
-
-		classifier.saveTo(modelFile);	
+		System.out.print("..Training complete!\n");
+		System.out.print("Saving model...\n");
+		classifier.saveTo(bayesModelFile);	
 		classifier = null;
-
-		BayesClassifier bayes;
-		bayes =BayesClassifier.loadFrom(modelFile);
-		
+		System.out.print("..Saving model complete!\n");
 		/**
 		 * 测试
 		 */
-		System.out.println("类别 : 文本内容");
-		System.out.println("===================");
+		System.out.print("Loading model...\n");
+		BayesClassifier bayes;
+		bayes =BayesClassifier.loadFrom(bayesModelFile);
+//		bayes =classifier;
+		System.out.print("..Loading model complete!\n");
+		
+		System.out.println("Testing Bayes...");
 		int count=0;
 		for(int i=0;i<testset.size();i++){
 			Instance data = testset.getInstance(i);
-			
 			Integer gold = (Integer) data.getTarget();
 			Predict<String> pres=bayes.classify(data, Type.STRING, 3);
 			String pred_label=pres.getLabel();
@@ -105,30 +109,18 @@ public class TextClassificationBasedOnBayes {
 			String gold_label = bayes.getLabel(gold);
 			
 			if(pred_label.equals(gold_label)){
-				System.out.println(pred_label+" : "+testset.getInstance(i).getSource());
+				//System.out.println(pred_label+" : "+testsetbayes.getInstance(i).getTempData());
 				count++;
 			}
-			else
-				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getSource());
-			for(int j=0;j<3;j++)
-				System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
+			else{
+				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
+				for(int j=0;j<3;j++)
+					System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
+			}
 		}
-		System.out.println("Precision:"+((float)count/testset.size())+"("+count+"/"+testset.size()+")");
-		/**
-		 * 分类器使用
-		 */
-		String str = "韦德：不拿冠军就是失败 詹皇：没拿也不意味失败";
-		System.out.println("============\n分类："+ str);
-		Pipe p = bayes.getPipe();
-		Instance inst = new Instance(str);
-		try {
-			//特征转换
-			p.addThruPipe(inst);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String res = bayes.getStringLabel(inst);
-		System.out.println("类别："+ res);		//清除模型文件
+		int bayesCount=count;
+		System.out.println("..Testing Bayes complete!");
+		System.out.println("Bayes Precision:"+((float)bayesCount/testset.size())+"("+bayesCount+"/"+testset.size()+")");
 
 	}
 
