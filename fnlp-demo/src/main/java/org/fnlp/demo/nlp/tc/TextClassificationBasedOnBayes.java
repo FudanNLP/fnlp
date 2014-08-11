@@ -49,8 +49,10 @@ public class TextClassificationBasedOnBayes {
 
 	public static void main(String[] args) throws Exception {
 		//分词
-//		CWSTagger tag = new CWSTagger("../models/seg.m");
-//		Pipe segpp=new CNPipe(tag);
+		Pipe removepp=new RemoveWords();
+		CWSTagger tag = new CWSTagger("../models/seg.m");
+		Pipe segpp=new CNPipe(tag);
+		Pipe s2spp=new Strings2StringArray();
 		/**
 		 * Bayes
 		 */
@@ -63,7 +65,7 @@ public class TextClassificationBasedOnBayes {
 		//将目标值对应的索引号作为类别
 		Pipe targetpp = new Target2Label(af.DefaultLabelAlphabet());	
 		//建立pipe组合
-		SeriesPipes pp = new SeriesPipes(new Pipe[]{ngrampp,targetpp,sparsepp});
+		SeriesPipes pp = new SeriesPipes(new Pipe[]{removepp,segpp,s2spp,targetpp,sparsepp});
 
 		System.out.print("\nReading data......\n");
 		InstanceSet instset = new InstanceSet(pp,af);	
@@ -100,6 +102,7 @@ public class TextClassificationBasedOnBayes {
 		System.out.print("..Loading model complete!\n");
 		
 		System.out.println("Testing Bayes...");
+		int flag=0;
 		float[] percents_cs=new float[]{1.0f,0.9f,0.8f,0.7f,0.5f,0.3f,0.2f,0.1f};
 		int[] counts_cs=new int[10];
 		for(int test=0;test<percents_cs.length;test++){
@@ -118,6 +121,7 @@ public class TextClassificationBasedOnBayes {
 					count++;
 				}
 				else{
+					flag=i;
 //					System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
 //					for(int j=0;j<3;j++)
 //						System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
