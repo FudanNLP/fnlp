@@ -60,7 +60,7 @@ public class BayesClassifier extends AbstractClassifier implements Serializable{
 				for(int type=0;type<typeSize;type++){
 					float itemF=tf.getItemFrequency(feature, type);
 					float typeF=tf.getTypeFrequency(type);
-					score[type]+=it.value()*Math.log((itemF+1.0)/(typeF+feaSize));
+					score[type]+=it.value()*Math.log((itemF+0.1)/(typeF+feaSize));
 				}
 		}
 		
