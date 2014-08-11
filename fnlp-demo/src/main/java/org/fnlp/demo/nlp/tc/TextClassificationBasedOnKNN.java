@@ -35,14 +35,14 @@ public class TextClassificationBasedOnKNN {
 	/**
 	 * 训练数据路径
 	 */
-	//private static String dataPath="C:/dataset/SogouC/";
-	//private static String trainDataPath = dataPath+"ClassFile/";
-	//private static String dataPath="C:/dataset/SogouC.mini/";
-	//private static String trainDataPath = dataPath+"Sample/";
+	private static String dataPath="C:/dataset/SogouC/";
+	private static String trainDataPath = dataPath+"ClassFile/";
+//	private static String dataPath="C:/dataset/SogouC.mini/";
+//	private static String trainDataPath = dataPath+"Sample/";
 	//private static String dataPath="D:/Documents/dataset/SogouC.reduced/";
 	//private static String trainDataPath = dataPath+"Reduced/";
-	private static String dataPath="D:/Documents/dataset/SogouC.mini/";
-	private static String trainDataPath = dataPath+"Sample/";
+	//private static String dataPath="D:/Documents/dataset/SogouC.mini/";
+	//private static String trainDataPath = dataPath+"Sample/";
 
 	/**
 	 * 模型文件
@@ -71,16 +71,6 @@ public class TextClassificationBasedOnKNN {
 		 * Knn
 		 */
 		System.out.print("\nKnn\n");
-		//建立字典管理器
-		AlphabetFactory af2 = AlphabetFactory.buildFactory();
-		//使用n元特征
-		ngrampp = new NGram(new int[] {2,3});
-		//将字符特征转换成字典索引;	
-		sparsepp=new StringArray2SV(af2);
-		//将目标值对应的索引号作为类别
-		targetpp = new Target2Label(af2.DefaultLabelAlphabet());	
-		//建立pipe组合
-		pp = new SeriesPipes(new Pipe[]{ngrampp,targetpp,sparsepp});
 		System.out.print("\nReading data......\n");
 		InstanceSet instset = new InstanceSet(pp,af);	
 		Reader reader = new MyDocumentReader(trainDataPath,"gbk");
@@ -89,7 +79,7 @@ public class TextClassificationBasedOnKNN {
 		
 		//将数据集分为训练是和测试集
 		System.out.print("Sspliting....");
-		float percent = 0.8f;
+		float percent = 0.9f;
 		InstanceSet[] splitsets = instset.split(percent);
 		
 		InstanceSet trainset = splitsets[0];
@@ -99,8 +89,8 @@ public class TextClassificationBasedOnKNN {
 		System.out.print("Training Knn...\n");
 		SparseVectorSimilarity sim=new SparseVectorSimilarity();
 		pp.removeTargetPipe();
-		KNNClassifier knn=new KNNClassifier(trainset, pp, sim, af2, 17);	
-		af2.setStopIncrement(true);	
+		KNNClassifier knn=new KNNClassifier(trainset, pp, sim, af, 91);	
+		af.setStopIncrement(true);	
 		System.out.print("..Training compelte!\n");
 		System.out.print("Saving model...\n");
 		knn.saveTo(knnModelFile);	
