@@ -40,8 +40,8 @@ public class TestDepParser {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		parser = new JointParser("models/dep.m");
-		tag = new POSTagger("models/seg.m","models/pos.m");
+		parser = new JointParser("../models/dep.m");
+		tag = new POSTagger("../models/seg.m","../models/pos.m");
 
 		test();
 
@@ -54,12 +54,12 @@ public class TestDepParser {
 	private static void test() throws Exception {		
 
 		
-		ArrayList<String> cases = MyCollection.loadList("./testcase/test case parser.txt",null);
-		for(String w:cases){
-			String[][] s = tag.tag2Array(w);
-			String tree = parser.parse2String(s[0],s[1],true);
-			System.out.println(tree);
-		}
+//		ArrayList<String> cases = MyCollection.loadList("./testcase/test case parser.txt",null);
+//		for(String w:cases){
+//			String[][] s = tag.tag2Array(w);
+//			String tree = parser.parse2String(s[0],s[1],true);
+//			System.out.println(tree);
+//		}
 		
 	}
 

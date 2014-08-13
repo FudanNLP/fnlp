@@ -57,14 +57,6 @@ public class KNNTest {
 
 		
 	}
-	@Test
-	public void testClassifyInstanceTypeInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetStringLabelInstanceInt() {
-		fail("Not yet implemented");
-	}
+	
 
 }

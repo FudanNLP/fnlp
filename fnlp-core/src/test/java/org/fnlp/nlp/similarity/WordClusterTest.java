@@ -50,10 +50,7 @@ public class WordClusterTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testRead() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testStartClustering() {
@@ -65,9 +62,9 @@ public class WordClusterTest {
 
 		try {
 			Cluster root = wc.startClustering();
-			DrawTree.printTree(root,"./tmp/t.png");
-			wc.saveModel("./tmp/t.m");
-			wc.saveTxt("./tmp/t.txt");
+			DrawTree.printTree(root,"../tmp/t.png");
+			wc.saveModel("../tmp/t.m");
+			wc.saveTxt("../tmp/t.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

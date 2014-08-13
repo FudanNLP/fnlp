@@ -1,56 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.fnlp</groupId>
-  <artifactId>fnlp-all</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+	<groupId>org.fnlp</groupId>
+	<artifactId>fnlp-all</artifactId>
+	<version>2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-  <name>fnlp-all</name>
-  <url>http://maven.apache.org</url>
+	
+	<url>https://github.com/xpqiu/fnlp/</url>
+	<description>FNLP is developed for Chinese natural language processing (NLP), which also includes some machine learning algorithms and data sets to achieve the NLP tasks. FNLP is distributed under LGPL3.0.</description>
+	<organization>
+		<name>fnlp.org</name>
+		<url>http://www.fnlp.org</url>
+	</organization>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<scm>
+		<url>scm:git:git@github.com:xpqiu/fnlp.git</url>
+		<connection>scm:git:git@github.com:xpqiu/fnlp.git</connection>
+		<tag>fnlp-core</tag>
+	</scm>
+	
+	  
+    <licenses>
+    <license>
+      <name>LGPLv3</name>
+      <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-  <dependencies>
-    
-    <dependency>
-    	<groupId>net.sf.trove4j</groupId>
-    	<artifactId>trove4j</artifactId>
-    	<version>3.0.3</version>
-    </dependency>
-    <dependency>
-    	<groupId>commons-cli</groupId>
-    	<artifactId>commons-cli</artifactId>
-    	<version>1.2</version>
-    </dependency>
-    <dependency>
-    	<groupId>junit</groupId>
-    	<artifactId>junit</artifactId>
-    	<version>4.11</version>
-    </dependency>
-  </dependencies>
-  <modules>
-  	<module>fnlp-core</module>
-  	<module>fnlp-dev</module>
-  	<module>fnlp-train</module>
-    <module>fnlp-demo</module>
-    <module>fnlp-app</module>
-  </modules>
-  <build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
-            <configuration>
-                <source>1.6</source>
-                <target>1.6</target>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+	<developers>
+		<developer>
+			<name>Xipeng Qiu</name>
+			<id>xpqiu</id>
+			<email>xpqiu@fudan.edu.cn</email>
+			<roles>
+				<role>Project Manager</role>
+				<role>Architect</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>net.sf.trove4j</groupId>
+			<artifactId>trove4j</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>fnlp-core</module>
+		<module>fnlp-dev</module>
+		<module>fnlp-train</module>
+		<module>fnlp-demo</module>
+		<module>fnlp-app</module>
+	</modules>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
