@@ -1,7 +1,12 @@
 package org.fnlp.ml.classifier.bayes;
 
 import java.util.ArrayList;
-
+/**
+ * 堆
+ * @author sywu
+ *
+ * @param <T> 存储的数据类型
+ */
 public class Heap<T>{
 	private boolean isMinRootHeap;
 	private ArrayList<T> datas;

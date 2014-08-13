@@ -83,11 +83,9 @@ public class TextClassificationBasedOnBayes {
 		System.out.print("..Spliting complete!\n");
 
 		System.out.print("Training...\n");
+		af.setStopIncrement(true);
 		BayesTrainer trainer=new BayesTrainer();
 		BayesClassifier classifier= (BayesClassifier) trainer.train(trainset);
-		pp.removeTargetPipe();
-		classifier.setPipe(pp);
-		af.setStopIncrement(true);
 		System.out.print("..Training complete!\n");
 		System.out.print("Saving model...\n");
 		classifier.saveTo(bayesModelFile);	

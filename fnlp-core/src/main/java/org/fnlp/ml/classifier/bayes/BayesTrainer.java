@@ -10,47 +10,28 @@ import org.fnlp.ml.types.Instance;
 import org.fnlp.ml.types.InstanceSet;
 import org.fnlp.ml.types.alphabet.AlphabetFactory;
 import org.fnlp.ml.types.sv.HashSparseVector;
-
+import org.fnlp.nlp.pipe.Pipe;
+import org.fnlp.nlp.pipe.SeriesPipes;
+/**
+ * 贝叶斯文本分类模型训练器
+ * 输入训练数据为稀疏矩阵
+ * @author sywu
+ *
+ */
 public class BayesTrainer{
 
 	public AbstractClassifier train(InstanceSet trainset) {
 		AlphabetFactory af=trainset.getAlphabetFactory();
-		ItemFrequency tf=new ItemFrequency(af.getFeatureSize(),af.getLabelSize());
-		int numSamples = trainset.size();
-		for(int i=0;i<numSamples;i++){
-			if(i%1000==0)
-				System.out.println((i+0.0)/numSamples);
-			Instance inst=trainset.get(i);
-			oneStepCount(inst,tf);
-		}
-		BayesClassifier classifier=new BayesClassifier();
-		classifier.setTf(tf);
-		classifier.setFactory(af);
-		return classifier;
+		SeriesPipes pp=(SeriesPipes) trainset.getPipes();
+		pp.removeTargetPipe();
+		return train(trainset,af,pp);
 	}
-	private boolean oneStepCount(Instance inst,ItemFrequency tf) {
-		if(inst==null)
-			return false;
-		int[] type;
-		Object t=inst.getTarget();
-		if(t instanceof Integer){
-			type=new int[1];
-			type[0]=Integer.parseInt(t.toString());
-		}
-		else{
-			return false;
-		}
-		
-		HashSparseVector data = (HashSparseVector) inst.getData();
-		TIntFloatIterator it = data.data.iterator();
-		while (it.hasNext()) {
-			it.advance();
-			int feature=it.key();
-			for(int i=0;i<type.length;i++){
-				tf.addItemFrequency(feature, type[i], (int)it.value());
-			}
-		}
-		
-		return true;
+	public AbstractClassifier train(InstanceSet trainset,AlphabetFactory af,Pipe pp) {
+		ItemFrequency tf=new ItemFrequency(trainset,af);
+		BayesClassifier classifier=new BayesClassifier();
+		classifier.setFactory(af);
+		classifier.setPipe(pp);
+		classifier.setTf(tf);
+		return classifier;
 	}
 }

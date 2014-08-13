@@ -18,9 +18,11 @@ import org.fnlp.ml.classifier.LinkedPredict;
 import org.fnlp.ml.classifier.Predict;
 import org.fnlp.ml.classifier.TPredict;
 import org.fnlp.ml.classifier.LabelParser.Type;
+import org.fnlp.ml.feature.FeatureSelect;
 import org.fnlp.ml.types.Instance;
 import org.fnlp.ml.types.InstanceSet;
 import org.fnlp.ml.types.alphabet.AlphabetFactory;
+import org.fnlp.ml.types.sv.HashSparseVector;
 import org.fnlp.nlp.pipe.Pipe;
 import org.fnlp.nlp.similarity.ISimilarity;
 import org.fnlp.util.exception.LoadModelException;
@@ -41,6 +43,7 @@ public class KNNClassifier extends AbstractClassifier implements Serializable{
 	 * 特征字典
 	 */
 	protected AlphabetFactory factory;
+	protected FeatureSelect fs;
 	/**
 	 * 
 	 */
@@ -72,12 +75,18 @@ public class KNNClassifier extends AbstractClassifier implements Serializable{
 	}
 	public Predict classify(Instance instance, int n){
 		VotePredict<Integer> predK=new VotePredict<Integer>(k);
-
+		HashSparseVector sv1 =(HashSparseVector) instance.getData();
+		if(fs!=null)
+			sv1=fs.select(sv1);
+		
 		for(int i = 0; i < prototypes.size(); i++){
 			Instance curInst = prototypes.get(i);
+			HashSparseVector sv2 =(HashSparseVector) curInst.getData();
+			if(fs!=null)
+				sv2=fs.select(sv2);
 			float score;
 			try {
-				score = sim.calc(instance.getData(), curInst.getData());
+				score = sim.calc(sv1, sv2);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -142,5 +151,14 @@ public class KNNClassifier extends AbstractClassifier implements Serializable{
 	}
 	public AlphabetFactory getFactory(){
 		return factory;
+	}
+	public FeatureSelect getFs() {
+		return fs;
+	}
+	public void setFs(FeatureSelect fs) {
+		this.fs = fs;
+	}
+	public void noFeatureSelection(){
+		this.setFs(null);
 	}
 } 

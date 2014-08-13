@@ -1,21 +1,39 @@
 package org.fnlp.ml.classifier.bayes;
 
+import gnu.trove.iterator.TIntFloatIterator;
+
 import java.io.Serializable;
 
+import org.fnlp.ml.types.Instance;
+import org.fnlp.ml.types.InstanceSet;
+import org.fnlp.ml.types.alphabet.AlphabetFactory;
+import org.fnlp.ml.types.sv.HashSparseVector;
+
 /**
+ * 
  * 特征频数统计结构 
  * 用于统计特征、类别、特征-类别的出现频数，可以用于词频统计
  * @author sywu
- * @version 1.0
+ *
  */
-public final class ItemFrequency implements Serializable{
+public class ItemFrequency implements Serializable{
 	private int size,featureSize,typeSize;
 	private int[] itemFrequency;
 	private int[] typeFrequency;
 	private int[] featureFrequency;
 	private int total=0;
-	
+
 	public ItemFrequency(int featureSize,int typeSize){
+		init(featureSize, typeSize);
+	}
+	public ItemFrequency(InstanceSet instSet){
+		this(instSet,instSet.getAlphabetFactory());
+	}
+	public ItemFrequency(InstanceSet instSet,AlphabetFactory af){
+		this(af.getFeatureSize(),af.getLabelSize());
+		statistic(instSet);
+	}
+	public void init(int featureSize,int typeSize){
 		this.setFeatureSize(featureSize);
 		this.setTypeSize(typeSize);
 		size=featureSize*typeSize;
@@ -80,5 +98,43 @@ public final class ItemFrequency implements Serializable{
 	}
 	public void setTotal(int total) {
 		this.total = total;
+	}
+	/**
+	 * 统计数据集词频
+	 * @param set 数据集
+	 */
+	public void statistic(InstanceSet instSet){	
+		int numSamples = instSet.size();
+		for(int i=0;i<numSamples;i++){
+			if(i%1000==0)
+				System.out.println((i+0.0)/numSamples);
+			Instance inst=instSet.get(i);
+			oneStepStatistic(inst);
+		}
+	}
+	private boolean oneStepStatistic(Instance inst) {
+		if(inst==null)
+			return false;
+		int[] type;
+		Object t=inst.getTarget();
+		if(t instanceof Integer){
+			type=new int[1];
+			type[0]=Integer.parseInt(t.toString());
+		}
+		else{
+			return false;
+		}
+		
+		HashSparseVector data = (HashSparseVector) inst.getData();
+		TIntFloatIterator it = data.data.iterator();
+		while (it.hasNext()) {
+			it.advance();
+			int feature=it.key();
+			for(int i=0;i<type.length;i++){
+				addItemFrequency(feature, type[i], (int)it.value());
+			}
+		}
+		
+		return true;
 	}
 }

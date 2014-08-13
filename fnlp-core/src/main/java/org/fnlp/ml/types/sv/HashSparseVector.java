@@ -167,7 +167,7 @@ public class HashSparseVector implements ISparseVector {
 		return v;
 	}
 	/**
-	 * 点积 v.*sv
+	 * cos cos(v,sv)
 	 * @param sv
 	 * @return
 	 */
