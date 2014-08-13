@@ -42,6 +42,8 @@ You can also use the following site to check the partial functionality.
 ----
 欢迎大家提供非Java语言的接口。
 
+大的模型文件和代码分离。相应的模型文件可以从release页面下载。
+
 引用(Citation)
 ----
 If you would like to acknowledge our efforts, please cite the following paper.
