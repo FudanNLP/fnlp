@@ -40,9 +40,12 @@ You can also use the following site to check the partial functionality.
 
 使用(Usages)
 ----
-欢迎大家提供非Java语言的接口。
+
+[FNLP入门教程](https://github.com/xpqiu/fnlp/wiki)
 
 大的模型文件和代码分离。相应的模型文件可以从release页面下载。
+
+欢迎大家提供非Java语言的接口。
 
 引用(Citation)
 ----
