@@ -107,9 +107,9 @@ public class TextClassificationTest {
 				count++;
 			}
 			else{
-				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
-				for(int j=0;j<3;j++)
-					System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
+//				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
+//				for(int j=0;j<3;j++)
+//					System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
 			}
 		}
 		int bayesCount=count;
@@ -182,9 +182,9 @@ public class TextClassificationTest {
 				count++;
 			}
 			else{
-				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
-				for(int j=0;j<3;j++)
-					System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
+//				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
+//				for(int j=0;j<3;j++)
+//					System.out.println(pres.getLabel(j)+":"+pres.getScore(j));
 			}
 		}
 		int knnCount=count;
@@ -260,7 +260,7 @@ public class TextClassificationTest {
 				count++;
 			}
 			else{
-				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
+//				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getTempData());
 			}
 		}
 		int linearCount=count;
@@ -269,8 +269,7 @@ public class TextClassificationTest {
 		System.out.println("instsetSize: "+instset.size());
 		System.out.println("Bayes Precision:"+((float)bayesCount/testset.size())+"("+bayesCount+"/"+testset.size()+")");
 		System.out.println("Knn Precision:"+((float)knnCount/testset.size())+"("+knnCount+"/"+testset.size()+")");
-		System.out.println("Linear Precision:"+((float)linearCount/testset.size())+"("+linearCount+"/"+testset.size()+")");
-		
+		System.out.println("Linear Precision:"+((float)linearCount/testset.size())+"("+linearCount+"/"+testset.size()+")");	
 	}
 
 }
