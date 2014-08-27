@@ -17,6 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
+
 package org.fnlp.nlp.similarity;
 
 import java.util.Vector;
