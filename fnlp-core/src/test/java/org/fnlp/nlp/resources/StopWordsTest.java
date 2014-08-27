@@ -49,21 +49,15 @@ public class StopWordsTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testRead() {
-		fail("Not yet implemented");
-	}
+	
 
-	@Test
-	public void testPhraseDel() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testIsStopWord() {
 		StopWords sw = new StopWords();
-		sw.read("./models/stopwords/StopWords.txt");
-		assertTrue(sw.isStopWord("现在我"));
+		sw.read("../models/stopwords/StopWords.txt");
+		assertTrue(!sw.isStopWord("现在我"));
 		assertTrue(sw.isStopWord("我0"));
 		assertTrue(sw.isStopWord("我#"));	
 		assertTrue(sw.isStopWord(" "));	

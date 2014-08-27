@@ -31,12 +31,16 @@ import org.fnlp.util.MultiValueMap;
 import org.fnlp.util.MyCollection;
 import org.fnlp.util.MyFiles;
 import org.fnlp.util.exception.LoadModelException;
-
+/**
+ * 增加英文词性标签
+ * @author Xipeng
+ *
+ */
 public class POSAddEnTag {
 
 	
 	
-	static String c2ePath = "./data/map/pos-fnlp2e.txt";
+	static String c2ePath = "../data/map/pos-fnlp2e.txt";
 
 		
 	/**
@@ -44,31 +48,9 @@ public class POSAddEnTag {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		String e2cPath = "./data/map/pos-ctb2fnlp.txt";
-		HashMap<String, String> e2c = MyCollection.loadStringStringMap(e2cPath);
-		MultiValueMap<String, String> c2e = new MultiValueMap<String, String>();
-		Iterator<Entry<String, String>> it = e2c.entrySet().iterator();
-		while(it.hasNext()){
-			Entry<String, String> entry = it.next();
-			String cn = entry.getValue(); 
-			String en = entry.getKey();			
-			
-			if(cn.equals("动词"))
-				en = "VV";
-			else if(cn.equals("结构助词"))
-				en = "DSP";
-			else if(cn.equals("被动词"))
-				en = "BEI";
-			else if(cn.equals("惯用词"))
-				en = "IDIOM";	
-			else if(cn.equals("专有名"))
-				en = "NR";
-				
-			
-			c2e.put(cn,en);
-		}
-		MyFiles.write(c2ePath, c2e.toString());
-		
+		//
+		POSAddEnTag pp = new POSAddEnTag();
+		pp.addEnTag("../models/pos.m");
 		
 		System.out.print("Done");
 	}
@@ -76,7 +58,6 @@ public class POSAddEnTag {
 	public void addEnTag(String file) throws LoadModelException,
 			IOException {
 		AbstractTagger cl = new POSTagger(file);
-		
 			
 
 		addEnTag(cl,file);

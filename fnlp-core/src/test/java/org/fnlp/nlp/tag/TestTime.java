@@ -60,7 +60,7 @@ public class TestTime {
 				System.out.println("句法分析");
 				break;
 			case 4:
-				normalizer = new TimeNormalizer("../models/TimeExp.m");
+				normalizer = new TimeNormalizer("../models/time.m");
 				System.out.println("时间");
 				break;
 			}

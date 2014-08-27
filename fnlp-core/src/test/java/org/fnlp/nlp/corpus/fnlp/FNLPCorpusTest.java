@@ -48,15 +48,12 @@ public class FNLPCorpusTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
+	
 	@Test
 	public void testReadCWS() throws IOException {
 		FNLPCorpus corpus = new FNLPCorpus();
-		corpus.readCWS("./data/FNLPDATA/seg",".txt","UTF8");		
-		corpus.writeOne("./tmp/seg.dat");
+		corpus.readCWS("../example-data/seg-bad-case.txt",".txt","UTF8");		
+		corpus.writeOne("../tmp/seg.dat");
 //		corpus.count("./tmp", true);
 		System.out.println("Done!");
 	}

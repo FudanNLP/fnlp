@@ -49,7 +49,7 @@ public class Cluster implements Serializable {
 		else if(c2==null)
 			rep = c1.rep;
 		else			
-			rep = c1.rep+":"+c2.rep;	
+			rep = c1.rep+":"+c2.rep;		
 	}
 
 	String getN() {

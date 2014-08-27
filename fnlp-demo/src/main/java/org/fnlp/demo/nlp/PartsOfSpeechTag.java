@@ -65,7 +65,7 @@ public class PartsOfSpeechTag {
 		CWSTagger cws2 = new CWSTagger("../models/seg.m", new Dictionary("../models/dict.txt"));
 		
 		//bool值指定该dict是否用于cws分词（分词和词性可以使用不同的词典）
-		tag = new POSTagger(cws2, "models/pos.m"
+		tag = new POSTagger(cws2, "../models/pos.m"
 				, new Dictionary("../models/dict.txt"), true);//true就替换了之前的dict.txt
 		tag.removeDictionary(false);//不移除分词的词典
 		tag.setDictionary(new Dictionary("../models/dict.txt"), false);//设置POS词典，分词使用原来设置

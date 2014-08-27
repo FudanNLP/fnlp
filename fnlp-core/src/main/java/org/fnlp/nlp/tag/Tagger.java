@@ -98,8 +98,8 @@ public class Tagger {
 
 	/**
 	 * 序列标注训练和测试主程序
-	 * 训练： java -classpath fudannlp.jar edu.fudan.nlp.tag.Tagger -train template train model 
-	 * 测试： java -classpath fudannlp.jar edu.fudan.nlp.tag.Tagger [-haslabel] model test [result]
+	 * 训练： java -classpath fnlp-core.jar org.fnlp.nlp.tag.Tagger -train template train model 
+	 * 测试： java -classpath fnlp-core.jar org.fnlp.nlp.tag.Tagger [-haslabel] model test [result]
 	 * 
 	 * @param args
 	 * @throws Exception

@@ -41,23 +41,23 @@ public class AR_ReaderTest {
 
 	@Test
 	public void test() throws Exception {
-		Linear cl=null;;
-		cl = Linear.loadFrom("./models/ar.m");
-		InstanceSet test = new InstanceSet(cl.getPipe());
-		String s = "随着中国经济融入世界经济进程的加快，和以高科技为主体的经济发展，众多跨国公司在中国不 在是单纯的建立生产基地，而是越来越多的将研发中心转移到了中国。目前已经有包括：微软、 摩托罗拉和贝尔实验室在内的几十家规模较大的跨国公司，将其研发中心在中国落户。 ";
-		POSTagger tag = new POSTagger("./models/seg.m","./models/pos.m");
-		String[][][] tagstr = tag.tag2DoubleArray(s);
-		AR_Reader reader = new AR_Reader(tagstr, s);
-		
-		test.loadThruPipes(reader);
-		for(int i=0;i<test.size();i++){
-			Instance inst = test.getInstance(i);
-			System.out.println(inst);
-			String ss = cl.getStringLabel(inst);
-			if(ss.equals("1"))
-				System.out.println(ss+"\n");
-		}
-		System.gc();
+//		Linear cl=null;;
+//		cl = Linear.loadFrom("./models/ar.m");
+//		InstanceSet test = new InstanceSet(cl.getPipe());
+//		String s = "随着中国经济融入世界经济进程的加快，和以高科技为主体的经济发展，众多跨国公司在中国不 在是单纯的建立生产基地，而是越来越多的将研发中心转移到了中国。目前已经有包括：微软、 摩托罗拉和贝尔实验室在内的几十家规模较大的跨国公司，将其研发中心在中国落户。 ";
+//		POSTagger tag = new POSTagger("../models/seg.m","../models/pos.m");
+//		String[][][] tagstr = tag.tag2DoubleArray(s);
+//		AR_Reader reader = new AR_Reader(tagstr, s);
+//		
+//		test.loadThruPipes(reader);
+//		for(int i=0;i<test.size();i++){
+//			Instance inst = test.getInstance(i);
+//			System.out.println(inst);
+//			String ss = cl.getStringLabel(inst);
+//			if(ss.equals("1"))
+//				System.out.println(ss+"\n");
+//		}
+//		System.gc();
 	}
 
 }

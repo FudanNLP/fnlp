@@ -17,23 +17,20 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.nlp.similarity;
 
-import static org.junit.Assert.*;
+package org.fnlp.nlp.similarity;
 
 import java.util.Vector;
 
+import org.fnlp.nlp.cn.CNFactory;
+import org.fnlp.nlp.cn.CNFactory.Models;
+import org.fnlp.ontology.graph.WordGraph;
+import org.fnlp.util.MyStrings;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import org.fnlp.nlp.cn.CNFactory;
-import org.fnlp.nlp.cn.CNFactory.Models;
-import org.fnlp.nlp.parser.dep.DependencyTree;
-import org.fnlp.ontology.graph.WordGraph;
-import org.fnlp.util.MyStrings;
 
 public class TreeKernelTest {
 	
@@ -50,12 +47,12 @@ public class TreeKernelTest {
 
 	@Before
 	public void setUp() throws Exception {
-		factory = CNFactory.getInstance("./models",Models.ALL);
-		WordGraph wg = new WordGraph();
-		
-		wg.read("./models/wordgraph.txt");
-		tk = new TreeKernel();
-		tk.setWordGraph(wg);
+//		factory = CNFactory.getInstance("../models",Models.ALL);
+//		WordGraph wg = new WordGraph();
+//		
+//		wg.read("../models/wordgraph.txt");
+//		tk = new TreeKernel();
+//		tk.setWordGraph(wg);
 	}
 
 	@After
@@ -77,11 +74,11 @@ public class TreeKernelTest {
 		s.add(new String[]{"我想去南京东路","我想去#POI#"});
 		s.add(new String[]{"播放流行的歌","我想听流行的歌"});
 		s.add(new String[]{"拍张照片","拍照"});
-		for(int i = 0; i < s.size(); i++){
-			float score = tk.calc(factory.parse2T(s.get(i)[0]), factory.parse2T(s.get(i)[1]));
-			System.out.println(MyStrings.toString(s.get(i), " ") );
-			System.out.println(score );
-		}
+//		for(int i = 0; i < s.size(); i++){
+//			float score = tk.calc(factory.parse2T(s.get(i)[0]), factory.parse2T(s.get(i)[1]));
+//			System.out.println(MyStrings.toString(s.get(i), " ") );
+//			System.out.println(score );
+//		}
 		
 	}
 

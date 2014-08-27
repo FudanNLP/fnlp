@@ -50,10 +50,7 @@ public class WordClusterTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testRead() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testStartClustering() {

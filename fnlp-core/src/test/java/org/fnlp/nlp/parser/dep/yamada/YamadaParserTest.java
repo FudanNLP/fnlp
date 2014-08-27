@@ -19,7 +19,7 @@
 
 package org.fnlp.nlp.parser.dep.yamada;
 
-import org.fnlp.nlp.cn.tag.POSTaggerX;
+import org.fnlp.nlp.cn.tag.POSTagger;
 import org.fnlp.nlp.parser.dep.YamadaParser;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,38 +47,38 @@ public class YamadaParserTest {
 
 	@Test
 	public void testParseStringArrayStringArray() throws Exception {
-		YamadaParser parser = new YamadaParser("models/chs.dep.ymd.gz");
-
-		System.out.println("只输入句子，不带词性");
-		String word = "中国进出口银行与中国银行加强合作";
-		POSTaggerX tag = new POSTaggerX("models/pos.c7.111128.gz");
-		String[][] s = tag.tag2Array(word);
-		int[] heads = null;
-		try {
-//			parser.getBestParse(s[0], s[1], heads);
-			heads = parser.parse(s[0], s[1]);
-		} catch (Exception e) {			
-			e.printStackTrace();
-		}
-
-		for(int i = 0; i < heads.length; i++)
-			System.out.printf("%s\t%s\t%d\n", s[0][i], s[1][i], heads[i]);
-		
-		System.out.println("输入句子，并标注了词性");
-		
-		String[] words = new String[]{"中国", "进出口", "银行", "与", "中国", "银行", "加强", "合作"};
-		String[] pos = new String[]{"NR", "NN", "NN", "CC", "NR", "NN", "VV", "NN"};
-		heads = null;
-
-		try {
-			heads = parser.parse(words, pos);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for(int i = 0; i < heads.length; i++)
-			System.out.printf("%s\t%s\t%d\n", words[i], pos[i], heads[i]);	
+//		YamadaParser parser = new YamadaParser("../models/dep.m");
+//
+//		System.out.println("只输入句子，不带词性");
+//		String word = "中国进出口银行与中国银行加强合作";
+//		POSTagger tag = new POSTagger("../models/pos.m");
+//		String[][] s = tag.tag2Array(word);
+//		int[] heads = null;
+//		try {
+////			parser.getBestParse(s[0], s[1], heads);
+//			heads = parser.parse(s[0], s[1]);
+//		} catch (Exception e) {			
+//			e.printStackTrace();
+//		}
+//
+//		for(int i = 0; i < heads.length; i++)
+//			System.out.printf("%s\t%s\t%d\n", s[0][i], s[1][i], heads[i]);
+//		
+//		System.out.println("输入句子，并标注了词性");
+//		
+//		String[] words = new String[]{"中国", "进出口", "银行", "与", "中国", "银行", "加强", "合作"};
+//		String[] pos = new String[]{"NR", "NN", "NN", "CC", "NR", "NN", "VV", "NN"};
+//		heads = null;
+//
+//		try {
+//			heads = parser.parse(words, pos);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		for(int i = 0; i < heads.length; i++)
+//			System.out.printf("%s\t%s\t%d\n", words[i], pos[i], heads[i]);	
 		
 	}
 

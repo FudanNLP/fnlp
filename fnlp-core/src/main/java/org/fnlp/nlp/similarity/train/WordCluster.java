@@ -492,7 +492,6 @@ public class WordCluster implements Serializable{
 //		int[] idx = MyCollection.sort(wordProb);
 		wordProb.remove(-1);
 		wordProb.remove(-2);
-		
 
 		int[] idx = MyHashSparseArrays.trim(wordProb, ENERGY);
 

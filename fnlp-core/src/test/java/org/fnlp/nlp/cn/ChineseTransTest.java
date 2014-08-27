@@ -68,10 +68,7 @@ public class ChineseTransTest {
 //		str = ChineseTrans.toTradwithHash(str);
 //		System.out.println(str);
 //	}
-	@Test
-	public void testToSimp() {
-		fail("Not yet implemented");
-	}
+	
 	
 	@Test
 	public void testNormalise() {
