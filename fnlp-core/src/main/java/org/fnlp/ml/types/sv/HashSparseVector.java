@@ -142,7 +142,46 @@ public class HashSparseVector implements ISparseVector {
 		return data.keys();
 	}
 
-
+	/**
+	 * cos cos(v,sv)
+	 * @param sv
+	 * @return
+	 */
+	public float cos(HashSparseVector sv) {
+		float v =0f;
+		if(sv.size() < data.size()){
+			TIntFloatIterator it = sv.data.iterator();			
+			while(it.hasNext()){
+				it.advance();
+				v += data.get(it.key())*it.value();
+			}
+		}else{
+			TIntFloatIterator it = data.iterator();			
+			while(it.hasNext()){
+				it.advance();
+				v += sv.data.get(it.key())*it.value();
+			}
+		}
+		TIntFloatIterator it = sv.data.iterator();
+		float sum=0.0f;
+		while (it.hasNext()) {
+			it.advance();
+			if(it.key()==0)
+				continue;
+			sum+=it.value()*it.value();
+		}
+		v/=Math.abs(sum)<0.00001?1:Math.sqrt(sum);
+		it = data.iterator();
+		sum=0.0f;
+		while (it.hasNext()) {
+			it.advance();
+			if(it.key()==0)
+				continue;
+			sum+=it.value()*it.value();
+		}
+		v/=Math.abs(sum)<0.00001?1:Math.sqrt(sum);
+		return v;
+	}
 
 	/**
 	 * 点积 v.*sv

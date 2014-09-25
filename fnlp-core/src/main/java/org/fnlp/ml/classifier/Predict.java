@@ -38,7 +38,7 @@ public class Predict<T> implements TPredict<T> {
 	/**
 	 * 保存个数
 	 */
-	int n;
+	protected int n;
 	/**
 	 * 缺省只保存一个最大值
 	 */
