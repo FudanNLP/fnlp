@@ -367,9 +367,20 @@ public class FNLPCorpus {
 		}
 	}
 
-	public int getDocumenSize() {
+	public int getDocumenNum() {
 		
 		return docs.size();
+	}
+	
+	
+	public int getSentenceNum() {
+		Iterator<FNLPDoc> it1 = docs.iterator();
+		int n=0;
+		while(it1.hasNext()){
+			FNLPDoc doc = it1.next();
+			n += doc.sentences.size();
+		}
+		return n;
 	}
 
 	public  FNLPDoc getDoc(int idx) {
@@ -402,5 +413,7 @@ public class FNLPCorpus {
 		return set;
 		
 	}
+
+	
 
 }

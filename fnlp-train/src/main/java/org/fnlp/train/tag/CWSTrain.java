@@ -84,8 +84,8 @@ public class CWSTrain {
 
 	/**
 	 * 序列标注训练和测试主程序
-	 * 训练： java -classpath fudannlp.jar org.fnlp.nlp.tag.Tagger -train template train model 
-	 * 测试： java -classpath fudannlp.jar org.fnlp.nlp.tag.Tagger model test [result]
+	 * 训练： java -classpath fnlp-core.jar org.fnlp.nlp.tag.Tagger -train template train model 
+	 * 测试： java -classpath fnlp-core.jar org.fnlp.nlp.tag.Tagger model test [result]
 	 * 
 	 * @param args
 	 * @throws Exception

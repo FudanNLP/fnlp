@@ -21,6 +21,11 @@ package org.fnlp.ml.types.sv;
 
 import java.io.Serializable;
 
+
+/**
+ * 稀疏向量，并实现各种向量运算
+ *
+ */
 public interface ISparseVector extends Serializable {
 
 	/**

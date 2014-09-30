@@ -67,8 +67,9 @@ public class Tags {
 			String word = wordArray[i];
 			for(int j=0; j<word.length(); j++) {
 				char c = word.charAt(j);
-				if(Chars.getType(c)==Chars.CharType.B)
-					System.err.println("包含空格");
+				if(Chars.getType(c)==Chars.CharType.B){
+					System.err.println(word + " :包含空格(将序列标签转为BMES)");					
+				}
 				sb.append(c);
 				sb.append('\t');
 				if(j == 0) {

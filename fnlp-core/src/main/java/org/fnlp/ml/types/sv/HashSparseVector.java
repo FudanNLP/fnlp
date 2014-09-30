@@ -207,7 +207,7 @@ public class HashSparseVector implements ISparseVector {
 	}
 
 	/* (non-Javadoc)
-	 * @see edu.fudan.ml.types.ISparseVector#dotProduct(float[])
+	 * @see org.fnlp.ml.types.sv.ISparseVector#dotProduct(float[])
 	 */
 	@Override
 	public float dotProduct(float[] vector) {
@@ -221,7 +221,7 @@ public class HashSparseVector implements ISparseVector {
 	}
 
 	/* (non-Javadoc)
-	 * @see edu.fudan.ml.types.ISparseVector#l2Norm2()
+	 * @see org.fnlp.ml.types.sv.ISparseVector#l2Norm2()
 	 */
 	public float l2Norm2() {
 		TIntFloatIterator it = data.iterator();

@@ -48,7 +48,7 @@ public class FNLPReader extends Reader {
 	public FNLPReader(String filepath) throws IOException {
 		corpus = new FNLPCorpus();
 		corpus.read(filepath, null);
-		size = corpus.getDocumenSize();
+		size = corpus.getDocumenNum();
 		curDocNo = 0;
 		curSentNo = 0;
 		

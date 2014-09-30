@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.demo.nlp;
+package org.fnlp.demo.nlp.tc;
 
 import java.io.File;
 

@@ -85,6 +85,12 @@ public class NGram extends Pipe{
         return list;
     }
 
+    /**
+     * 提取ngram
+     * @param tokens
+     * @param gramSizes2
+     * @return
+     */
     private ArrayList<String> ngram(List tokens, int[] gramSizes2) {
         ArrayList<String> list = new ArrayList<String>();
         StringBuffer buf = new StringBuffer();
@@ -132,6 +138,12 @@ public class NGram extends Pipe{
         return list;
     }
 
+    /**
+     * 提取ngram
+     * @param data
+     * @param gramSizes
+     * @param list
+     */
     private static void ngram(String data, int[] gramSizes, Collection<String> list) {
         for (int j = 0; j < gramSizes.length; j++) {
             int len = gramSizes[j];

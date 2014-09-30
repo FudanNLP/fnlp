@@ -61,12 +61,13 @@ public class PrepareSeg {
 		//读分词+词性文件
 		corpus.readPOS(datapath + "/FNLPDATA/pos",".txt","UTF8");	
 		//读FNLP数据
-		corpus.read(datapath + "/FNLPDATA/ctb7.dat", null);
+		corpus.read(datapath + "/FNLPDATA/ctb7.dat", null);			
+		corpus.read(datapath + "/FNLPDATA/WeiboFTB(v1.0)-train.dat", null);
 
 
 		
 		FNLP2BMES.w2BMES(corpus,segfile);		
-		FNLP2BMES.w2BMES(corpus,segfile_w);
+		//FNLP2BMES.w2BMES(corpus,segfile_w); //?
 		
 
 		//词典转BMES
@@ -107,12 +108,22 @@ public class PrepareSeg {
 		dictfile = datapath + "/FNLPDATA/all.seg";
 		String dicfile = datapath + "/FNLPDATA/all.dict";
 		DICT.BMES2DICT(dictfile,dicfile);
+		
+		//处理测试数据
+		FNLPCorpus corpust = new FNLPCorpus();
+		//读自有数据
+		corpust.read(datapath + "/FNLPDATA/WeiboFTB(v1.0)-test.dat", null);	
+		String testfile = datapath + "/FNLPDATA/test.seg";		
+		FNLP2BMES.w2BMES(corpust,testfile);		
 
 
 		System.out.println(new Date().toString());
 		System.out.println("Done!");
 
 		String param = "-iter 100 -c 0.01  ../data/template-seg ../data/FNLPDATA/all.seg ../models/seg.m";
+		CWSTrain.main(param.split(" +"));
+		
+		param = "../models/seg.m ../data/FNLPDATA/test.seg";
 		CWSTrain.main(param.split(" +"));
 
 

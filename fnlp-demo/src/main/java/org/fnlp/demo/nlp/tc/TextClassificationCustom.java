@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.demo.nlp;
+package org.fnlp.demo.nlp.tc;
 
 import java.io.File;
 
@@ -36,12 +36,13 @@ import org.fnlp.nlp.pipe.StringArray2IndexArray;
 import org.fnlp.nlp.pipe.Target2Label;
 
 /**
- * 文本分类示例
+ * 自定义流程的文本分类示例
+ * 不使用封装好的org.fnlp.app.tc.TextClassifier类
  * @author xpqiu
  *
  */
 
-public class TextClassification {
+public class TextClassificationCustom {
 
 	/**
 	 * 训练数据路径
@@ -122,6 +123,8 @@ public class TextClassification {
 			else
 				System.err.println(gold_label+"->"+pred_label+" : "+testset.getInstance(i).getSource());
 		}
+		
+		
 		/**
 		 * 分类器使用
 		 */
