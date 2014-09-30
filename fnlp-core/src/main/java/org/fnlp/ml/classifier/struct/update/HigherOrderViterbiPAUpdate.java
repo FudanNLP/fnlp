@@ -57,9 +57,9 @@ public class HigherOrderViterbiPAUpdate implements Serializable, Update {
 		this.useLoss = useLoss2;
 	}
 
-	public float update(Instance inst, float[] weights, Object predictLabel,
-			float c) {
-		return update(inst, weights, predictLabel, null, c);
+	public float update(Instance inst, float[] weights, float[] assistWeights, int updateTimes,
+			Object predictLabel, float c) {
+		return update(inst, weights, assistWeights, updateTimes, predictLabel, null, c);
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class HigherOrderViterbiPAUpdate implements Serializable, Update {
 	 * @param c
 	 * @param weights
 	 */
-	public float update(Instance inst, float[] weights, Object predictLabel,
-			Object goldenLabel, float c) {
+	public float update(Instance inst, float[] weights, float[] assistWeights, int updateTimes, 
+			Object predictLabel, Object goldenLabel, float c) {
 		int[][] data = (int[][]) inst.getData();
 		int[] target;
 		if (goldenLabel == null)

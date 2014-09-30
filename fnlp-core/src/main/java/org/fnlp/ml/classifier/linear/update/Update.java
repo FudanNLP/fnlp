@@ -23,10 +23,10 @@ import org.fnlp.ml.types.Instance;
 
 public interface Update {
 	
-	public float update(Instance inst, float[] weights, Object predictLabel,
+	public float update(Instance inst, float[] weights, float[] assistWeights, int updateTimes, Object predictLabel,
 			float c);
 
-	public float update(Instance inst, float[] weights, Object predictLabel,
+	public float update(Instance inst, float[] weights, float[] assistWeights, int updateTimes, Object predictLabel,
 			Object goldenLabel, float c);
 
 }

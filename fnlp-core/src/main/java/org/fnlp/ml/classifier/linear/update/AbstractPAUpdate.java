@@ -60,8 +60,8 @@ public abstract class AbstractPAUpdate implements Update {
 	 * @param c 步长阈值
 	 * @return 预测答案和标准答案之间的损失
 	 */
-	public float update(Instance inst, float[] weights, Object predict, float c) {
-		return update(inst, weights, inst.getTarget(), predict, c);
+	public float update(Instance inst, float[] weights, float[] assistWeights, int updateTimes, Object predict, float c) {
+		return update(inst, weights, assistWeights, updateTimes, inst.getTarget(), predict, c);
 	}
 
 	/**
@@ -73,7 +73,9 @@ public abstract class AbstractPAUpdate implements Update {
 	 * @param c 步长阈值
 	 * @return 预测答案和对照答案之间的损失
 	 */
-	public float update(Instance inst, float[] weights, Object target,
+	public float update(Instance inst, float[] weights, 
+			 float[] assistWeights, int updateTimes,
+			Object target,
 			Object predict, float c) {
 
 		int lost = diff(inst, weights, target, predict);
@@ -94,7 +96,9 @@ public abstract class AbstractPAUpdate implements Update {
 			 
 			for (int i = 0; i < idx.length; i++) {
 				
-				weights[idx[i]] += diffv.get(idx[i]) * alpha;
+				float t = diffv.get(idx[i]);
+				weights[idx[i]] +=  t * alpha;
+				assistWeights[idx[i]] += t * alpha * updateTimes;
 			}
 		}
 		

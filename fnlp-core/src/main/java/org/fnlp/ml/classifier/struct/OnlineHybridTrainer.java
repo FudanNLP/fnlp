@@ -41,6 +41,7 @@ public class OnlineHybridTrainer extends OnlineTrainer {
 
 	public Linear train(InstanceSet trainset, InstanceSet devset) {
 		int numSamples = trainset.size();
+		int updateTimes = 1;
 		int count = 0;
 		for (int ii = 0; ii < numSamples; ii++) {
 			Instance inst = trainset.getInstance(ii);
@@ -93,13 +94,10 @@ public class OnlineHybridTrainer extends OnlineTrainer {
 				if (l > 0)	{
 					err += l;
 					errtot++;
-					update.update(inst, weights, pred.get(0), c);
+					update.update(inst, weights, assistWeights, updateTimes,
+							pred.get(0), c);
 				}
-				if (method == TrainMethod.Average) {
-					for (int i = 0; i < weights.length; i++) {
-						innerWeights[i] += weights[i];
-					}
-				}
+				updateTimes++;
 
 				if (DEBUG && l > 0) {
 					pred = (List) inferencer.getBest(inst, 1);
@@ -141,16 +139,6 @@ public class OnlineHybridTrainer extends OnlineTrainer {
 				evaluate(devset);
 			}
 			
-			if (method == TrainMethod.Average) {
-				for (int i = 0; i < innerWeights.length; i++) {
-					averageWeights[i] += innerWeights[i] / numSamples;
-				}
-			} else if (method == TrainMethod.FastAverage) {
-				for (int i = 0; i < weights.length; i++) {
-					averageWeights[i] += weights[i];
-				}
-			}
-			
 			if (interim) {
 				Linear p = new Linear(inferencer,
 						trainset.getAlphabetFactory());
@@ -165,7 +153,7 @@ public class OnlineHybridTrainer extends OnlineTrainer {
 
 		if (method == TrainMethod.Average || method == TrainMethod.FastAverage) {
 			for (int i = 0; i < averageWeights.length; i++) {
-				averageWeights[i] /= iternum;
+				averageWeights[i] = weights[i] - assistWeights[i] / updateTimes;
 			}
 			weights = null;
 			weights = averageWeights;
