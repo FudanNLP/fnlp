@@ -74,6 +74,7 @@ public class OnlineTrainer extends AbstractTrainer {
 
 	public int iternum;
 	protected float[] weights;
+	protected float[] assistWeights;
 
 	public enum TrainMethod {
 		Perceptron, Average, FastAverage
@@ -90,6 +91,7 @@ public class OnlineTrainer extends AbstractTrainer {
 		this.iternum = iternum;
 		this.c = 0.1f;
 		weights = (float[]) inferencer.getWeights();
+		assistWeights = new float[af.getFeatureSize()];
 		if (weights == null) {
 			weights = new float[af.getFeatureSize()];
 			inferencer.setWeights(weights);
@@ -121,6 +123,7 @@ public class OnlineTrainer extends AbstractTrainer {
 		this.iternum = iternum;
 		this.c = c;
 		weights = (float[]) inferencer.getWeights();
+		assistWeights = new float[fsize];
 		if (weights == null) {
 			weights = new float[fsize];
 			inferencer.setWeights(weights);
@@ -160,6 +163,7 @@ public class OnlineTrainer extends AbstractTrainer {
 	@Override
 	public Linear train(InstanceSet trainset, InstanceSet devset) {
 		int numSamples = trainset.size();
+		int updateTimes = 1;
 		System.out.println("Instance Number: "+numSamples);
 		float[] hisErrRate = new float[historyNum];
 
@@ -190,11 +194,6 @@ public class OnlineTrainer extends AbstractTrainer {
 
 			beginTimeIter = System.currentTimeMillis();
 
-			float[] innerWeights = null;
-			if (method == TrainMethod.Average) {
-				innerWeights = Arrays.copyOf(weights, weights.length);
-			}
-
 			for (int ii = 0; ii < numSamples; ii++) {
 				Instance inst = trainset.getInstance(ii);
 				Predict pred = (Predict) inferencer.getBest(inst,2);				
@@ -203,19 +202,17 @@ public class OnlineTrainer extends AbstractTrainer {
 				if (l > 0) {
 					err += l;
 					errtot++;
-					update.update(inst, weights, pred.getLabel(0), c);
+					update.update(inst, weights, assistWeights, updateTimes, 
+							pred.getLabel(0), c);
 					
-				}else{
+				}
+				/*else{
 					if (pred.size() > 1)
 						update.update(inst, weights, pred.getLabel(1), c);
-				}
+				}*/
+				updateTimes++;
 				cnt += inst.length();
 				cnttot++;
-				if (method == TrainMethod.Average) {
-					for (int i = 0; i < weights.length; i++) {
-						innerWeights[i] += weights[i];
-					}
-				}
 
 				if (!simpleOutput && progress != 0 && ii % progress == 0) {
 					System.out.print('.');
@@ -255,16 +252,6 @@ public class OnlineTrainer extends AbstractTrainer {
 			}
 			System.out.println();
 
-			if (method == TrainMethod.Average) {
-				for (int i = 0; i < innerWeights.length; i++) {
-					averageWeights[i] += innerWeights[i] / numSamples;
-				}
-			} else if (method == TrainMethod.FastAverage) {
-				for (int i = 0; i < weights.length; i++) {
-					averageWeights[i] += weights[i];
-				}
-			}
-
 			if (interim) {
 				Linear p = new Linear(inferencer, trainset.getAlphabetFactory());
 				try {
@@ -282,7 +269,7 @@ public class OnlineTrainer extends AbstractTrainer {
 
 		if (method == TrainMethod.Average || method == TrainMethod.FastAverage) {
 			for (int i = 0; i < averageWeights.length; i++) {
-				averageWeights[i] /= iternum;
+				averageWeights[i] = weights[i] - assistWeights[i] / updateTimes;
 			}
 			weights = null;
 			weights = averageWeights;

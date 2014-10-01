@@ -41,6 +41,7 @@ public class OnlineStructTrainer extends OnlineTrainer {
 
 	public Linear train(InstanceSet trainset, InstanceSet devset) {
 		int numSamples = trainset.size();
+		int updateTimes = 1;
 
 		System.out.println("Training Number: " + numSamples);
 
@@ -74,12 +75,6 @@ public class OnlineStructTrainer extends OnlineTrainer {
 
 			beginTimeIter = System.currentTimeMillis();
 
-			float[] innerWeights = null;
-			if (method == TrainMethod.Average) {
-				innerWeights = Arrays.copyOf(weights, weights.length);
-			}
-
-			int innerCount = 0;
 			for (int ii = 0; ii < numSamples; ii++) {
 				Instance inst = trainset.getInstance(ii);
 				float l = inst.length();
@@ -89,13 +84,14 @@ public class OnlineStructTrainer extends OnlineTrainer {
 					Predict pred = (Predict) inferencer.getBest(inst);
 					l = loss.calc(pred.getLabel(0), inst.getTarget());
 					if (l > 0) {
-						update.update(inst, weights, pred.getLabel(0), c);
-						innerCount++;
+						update.update(inst, weights, assistWeights, updateTimes, 
+								pred.getLabel(0), c);
 						if (DEBUG) {
 							pred = (Predict) inferencer.getBest(inst);
 							float nl = loss.calc(pred.getLabel(0), inst.getTarget());
 						}
 					}
+					updateTimes++;
 					dl -= l;
 				} while (l != 0 && Math.abs(dl) > 0);
 				
@@ -106,25 +102,9 @@ public class OnlineStructTrainer extends OnlineTrainer {
 					errtot++;
 				}
 
-				if (method == TrainMethod.Average) {
-					for (int i = 0; i < weights.length; i++) {
-						innerWeights[i] += weights[i];
-					}
-				}
-
 				if (!simpleOutput && progress != 0 && ii % progress == 0) {
 					System.out.print('.');
 					progress += frac;
-				}
-			}
-
-			if (method == TrainMethod.Average) {
-				for (int i = 0; i < innerWeights.length; i++) {
-					averageWeights[i] += innerWeights[i] / numSamples;
-				}
-			} else if (method == TrainMethod.FastAverage) {
-				for (int i = 0; i < weights.length; i++) {
-					averageWeights[i] += weights[i];
 				}
 			}
 
@@ -161,7 +141,7 @@ public class OnlineStructTrainer extends OnlineTrainer {
 
 		if (method == TrainMethod.Average || method == TrainMethod.FastAverage) {
 			for (int i = 0; i < averageWeights.length; i++) {
-				averageWeights[i] /= iternum;
+				averageWeights[i] = weights[i] - assistWeights[i] / updateTimes;
 			}
 			weights = null;
 			weights = averageWeights;
