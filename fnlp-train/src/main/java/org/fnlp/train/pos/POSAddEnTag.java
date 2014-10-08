@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.tag;
+package org.fnlp.train.pos;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -45,9 +45,9 @@ public class RLSegTest {
 
 	@Before
 	public void setUp() throws Exception {
-		CWSTagger tag = new CWSTagger("./models/seg.m");	
+		CWSTagger tag = new CWSTagger("../models/seg.m");	
 
-		rlseg = new RLSeg(tag,"./tmpdata/FNLPDATA/all.dict");
+		rlseg = new RLSeg(tag,"../tmp/FNLPDATA/all.dict");
 	}
 
 	@After
@@ -57,13 +57,13 @@ public class RLSegTest {
 
 	@Test
 	public void testGetNewWords() throws IOException {
-		THashSet<String> newset = new THashSet<String>();
-		THashSet<String> set;
-//		set = rlseg.getNewWords("考几");
-//		set = rlseg.getNewWords("抛诸脑后");
-		set = rlseg.getNewWords("买iphone");
-		System.out.println(set);
-		
+//		THashSet<String> newset = new THashSet<String>();
+//		THashSet<String> set;
+////		set = rlseg.getNewWords("考几");
+////		set = rlseg.getNewWords("抛诸脑后");
+//		set = rlseg.getNewWords("买iphone");
+//		System.out.println(set);
+//		
 	}
 
 }

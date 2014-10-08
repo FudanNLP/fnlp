@@ -172,6 +172,13 @@ public class FNLPSent {
 		else
 			return false;
 	}
+	
+	public boolean hasRelation() {
+		if(relations[0]!=null)
+			return true;
+		else
+			return false;
+	}
 
 	public DependencyTree toTree() {
 		ArrayList<DependencyTree> nodes = new ArrayList<DependencyTree>();

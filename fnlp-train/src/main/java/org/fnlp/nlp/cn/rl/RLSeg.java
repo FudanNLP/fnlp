@@ -57,8 +57,8 @@ public class RLSeg {
 	BufferedWriter bwNew;
 	BufferedWriter bwNo;
 	float prop = 0.5f;
-	private String newdictfile = "./tmp/dict-new.txt";
-	private String nodictfile = "./tmp/dict-no.txt";
+	private String newdictfile = "../tmp/dict-new.txt";
+	private String nodictfile = "../tmp/dict-no.txt";
 
 	public RLSeg(CWSTagger tag, String string) throws IOException{
 		this.tag = tag;
@@ -88,7 +88,7 @@ public class RLSeg {
 		tag.setDictionary(tempdict);
 
 		System.out.println("\n处理文件：");
-		String s4 = tag.tagFile("./example-data/data-tag.txt");
+		String s4 = tag.tagFile("../example-data/data-tag.txt");
 		System.out.println(s4);
 		String[] toks = s4.split("\\s+");
 		int newset = rlseg.update(toks);
@@ -97,7 +97,7 @@ public class RLSeg {
 		tag.setDictionary(tempdict);
 
 		System.out.println("\n处理文件：");
-		String s = tag.tagFile("./example-data/data-tag.txt");
+		String s = tag.tagFile("../example-data/data-tag.txt");
 		System.out.println(s);
 
 

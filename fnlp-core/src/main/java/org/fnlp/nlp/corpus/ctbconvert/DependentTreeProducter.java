@@ -374,7 +374,7 @@ public class DependentTreeProducter {
 			root.getFirstChild().getLabel().setCore(root.getLastChild().getLabel().getCore());
 			root.getLastChild().getLabel().setCore(root.getFirstChild().getLabel());
 			root.getLastChild().getLabel().setDepClass("补语");
-			root.getLastChild().getLabel().setTag("趋向动词");
+			root.getLastChild().getLabel().setTag("趋向词");
 		}
 	}
 	/**
@@ -596,7 +596,7 @@ public class DependentTreeProducter {
 	private void makeFirstClass(Tree<Node> root){
 		if(root.label.getCore()!=null){
 			if(root.label.getCore().getId() == 0)
-				root.label.setDepClass("根节点");
+				root.label.setDepClass("核心词");
 			else if(is标点(root.label))
 				root.label.setDepClass("标点");
 			else if(is语态(root.label))
@@ -612,7 +612,7 @@ public class DependentTreeProducter {
 			else if(is地字结构(root.label))
 				root.label.setDepClass("地字结构");
 			else if(is之字结构(root.label))
-				root.label.setDepClass("之字结构");
+				root.label.setDepClass("的字结构");
 			else if(root.label.getCore().getTag().equals("P"))
 				root.label.setDepClass("介宾");
 

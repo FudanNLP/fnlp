@@ -543,7 +543,7 @@ public class WordCluster implements Serializable{
 					return null;
 			}
 			try {
-				saveTxt("res-"+round);
+				saveTxt("../tmp/res-"+round);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

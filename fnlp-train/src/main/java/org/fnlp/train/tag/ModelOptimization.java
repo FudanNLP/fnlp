@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.prepare;
+package org.fnlp.train.tag;
 
 import gnu.trove.iterator.TIntIntIterator;
 import gnu.trove.iterator.TObjectIntIterator;
@@ -47,11 +47,13 @@ import org.fnlp.util.exception.LoadModelException;
  */
 public class ModelOptimization {
 
-
-	float thresh = 0f;
+	/**
+	 * 方差的下限，大于该值的特征保留
+	 */
+	float varsthresh = 0f;
 
 	public ModelOptimization(float th) {
-		thresh = th;
+		varsthresh = th;
 	}
 
 	public ModelOptimization() {
@@ -118,14 +120,14 @@ public class ModelOptimization {
 				maxe[iii]=1;
 			}
 			float maxen = MyArrays.entropy(maxe);
-			if (i==0||vars[i]>thresh&&entropy[i]<maxen*0.999) {
+			if (i==0||vars[i]>varsthresh&&entropy[i]<maxen*0.999) {
 				String str = index.get(base);
 				int id = newfeat.lookupIndex(str, interv);
 				for (int j = 0; j < interv; j++) {
 					ww.insert(id + j, weights[base + j]);
 				}
 			}else{
-								System.out.print(".");	
+//								System.out.print(".");	
 			}
 		}
 		System.out.println("方差均值："+MyArrays.average(vars));
@@ -194,7 +196,7 @@ public class ModelOptimization {
 				sw[j] = weights[base+j];
 			}
 			float var = MyArrays.viarance(sw);
-			if (var>thresh) {
+			if (var>varsthresh) {
 				int str = index.get(base);
 				int id = newfeat.lookupIndex(str, interv);
 				for (int j = 0; j < interv; j++) {

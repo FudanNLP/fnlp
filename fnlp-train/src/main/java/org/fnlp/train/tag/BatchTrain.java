@@ -17,23 +17,28 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.prepare;
+package org.fnlp.train.tag;
+
+import org.fnlp.train.parsing.DepPrepare;
+import org.fnlp.train.pos.POSPrepare;
+import org.fnlp.train.seg.SegPrepare;
+
 
 public class BatchTrain {
 
 	public static void main(String[] args) throws Exception {
 		long time0 = System.currentTimeMillis();
-		PrepareSeg.main(null);
+		SegPrepare.main(null);
 		args = new String[]{"Tag","../models/seg.m","1.0E-6f"};
 		ModelOptimization.main(args);
 		long time1 = System.currentTimeMillis();
 		
-		PreparePOS.main(null);
+		POSPrepare.main(null);
 		args = new String[]{"Tag","../models/pos.m","1.0E-6f"};
 		ModelOptimization.main(args);
 		
 		long time2 = System.currentTimeMillis();
-		PrepareDep.main(null);
+		DepPrepare.main(null);
 		args = new String[]{"Dep","../models/dep.m","1.0E-6f"};
 		ModelOptimization.main(args);
 		long time3 = System.currentTimeMillis();

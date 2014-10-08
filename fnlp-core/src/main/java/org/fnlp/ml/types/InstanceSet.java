@@ -217,6 +217,7 @@ public class InstanceSet extends ArrayList<Instance> {
                 if (p1 != null)
                     p1.addThruPipe(inst);
                 this.add(inst);
+               
             };
         }
         for (int i = 1; i < p.size(); i++)

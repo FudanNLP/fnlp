@@ -137,13 +137,33 @@ public class StopWords {
 
 	Pattern noise = Pattern.compile(".*["+CharSets.allRegexPunc+"\\d]+.*");
 	
-	public boolean isStopWord(String word) {
-		if (word.length() == 1 || word.length()>4)
+	/**
+	 * 判断是否为停用词
+	 * @param word
+	 * @param minLen 最小长度
+	 * @param maxLen 最大长度
+	 * @return
+	 */
+	public boolean isStopWord(String word,int minLen, int maxLen) {
+		if (word.length() < minLen || word.length()>maxLen)
 			return true;
 
 		if (noise.matcher(word).matches())
 			return true;
 
+		if (sWord.contains(word))
+			return true;
+
+		return false;
+	}
+	
+	/**
+	 * 判断是否为停用词
+	 * @param word
+	 * @return
+	 */
+	public boolean isStopWord(String word) {		
+		
 		if (sWord.contains(word))
 			return true;
 

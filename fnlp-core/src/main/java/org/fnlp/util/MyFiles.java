@@ -35,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.nio.CharBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -162,5 +163,76 @@ public class MyFiles {
 			sb.append(Arrays.copyOfRange(cs, 0, n));			
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * 删除文件
+	 * @param filename
+	 */
+	public static void delete(String filename) {
+		File file = new File(filename);
+		if(file.exists()){
+			file.delete();
+		}
+	}
+	
+	/**
+	 * 合并文件
+	 * @param saveFileName
+	 * @param files
+	 * @throws Exception
+	 */
+	public static void combine(String saveFileName, String... files) throws Exception{
+		File mFile=new File(saveFileName); 
+
+		if(!mFile.exists()){ 
+			mFile.createNewFile(); 
+		} 
+		
+		FileOutputStream os = new FileOutputStream(mFile);
+		FileChannel mFileChannel = os.getChannel(); 
+		FileChannel inFileChannel; 
+		for(String file:files){
+			File f = new File(file);
+			if(!f.exists())
+				continue;
+			inFileChannel=new FileInputStream(f).getChannel(); 
+			inFileChannel.transferTo(0, inFileChannel.size(), mFileChannel); 
+
+			inFileChannel.close(); 
+		} 
+
+		mFileChannel.close(); 
+		os.close();
+	}
+	
+	
+	/**
+	 * 合并文件
+	 * @param saveFileName
+	 * @param files
+	 * @throws Exception
+	 */
+	public static void combine(String saveFileName, File...files) throws Exception{ 
+		File mFile=new File(saveFileName); 
+
+		if(!mFile.exists()){ 
+			mFile.createNewFile(); 
+		} 
+		
+		FileOutputStream os = new FileOutputStream(mFile);
+		FileChannel mFileChannel = os.getChannel(); 
+		FileChannel inFileChannel; 
+		for(File file:files){ 
+			if(!file.exists())
+				continue;
+			inFileChannel=new FileInputStream(file).getChannel(); 
+			inFileChannel.transferTo(0, inFileChannel.size(), mFileChannel); 
+
+			inFileChannel.close(); 
+		} 
+
+		mFileChannel.close(); 
+		os.close();
 	}
 }

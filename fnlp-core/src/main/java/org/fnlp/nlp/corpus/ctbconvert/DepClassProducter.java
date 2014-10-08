@@ -26,6 +26,8 @@ package org.fnlp.nlp.corpus.ctbconvert;
  */
 public  class DepClassProducter {
 	
+	private static final String VDD = "趋向词";
+	
 	private static boolean isCoreLeft(Node label){
 		return label.getId()<label.getCore().getId();
 	}
@@ -78,7 +80,7 @@ public  class DepClassProducter {
 	private static boolean isSUB(Node label){
 		return(isCoreLeft(label)&&
 				(label.getCore().getTag().startsWith("V")||
-						label.getCore().getTag().equals("趋向动词")||
+						label.getCore().getTag().equals(VDD)||
 						label.getCore().getTag().equals("AD")||
 						label.getCore().getTag().equals("BA")||
 						label.getCore().getTag().equals("LB")||
@@ -94,7 +96,7 @@ public  class DepClassProducter {
 	private static boolean isOBJ(Node label){
 		return!isCoreLeft(label)&&	
 				(label.getCore().getTag().startsWith("V")||
-						label.getCore().getTag().equals("趋向动词")||
+						label.getCore().getTag().equals(VDD)||
 						label.getCore().getTag().equals("AD")||
 						label.getCore().getTag().equals("AS")||
 						label.getCore().getTag().equals("BA")||
@@ -118,7 +120,7 @@ public  class DepClassProducter {
 				||label.getCore().getTag().equals("LC")
 				||((label.getCore().getTag().startsWith("DE")&&
 						!label.getTag().startsWith("V")&&
-						!label.getTag().equals("趋向动词")));
+						!label.getTag().equals(VDD)));
 	}
 	private static boolean isD(Node label){
 		return label.getCore().getTag().equals("LC");
@@ -135,7 +137,7 @@ public  class DepClassProducter {
 				||label.getTag().equals("NR")
 				||label.getTag().equals("PN"))&&
 				(label.getCore().getTag().startsWith("V")||
-						label.getCore().getTag().equals("趋向动词")||
+						label.getCore().getTag().equals(VDD)||
 						label.getCore().getTag().equals("AD")||
 						label.getCore().getTag().equals("AS")||
 						label.getCore().getTag().equals("MSP")||
@@ -172,7 +174,7 @@ public  class DepClassProducter {
 				&&label.getCore().getTag().startsWith("DE"));
 	}
 	private static boolean isSBAR(Node label){
-		return((label.getTag().startsWith("V")||label.getTag().equals("趋向动词"))&&
+		return((label.getTag().startsWith("V")||label.getTag().equals(VDD))&&
 				(isCoreLeft(label)&&label.getCore().getTag().startsWith("DE"))||
 				(!isCoreLeft(label)&&(label.getCore().getTag().equals("CS")||
 						label.getCore().getTag().equals("AD"))));		
@@ -259,6 +261,6 @@ public  class DepClassProducter {
 		if(isDEP(label))
 			return "DEP";
 
-		return "****";
+		return "修饰";
 	}
 }

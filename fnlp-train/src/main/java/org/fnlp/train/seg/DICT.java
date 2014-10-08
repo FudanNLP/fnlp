@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.prepare;
+package org.fnlp.train.seg;
 
 import gnu.trove.set.hash.THashSet;
 
@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.fnlp.nlp.corpus.Tags;
+import org.fnlp.train.pos.DictPOS;
 import org.fnlp.util.MyCollection;
 import org.fnlp.util.MyFiles;
 
@@ -60,7 +61,7 @@ public class DICT {
 
 
 
-	static void BMES2DICT(String file, String dicfile) throws UnsupportedEncodingException,
+	public static void BMES2DICT(String file, String dicfile) throws UnsupportedEncodingException,
 	FileNotFoundException, IOException {
 
 

@@ -370,6 +370,8 @@ public class MyCollection {
 			if(line.length()==0)
 				continue;
 			int idx = line.lastIndexOf("\t");
+			if(idx==-1)
+				continue;
 			if(isRevert)
 				dict.put(line.substring(idx+1),line.substring(0,idx));
 			else

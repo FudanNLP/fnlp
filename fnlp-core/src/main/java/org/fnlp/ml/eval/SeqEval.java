@@ -1,21 +1,21 @@
 /**
-*  This file is part of FNLP (formerly FudanNLP).
-*  
-*  FNLP is free software: you can redistribute it and/or modify
-*  it under the terms of the GNU Lesser General Public License as published by
-*  the Free Software Foundation, either version 3 of the License, or
-*  (at your option) any later version.
-*  
-*  FNLP is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU Lesser General Public License for more details.
-*  
-*  You should have received a copy of the GNU General Public License
-*  along with FudanNLP.  If not, see <http://www.gnu.org/licenses/>.
-*  
-*  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
-*/
+ *  This file is part of FNLP (formerly FudanNLP).
+ *  
+ *  FNLP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *  
+ *  FNLP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with FudanNLP.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
+ */
 
 package org.fnlp.ml.eval;
 
@@ -75,6 +75,7 @@ public class SeqEval {
 	 */
 	HashSet<String> dict;
 	private boolean latex = false;
+	public boolean NoSegLabel = false;
 
 	public SeqEval() {
 		if(latex){
@@ -101,7 +102,7 @@ public class SeqEval {
 		res += calcByCOOV()+"\n";
 		res += calcByOOV2()+"\n";
 		res += calcByOOVRate()+"\n";
-		
+
 
 
 		if(outputPath != null ){
@@ -162,7 +163,7 @@ public class SeqEval {
 		}
 
 
-		
+
 		return toString("Length", mpc, mp, mc, oov);
 	}
 
@@ -285,7 +286,7 @@ public class SeqEval {
 
 		return toString("OOV",mpc, mp, mc, oov);
 	}
-	
+
 	private String calcByCOOV() {
 
 		/**
@@ -388,7 +389,10 @@ public class SeqEval {
 				;
 		strOutBuf.append(strInfo + STRLINE);
 		for(Object key:mc.keySet()){
-			double oovrate = (Double)oov.get(key)/(Double)mc.get(key);
+			Double oovv = (Double) oov.get(key);
+			if(oovv==null)
+				oovv =0.0;
+			double oovrate = oovv/(Double)mc.get(key);
 			if(mpc.containsKey(key) && mp.containsKey(key)){
 				double pre = (Double) mpc.get(key)/(Double) mp.get(key);
 				double recall = (Double)mpc.get(key)/(Double)mc.get(key);				
@@ -453,12 +457,12 @@ public class SeqEval {
 					oovs.add(s);
 			}
 		}
-//		if(oovs.size()>11)
-//			System.out.println(oovs);
+		//		if(oovs.size()>11)
+		//			System.out.println(oovs);
 		return oovs;
 	}
 
-	private String calcByType() {
+	public String calcByType() {
 
 		/**
 		 * 估计的中正确的，key是字符串长度，value是这种长度的个数
@@ -509,6 +513,62 @@ public class SeqEval {
 
 		return toString("Type",mpc, mp, mc,oov);
 	}
+	
+	public String calcByType2() {
+
+		/**
+		 * 估计的中正确的，key是字符串长度，value是这种长度的个数
+		 */
+		Map<String,Double> mpc = new TreeMap<String,Double>();
+		/**
+		 * 估计的，key是字符串长度，value是这种长度的个数
+		 */
+		Map<String,Double> mp = new TreeMap<String,Double>();		
+		/**
+		 * 正确的，key是字符串长度，value是这种长度的个数
+		 */
+		Map<String,Double> mc = new TreeMap<String,Double>();	
+
+		/**
+		 * OOV
+		 */
+		Map<String,Double> oov = new TreeMap<String,Double>();	
+
+		for(int i=0;i<entityCs.size();i++){
+			LinkedList<Entity>  cList =  entityCs.get(i);
+			LinkedList<Entity>  pList =  entityPs.get(i);
+			LinkedList<Entity>  cpList =  entityCinPs.get(i);
+
+			for(Entity entity:cList){
+				String type = entity.getType();
+
+				adjust(mc, type, 1.0);
+				adjust(mc, "all", 1.0);
+				if(dict!=null&&dict.size()>0){					
+					String s = entity.getEntityStr();
+					if(!dict.contains(s)){
+						adjust(oov, type, 1.0);
+						adjust(oov, "all", 1.0);
+					}
+				}
+			}
+
+			for(Entity entity:pList){
+				String type = entity.getType();
+				adjust(mp, type, 1.0);
+				adjust(mp, "all", 1.0);
+			}
+
+			for(Entity entity:cpList){
+				String type = entity.getType();
+				adjust(mpc, type, 1.0);
+				adjust(mpc, "all", 1.0);
+			}	
+		}
+
+
+		return toString("Type",mpc, mp, mc,oov);
+	}
 
 
 
@@ -547,15 +607,23 @@ public class SeqEval {
 				//判断实体,实体开始的边界为B-***或者S-***，结束的边界为E-***或N（O）或空白字符或B-***
 				//predict
 				String[] toks = line.split("\\s+");
-				String[] marktype = getMarkType(toks[1]);
 				
+				int ci = 1;
+				int cj=2;
+				
+				if(toks.length>3){//如果列数大于三，默认取最后两列
+					ci=toks.length-2;
+					cj=toks.length-1;
+				}
+
+				String[] marktype = getMarkType(toks[ci]);
 				words.add(toks[0]);
 				markP.add(marktype[0]);
-				typeP.add(marktype[1]);	
+				typeP.add(marktype[1]);
 				entityType.add(marktype[1]);	
 
 				//correct
-				marktype = getMarkType(toks[2]);
+				marktype = getMarkType(toks[cj]);
 				markC.add(marktype[0]);
 				typeC.add(marktype[1]);	
 				entityType.add(marktype[1]);	
@@ -618,6 +686,9 @@ public class SeqEval {
 
 	private boolean isStart(ArrayList<String> marks, ArrayList<String> types,
 			int i) {
+		
+		if(NoSegLabel)
+			return true;
 
 		boolean start = false;
 		String prevMark;
@@ -690,10 +761,23 @@ public class SeqEval {
 
 		return end;
 	}
+	
+	
 
-
+	/**
+	 * 得到标记类型，BMES-后面的标记
+	 * @param label
+	 * @return
+	 */
 	private String[] getMarkType(String label) {
 		String[] types = new String[2];
+		
+		if(NoSegLabel){
+			types[0] = "";
+			types[1] = label;
+			return types;
+		}
+		
 		int idx = label.indexOf('-');
 		if(idx!=-1){
 			types[0] = label.substring(0,idx);
@@ -717,7 +801,7 @@ public class SeqEval {
 			LinkedList<Entity> entityps = entityPs.get(i);
 			LinkedList<Entity> entitycs = entityCs.get(i);
 			LinkedList<Entity> entitycinps = new LinkedList<Entity>();
-			
+
 			for(Entity entityp:entityps){
 				while(!entitycs.isEmpty()){
 					Entity entityc = entitycs.peek();
@@ -788,7 +872,7 @@ public class SeqEval {
 		ne1 = new SeqEval();
 		ne1.readOOV(dictpath);
 		ne1.read(filePath);
-//		ne1.getWrongOOV("./paperdata/ctb6-seg/wrong-dict.txt");
+		//		ne1.getWrongOOV("./paperdata/ctb6-seg/wrong-dict.txt");
 		ne1.getRightOOV("./paperdata/ctb6-seg/right-pattern.txt");
 		ne1.NeEvl(null);
 
@@ -858,8 +942,8 @@ public class SeqEval {
 		MyCollection.write(set, string);
 
 	}
-	
-	
+
+
 	private void getRightOOV(String string) {
 
 		if(dict==null||dict.size()==0)
@@ -870,11 +954,11 @@ public class SeqEval {
 			LinkedList<Entity>  cList =  entityCs.get(i);
 			LinkedList<Entity>  pList =  entityPs.get(i);
 			LinkedList<Entity>  cpList =  entityCinPs.get(i);
-			
+
 			for(Entity entity:cpList){
 				String e = entity.getEntityStr();
-//				if(dict.contains(e))
-//					break;
+				//				if(dict.contains(e))
+				//					break;
 				int idx = cList.indexOf(entity);
 				String s= " ... ";
 				if(idx!=-1){
@@ -883,9 +967,9 @@ public class SeqEval {
 					if(idx<cList.size()-1)
 						s = s+ cList.get(idx+1).getEntityStr();
 				}
-					adjust(set, s, 1);
+				adjust(set, s, 1);
 			}	
-			
+
 		}
 		List<Entry> sortedposFreq = MyCollection.sort(set);		
 		MyCollection.write(sortedposFreq, string, true);

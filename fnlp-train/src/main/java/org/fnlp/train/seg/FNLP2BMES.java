@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.prepare;
+package org.fnlp.train.seg;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -80,7 +80,7 @@ public class FNLP2BMES {
 		bout.close();
 	}
 
-	static void w2BMES(FNLPCorpus corpus, String file)
+	public static void w2BMES(FNLPCorpus corpus, String file)
 			throws UnsupportedEncodingException, FileNotFoundException,
 			IOException {
 		BufferedWriter bout = new BufferedWriter(new OutputStreamWriter(
