@@ -23,10 +23,31 @@ import org.fnlp.ml.types.Instance;
 
 public interface Update {
 	
-	public float update(Instance inst, float[] weights, Object predictLabel,
-			float c);
-
-	public float update(Instance inst, float[] weights, Object predictLabel,
+	/**
+	 * 
+	 * @param inst 样本实例
+	 * @param weights 权重
+	 * @param k 目前遍历的样本数
+	 * @param extraweight 平均化感知器需要减去的权重
+	 * @param predictLabel 预测类别
+	 * @param c 步长阈值
+	 * @return 预测类别和真实类别之间的损失
+	 */
+	public float update(Instance inst, float[] weights, int k, float[] extraweight, Object predictLabel,
+			 float c);
+	
+	/**
+	 * 
+	 * @param inst 样本实例
+	 * @param weights 权重
+	 * @param k 目前遍历的样本数
+	 * @param extraweight 平均化感知器需要减去的权重
+	 * @param predictLabel 预测类别
+	 * @param goldenLabel 真实类别
+	 * @param c 步长阈值
+	 * @return 预测类别和真实类别之间的损失
+	 */
+	public float update(Instance inst, float[] weights, int k, float[] extraweight, Object predictLabel,
 			Object goldenLabel, float c);
 
 }

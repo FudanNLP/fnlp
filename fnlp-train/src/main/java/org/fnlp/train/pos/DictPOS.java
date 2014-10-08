@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.prepare;
+package org.fnlp.train.pos;
 
 import gnu.trove.iterator.hash.TObjectHashIterator;
 import gnu.trove.set.hash.THashSet;
@@ -31,13 +31,27 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.fnlp.util.MyCollection;
 import org.fnlp.util.MyFiles;
-
+/**
+ * 读取代词性的字典
+ * @author Administrator
+ *
+ */
 public class DictPOS {
+	
+	/**
+	 * 词以及相应的词性集合
+	 */
+	public TreeMap<String,TreeSet<String>> dict = new TreeMap<String,TreeSet<String>>();
+	/**
+	 * 所有词性集合
+	 */
+	private TreeSet<String> posSet = new TreeSet<String>();
 
 	/**
 	 * @param args
@@ -45,12 +59,13 @@ public class DictPOS {
 	 */
 	public static void main(String[] args) throws Exception {
 		DictPOS dp = new DictPOS();
-		String path = "./data/FNLPDATA/词性字典";
-		String out = "./data/FNLPDATA/dict.pos";
+		String path = "../data/FNLPDATA/词性字典";
+		String out = "../data/FNLPDATA/dict.pos";
 		dp.loadPath(path,".txt");
 		dp.save(out);
 		System.out.println("Done!");
 	}
+	
 	/**
 	 * 读入词典
 	 * @param path
@@ -58,7 +73,7 @@ public class DictPOS {
 	 * @param out
 	 * @throws IOException
 	 */
-	void loadPath(String path, String suffix)
+	public void loadPath(String path, String suffix)
 			throws IOException {
 		List<File> files = MyFiles.getAllFiles(path, suffix);
 		for(File f:files){
@@ -67,7 +82,7 @@ public class DictPOS {
 		
 	}
 
-	TreeMap<String,TreeSet<String>> dict = new TreeMap<String,TreeSet<String>>();
+	
 	int maxLen = 5;
 	private String filter = "市区县";
 
@@ -113,9 +128,18 @@ public class DictPOS {
 		}
 		return null;
 	}
+	
+	/**
+	 * 增加词+词性
+	 * @param pos
+	 * @param s
+	 */
 	private void add(String pos, String s) {
 		if(s.length()>maxLen)
 			return;
+		if(pos.length()==0)
+			return;
+		posSet.add(pos);
 		if(dict.containsKey(s)){
 			TreeSet<String> sett = dict.get(s);
 			sett.add(pos);
@@ -152,5 +176,11 @@ public class DictPOS {
 		}
 		bout.close();
 	}
+
+	public Set<String> getPosSet() {
+		return posSet;
+	}
+
+	
 
 }

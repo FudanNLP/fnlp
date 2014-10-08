@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.nlp.corpus.ctbconvert;
+package org.fnlp.train.corpus;
 import java.util.*;
 import java.io.*;
 import java.util.regex.Pattern;
@@ -39,9 +39,9 @@ public class TagCorrect {
 
 
 	public TagCorrect() throws IOException{
-		ppronoun = MyCollection.loadSet("./data/FNLPDATA/词性字典/人称代词.txt");
-		qpronoun = MyCollection.loadSet("./data/FNLPDATA/词性字典/疑问代词.txt");
-		auxiliaryVerb = MyCollection.loadSet("./data/FNLPDATA/词性字典/能愿动词.txt");
+		ppronoun = MyCollection.loadSet("../data/FNLPDATA/词性字典/人称代词.txt");
+		qpronoun = MyCollection.loadSet("../data/FNLPDATA/词性字典/疑问代词.txt");
+		auxiliaryVerb = MyCollection.loadSet("../data/FNLPDATA/词性字典/情态词.txt");
 		pronount = new TreeSet<String>();
 	}
 
@@ -72,12 +72,12 @@ public class TagCorrect {
 			else if (ppronoun.contains(words[i]))
 				tags[i]= "人称代词";
 			else{
-				tags[i]="指示代词";
+				tags[i]="指示词";
 				pronount.add(words[i]);
 			}
 		}else if(tags[i].equals("动词")){
 			if (auxiliaryVerb.contains(words[i])) 
-				tags[i]= "能愿动词";
+				tags[i]= "情态词";
 		}
 	}
 

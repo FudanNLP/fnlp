@@ -19,8 +19,6 @@
 
 package org.fnlp.nlp.pipe.seq.templet;
 
-import java.io.Serializable;
-
 import org.fnlp.ml.types.Instance;
 import org.fnlp.ml.types.alphabet.IFeatureAlphabet;
 

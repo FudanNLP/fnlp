@@ -32,10 +32,10 @@ public class FCTB2CONLL {
 
 	public static void main(String[] args) throws IOException{
 		DependentTreeProducter rp = new DependentTreeProducter();
-		InstanceSet ins = MyTreebankReader.readTrees("./data/ctb/data", null,Charset.forName("UTF8"));
+		InstanceSet ins = MyTreebankReader.readTrees("../data/ctb/data", null,Charset.forName("UTF8"));
 //		InstanceSet ins = MyTreebankReader.readNewTrees("./data/ctb/data", null,Charset.forName("UTF8"));
 		
-		rp.write(ins, "./data/ctb/result.txt", "./data/headrules.txt");
+		rp.write(ins, "../data/ctb/result.txt", "../data/headrules.txt");
 		System.out.print("Done!");
 	}
 }

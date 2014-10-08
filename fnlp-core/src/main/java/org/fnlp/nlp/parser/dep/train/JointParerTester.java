@@ -92,7 +92,7 @@ public class JointParerTester {
 		long beginTime = System.currentTimeMillis();
 		int count = 0;
 		while (reader.hasNext()) {
-			System.out.println(count++);
+//			System.out.println(count++);
 			Sentence instance = (Sentence) reader.next();
 			
 			Target targets = (Target) instance.getTarget();
@@ -129,15 +129,15 @@ public class JointParerTester {
 		float time = (endTime - beginTime) / 1000.0f;
 		System.out.println("finish! =]");
 		System.out.printf("total time:\t%.2f(s)\n", time);
-		System.out.printf("errate(depClass):\t%.8f\ttotal(words):\t%d\n", 1.0
+		System.out.printf("accuracy(depClass):\t%.8f\ttotal(words):\t%d\n",  1.0-1.0
 				* dError / total, total);
-		System.out.printf("errate(heads):\t%.8f\ttotal(words):\t%d\n", 1.0
+		System.out.printf("accuracy(heads):\t%.8f\ttotal(words):\t%d\n",  1.0-1.0
 				* error / total, total);
-		System.out.printf("errate(sents):\t%.8f\ttotal(sents):\t%d\n", 1.0
+		System.out.printf("accuracy(sents):\t%.8f\ttotal(sents):\t%d\n", 1.0-1.0
 				* errsent / totsent, totsent);
-		System.out.printf("errate(root):\t%.8f\ttotal(root):\t%d\n", 1.0
+		System.out.printf("accuracy(root):\t%.8f\ttotal(root):\t%d\n", 1.0- 1.0
 				* errroot / totsent, totsent);
-		System.out.printf("average speed:\t%.4f(s/word)\t%.4f(s/sent)", total
+		System.out.printf("average speed:\t%.4f(s/word)\t%.4f(s/sent)",  total
 				/ time, totsent / time);
 	}
 

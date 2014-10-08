@@ -99,18 +99,19 @@ public class SequenceReader extends Reader {
 		cur = null;
 		try {
 			ArrayList<ArrayList<String>> seq = new ArrayList<ArrayList<String>>();
-			ArrayList<String> first = new ArrayList(); //至少有一列元素
-			seq.add(first);
+			ArrayList<String> firstColumnList = new ArrayList(); //至少有一列元素
+			seq.add(firstColumnList);
 			ArrayList<String> labels = null;
 			if(hasTarget){
 				labels = new ArrayList<String>();
 			}
 			String content = null;
+			
 			while ((content = reader.readLine()) != null) {
 				lineNo++;
-//				content = content.trim();
+				content = content.trim();
 				if (content.matches("^$")){
-					if(first.size()>0) //第一列个数>0
+					if(firstColumnList.size()>0) //第一列个数>0
 						break;
 					else
 						continue;
@@ -140,10 +141,17 @@ public class SequenceReader extends Reader {
 				}else{
 					ensure(colsnum,seq);
 					seq.get(colsnum).add(content.substring(start));
-				}					
+				}	
+				//debug
+//				if(colsnum>2){
+//					System.out.println(content);
+//				}
 			}
-			if (first.size() > 0){
+			
+			if (firstColumnList.size() > 0){
 				cur = new Instance(seq, labels);
+				//debug
+//				cur.setSource(firstColumnList.toString());
 			}
 			seq = null;
 			labels = null;

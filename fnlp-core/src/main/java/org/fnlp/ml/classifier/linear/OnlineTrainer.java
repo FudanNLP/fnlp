@@ -53,8 +53,6 @@ public class OnlineTrainer extends AbstractTrainer {
 	 */
 	public static float eps = 1e-10f;
 
-	public TrainMethod method = TrainMethod.FastAverage;
-
 	public boolean DEBUG = false;
 	public boolean shuffle = true;
 	public boolean finalOptimized = false;
@@ -75,9 +73,6 @@ public class OnlineTrainer extends AbstractTrainer {
 	public int iternum;
 	protected float[] weights;
 
-	public enum TrainMethod {
-		Perceptron, Average, FastAverage
-	}
 	public OnlineTrainer(AlphabetFactory af, int iternum) {
 		//默认特征生成器
 		Generator gen = new SFGenerator();
@@ -168,34 +163,37 @@ public class OnlineTrainer extends AbstractTrainer {
 		int iter = 0;
 		int frac = numSamples / 10;
 
-		float[] averageWeights = null;
-		if (method == TrainMethod.Average || method == TrainMethod.FastAverage) {
-			averageWeights = new float[weights.length];
-		}
-
+		//平均化感知器需要减去的权重
+		float[] extraweight = null;
+		extraweight = new float[weights.length];
+		
+			
+		
 		beginTime = System.currentTimeMillis();
 
-		if (shuffle)
-			trainset.shuffle(random);
+		
+		
+		//遍历的总样本数
+		int k=0;
 
 		while (iter++ < iternum) {
 			if (!simpleOutput) {
 				System.out.print("iter "+iter+":  ");
 			}
+			
 			float err = 0;
 			float errtot = 0;
 			int cnt = 0;
 			int cnttot = 0;
-			int progress = frac;
+			int progress = frac;			
 
+			if (shuffle)
+				trainset.shuffle(random);
+			
 			beginTimeIter = System.currentTimeMillis();
-
-			float[] innerWeights = null;
-			if (method == TrainMethod.Average) {
-				innerWeights = Arrays.copyOf(weights, weights.length);
-			}
-
 			for (int ii = 0; ii < numSamples; ii++) {
+				
+				k++;
 				Instance inst = trainset.getInstance(ii);
 				Predict pred = (Predict) inferencer.getBest(inst,2);				
 				
@@ -203,25 +201,21 @@ public class OnlineTrainer extends AbstractTrainer {
 				if (l > 0) {
 					err += l;
 					errtot++;
-					update.update(inst, weights, pred.getLabel(0), c);
+					update.update(inst, weights, k, extraweight, pred.getLabel(0), c);
 					
 				}else{
 					if (pred.size() > 1)
-						update.update(inst, weights, pred.getLabel(1), c);
+						update.update(inst, weights, k, extraweight, pred.getLabel(1), c);
 				}
 				cnt += inst.length();
-				cnttot++;
-				if (method == TrainMethod.Average) {
-					for (int i = 0; i < weights.length; i++) {
-						innerWeights[i] += weights[i];
-					}
-				}
+				cnttot++;				
 
 				if (!simpleOutput && progress != 0 && ii % progress == 0) {
 					System.out.print('.');
 					progress += frac;
-				}
-			}
+				}				
+				
+			}//end for
 
 			float curErrRate = err / cnt;
 
@@ -253,17 +247,7 @@ public class OnlineTrainer extends AbstractTrainer {
 			if (devset != null) {
 				evaluate(devset);
 			}
-			System.out.println();
-
-			if (method == TrainMethod.Average) {
-				for (int i = 0; i < innerWeights.length; i++) {
-					averageWeights[i] += innerWeights[i] / numSamples;
-				}
-			} else if (method == TrainMethod.FastAverage) {
-				for (int i = 0; i < weights.length; i++) {
-					averageWeights[i] += weights[i];
-				}
-			}
+			System.out.println();			
 
 			if (interim) {
 				Linear p = new Linear(inferencer, trainset.getAlphabetFactory());
@@ -278,17 +262,14 @@ public class OnlineTrainer extends AbstractTrainer {
 				System.out.println("convergence!");
 				break;	
 			}
+			
+		}// end while 外循环
+		
+		//平均化参数
+		for (int i = 0; i < weights.length; i++) {
+			weights[i] -= extraweight[i]/k;
 		}
-
-		if (method == TrainMethod.Average || method == TrainMethod.FastAverage) {
-			for (int i = 0; i < averageWeights.length; i++) {
-				averageWeights[i] /= iternum;
-			}
-			weights = null;
-			weights = averageWeights;
-			inferencer.setWeights(weights);
-		}
-
+		
 		System.out.print("Non-Zero Weight Numbers: " + MyArrays.countNoneZero(weights));
 		if (finalOptimized) {
 			int[] idx = MyArrays.getTop(weights.clone(), threshold, false);

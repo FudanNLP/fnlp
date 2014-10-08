@@ -27,7 +27,6 @@ import org.fnlp.ml.types.sv.HashSparseVector;
  * 抽象参数更新类，采用PA算法
  * \mathbf{w_{t+1}} = \w_t + {\alpha^*(\Phi(x,y)- \Phi(x,\hat{y}))}.
  * \alpha =\frac{1- \mathbf{w_t}^T \left(\Phi(x,y) - \Phi(x,\hat{y})\right)}{||\Phi(x,y) - \Phi(x,\hat{y})||^2}.
- * @author Feng Ji
  *
  */
 public abstract class AbstractPAUpdate implements Update {
@@ -52,28 +51,14 @@ public abstract class AbstractPAUpdate implements Update {
 		this.loss = loss;
 	}
 
-	/**
-	 * 参数更新方法
-	 * @param inst 样本实例
-	 * @param weights 权重
-	 * @param predict 预测答案
-	 * @param c 步长阈值
-	 * @return 预测答案和标准答案之间的损失
-	 */
-	public float update(Instance inst, float[] weights, Object predict, float c) {
-		return update(inst, weights, inst.getTarget(), predict, c);
+	@Override
+	public float update(Instance inst, float[] weights, int k, float[] extraweight, Object predict, float c) {
+		return update(inst, weights, k, extraweight, inst.getTarget(), predict, c);
 	}
+	
 
-	/**
-	 * 参数更新方法
-	 * @param inst 样本实例
-	 * @param weights 权重
-	 * @param target 对照答案
-	 * @param predict 预测答案
-	 * @param c 步长阈值
-	 * @return 预测答案和对照答案之间的损失
-	 */
-	public float update(Instance inst, float[] weights, Object target,
+	@Override
+	public float update(Instance inst, float[] weights, int k, float[] extraweight, Object target,
 			Object predict, float c) {
 
 		int lost = diff(inst, weights, target, predict);
@@ -87,14 +72,17 @@ public abstract class AbstractPAUpdate implements Update {
 				alpha = alpha*inst.getWeight();
 			if(alpha>c){
 				alpha = c;
-			}else{
-				alpha=alpha;
 			}
+			
 			int[] idx = diffv.indices();
 			 
-			for (int i = 0; i < idx.length; i++) {
+			for (int i = 0; i < idx.length; i++) {			
+				float t = diffv.get(idx[i]) * alpha;
+				weights[idx[i]] += t;
+				extraweight[idx[i]] += t *k;
+			}
+			for (int i = 0; i < idx.length; i++) {				
 				
-				weights[idx[i]] += diffv.get(idx[i]) * alpha;
 			}
 		}
 		
@@ -105,12 +93,12 @@ public abstract class AbstractPAUpdate implements Update {
 	}
 
 	/**
-	 * 计算预测答案和对照答案之间的距离
+	 * 计算预测类别和对照类别之间的距离
 	 * @param inst 样本实例
 	 * @param weights 权重
-	 * @param target 对照答案
-	 * @param predict 预测答案
-	 * @return 预测答案和对照答案之间的距离
+	 * @param target 对照类别
+	 * @param predict 预测类别
+	 * @return 预测类别和对照类别之间的距离
 	 */
 	protected abstract int diff(Instance inst, float[] weights, Object target,
 			Object predict);

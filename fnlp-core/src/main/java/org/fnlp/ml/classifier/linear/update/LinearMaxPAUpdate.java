@@ -24,8 +24,6 @@ import org.fnlp.ml.types.Instance;
 
 /**
  * 线性分类的参数更新类，采用PA算法
- * @author Feng Ji
- *
  */
 public class LinearMaxPAUpdate extends AbstractPAUpdate {
 
@@ -57,6 +55,5 @@ public class LinearMaxPAUpdate extends AbstractPAUpdate {
 
 		return 1;
 	}
-
 
 }

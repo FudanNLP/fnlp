@@ -23,4 +23,4 @@
  * @version 1.0.0  
  * @date 2012-11-14
  */
-package org.fnlp.train.prepare;
+package org.fnlp.train.tag;

@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.nlp.corpus.ctbconvert;
+package org.fnlp.train.corpus;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -118,14 +118,14 @@ public class CoNLL2FNLP{
 	public void correct(FNLPSent sent) {
 		
 		for(int i=0;i<sent.tags.length;i++){
-			if(sent.words[i].equals("觉得"))
-				System.out.print("");
+//			if(sent.words[i].equals("觉得"))
+//				System.out.print("");
 			String newtag = posdict.get(sent.tags[i]);
 			if(newtag!=null)
 				sent.tags[i] = newtag;
 			String pos = NRdict.get(sent.words[i]);
 			if(pos!=null){
-				if(sent.tags[i].equals("专有名")){
+				if(sent.tags[i].equals("实体名")){
 					sent.tags[i] = pos;
 				}
 			}
@@ -140,15 +140,15 @@ public class CoNLL2FNLP{
 	}
 
 	public static void main(String[] args) throws IOException{
-		 posdict = MyCollection.loadStringStringMap("./data/map/pos-ctb2fnlp.txt");
-		 reldict = MyCollection.loadStringStringMap("./data/map/rel-ctb2fnlp.txt");
-		 NRdict = MyCollection.loadStringStringMap("./data/map/pos-nr.txt");
-		CoNLL2FNLP reader = new CoNLL2FNLP("./data/ctb/result.txt","utf-8",".txt");
+		 posdict = MyCollection.loadStringStringMap("../data/map/pos-ctb2fnlp.txt");
+		 reldict = MyCollection.loadStringStringMap("../data/map/rel-ctb2fnlp.txt");
+		 NRdict = MyCollection.loadStringStringMap("../data/map/pos-nr.txt");
+		CoNLL2FNLP reader = new CoNLL2FNLP("../data/ctb/result.txt","utf-8",".txt");
 		HASID = true;
 		reader.read();		
-		reader.corpus.writeOne("./data/FNLPDATA/ctb7.dat");
-		reader.corpus.count("./data/FNLPDATA/count", false);
-		MyCollection.write(reader.tc.pronount,"./data/FNLPDATA/pronount.txt");
+		reader.corpus.writeOne("../data/FNLPDATA/ctb7.dat");
+		reader.corpus.count("../data/FNLPDATA/count", false);
+		MyCollection.write(reader.tc.pronount,"../data/FNLPDATA/pronount.txt");
 		System.out.println("Done!");
 	}
 	

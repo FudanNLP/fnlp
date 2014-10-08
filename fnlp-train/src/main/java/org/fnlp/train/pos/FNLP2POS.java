@@ -17,7 +17,7 @@
 *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
 */
 
-package org.fnlp.train.prepare;
+package org.fnlp.train.pos;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -34,7 +34,11 @@ import org.fnlp.nlp.corpus.fnlp.FNLPCorpus;
 import org.fnlp.nlp.corpus.fnlp.FNLPDoc;
 import org.fnlp.nlp.corpus.fnlp.FNLPSent;
 import org.fnlp.nlp.pipe.seq.String2Sequence;
-
+/**
+ * 将FNLP格式转为“词+词性”双列格式
+ * @author xpqiu
+ *
+ */
 public class FNLP2POS {
 	static ChineseTrans ct = new ChineseTrans();
 	/**
