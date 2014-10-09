@@ -31,14 +31,14 @@ public class DepRun {
 		
 
 		JointParerTrainer trainer = new JointParerTrainer(model);
-		int maxite = 50;
+		int maxite = 25;
 		float c = 0.01f;
 		trainer.train(trainfile, maxite, c);
 
 		eval();
 
 		bw.println("优化");
-		float thres = 0.00001f;
+		float thres = 1.0E-3f;
 		bw.println(thres);
 
 		ModelOptimization op = new ModelOptimization(thres);
@@ -48,7 +48,7 @@ public class DepRun {
 		/////////////////////////////////////////
 
 		bw.println("优化");
-		thres = 0.001f;
+		thres = 1.0E-2f;
 		bw.println(thres);
 		op = new ModelOptimization(thres);
 		op.optimizeDep(model);

@@ -36,7 +36,7 @@ public class DepRunFinal {
 		float c = 0.01f;
 		trainer.train(allfile, maxite, c);
 		
-		float thres = 0.00001f;
+		float thres = 1.0E-3f;
 		ModelOptimization op = new ModelOptimization(thres);
 		op.optimizeDep(model);
 		

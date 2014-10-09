@@ -59,7 +59,7 @@ public class DepPrepare {
 		//处理测试数据
 		FNLPCorpus corpust = new FNLPCorpus();
 		//读自有数据
-//		corpust.read(datapath + "/FNLPDATA/WeiboFTB(v1.0)-test.dat", null);	
+		corpust.read(datapath + "/FNLPDATA/WeiboFTB(v1.0)-test.dat", null);	
 		corpust.writeOne(testfile);
 
 		TreeSet<String> set2 = corpus.getAllRelations();
