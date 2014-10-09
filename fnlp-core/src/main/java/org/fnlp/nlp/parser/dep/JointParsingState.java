@@ -126,46 +126,19 @@ public class JointParsingState{
 		int rightFocus = leftFocus + 1;
 
 //		ISparseVector vec = new HashSparseVector();
-		
-		StringBuilder posFeature1 = new StringBuilder();
-		//左右词性
-		posFeature1.append("+-2").append(POS).append(trees.get(leftFocus).pos)
-		.append("/").append(trees.get(rightFocus).pos);
-		featurelist.add(posFeature1.toString());
-		//左右词性
-		StringBuilder posFeature2 = new StringBuilder();
-		posFeature2.append("+-4").append(POS).append(trees.get(leftFocus).pos)
-			.append("/").append(trees.get(rightFocus).pos);
-		posFeature2.append("/");
-		if(leftFocus>0)
-			posFeature2.append(trees.get(leftFocus-1).pos);
-		posFeature2.append("/");
-		if(rightFocus<trees.size()-1)
-			posFeature2.append(trees.get(rightFocus+1).pos);
-		
-		featurelist.add(posFeature2.toString());
-		//左右词
-		StringBuilder lexFeature1 = new StringBuilder();
-		lexFeature1.append("+-2").append(LEX).append(trees.get(leftFocus).word)
-		.append("/").append(trees.get(rightFocus).word);
-		featurelist.add(lexFeature1.toString());
-		
-		
-		StringBuilder lexFeature2 = new StringBuilder();
-		lexFeature2.append("+-4").append(LEX).append(trees.get(leftFocus).word)
-			.append("/").append(trees.get(rightFocus).word);
-		lexFeature2.append("/");
-		if(leftFocus>0)
-			lexFeature2.append(trees.get(leftFocus-1).word);
-		lexFeature2.append("/");
-		if(rightFocus<trees.size()-1)
-			lexFeature2.append(trees.get(rightFocus+1).word);
-		
-		featurelist.add(lexFeature2.toString());
+		//所有的联合feature
+		featurelist.add(combinedFeature("+0+1", POS, new int[]{0, 1}));
+		featurelist.add(combinedFeature("-1+0+1", POS, new int[]{-1, 0, 1}));
+		featurelist.add(combinedFeature("+0+1+2", POS, new int[]{0, 1, 2}));
+		featurelist.add(combinedFeature("+1+2+3", POS, new int[]{1, 2, 3}));
+		featurelist.add(combinedFeature("-2+3+4", POS, new int[]{2, 3, 4}));
+		featurelist.add(combinedFeature("+0+1", LEX, new int[]{0, 1}));
+		featurelist.add(combinedFeature("-1+0+1", LEX, new int[]{-1, 0, 1}));
+		featurelist.add(combinedFeature("+0+1+2", LEX, new int[]{0, 1, 2}));
 
 		// 设定上下文窗口大小
 		int l = 2;
-		int r = 2;
+		int r = 4;
 		for (int i = 0; i <= l; i++) {
 			// 特征前缀
 			String posFeature = "-" + String.valueOf(i) + POS;
@@ -179,6 +152,10 @@ public class JointParsingState{
 					+ CH_R_LEX;
 			String rcPosFeature = "-" + String.valueOf(i)
 					+ CH_R_POS;
+			String lcDepFeature = "-" + String.valueOf(i)
+					+ CH_L_DEP;			
+			String rcDepFeature = "-" + String.valueOf(i)
+					+ CH_R_DEP;
 
 			if (leftFocus - i < 0) {
 				featurelist.add(lexFeature + START + String.valueOf(i - leftFocus));
@@ -196,6 +173,8 @@ public class JointParsingState{
 								+ sent.words[leftChildIndex]);
 						featurelist.add(lcPosFeature
 								+ sent.tags[leftChildIndex]);
+						featurelist.add(lcDepFeature
+								+ sent.getDepClass(leftChildIndex));
 					}
 				}else{
 					featurelist.add(lcLexFeature + NULL);
@@ -211,6 +190,8 @@ public class JointParsingState{
 								+ sent.words[rightChildIndex]);
 						featurelist.add(rcPosFeature
 								+ sent.tags[rightChildIndex]);
+						featurelist.add(rcDepFeature
+								+ sent.getDepClass(rightChildIndex));
 					}
 				}else{
 					featurelist.add(rcLexFeature + NULL);
@@ -275,6 +256,51 @@ public class JointParsingState{
 		
 		
 		return featurelist;
+	}
+	
+	/**
+	 * 
+	 * @param sign 
+	 * 		该类feature在字符串中的标志，如"-0+0"
+	 * @param posOrLex
+	 * 		该feature是取pos还是lex
+	 * @param locations
+	 * 		选取的这些联合feature的位置，以leftFocus为准的偏移量
+	 * @return 
+	 * 		联合feature的字符串形式
+	 */
+	private String combinedFeature(String sign, String posOrLex, int[] locations){
+		StringBuilder cf = new StringBuilder();
+		cf.append(sign);
+		cf.append(posOrLex);
+		for(int loc:locations){
+			int focus = leftFocus + loc;
+			if(isCrossBorder(focus)){
+				cf.append(NULL);
+			}
+			else{
+				cf.append(getPosOrLex(posOrLex, focus));
+			}
+			cf.append("/");
+		}
+		return cf.toString();
+	}
+	
+	private String getPosOrLex(String posOrLex, int focus){
+		if(posOrLex.equals(LEX)){
+			return trees.get(focus).word;
+		}
+		else if(posOrLex.equals(POS)){
+			return trees.get(focus).pos;
+		}
+		return null;
+	}
+	
+	private boolean isCrossBorder(int focus){
+		if(focus >= 0 && focus < trees.size()){
+			return false;	
+		}
+		return true;
 	}
 
 	public boolean isFinalState() {

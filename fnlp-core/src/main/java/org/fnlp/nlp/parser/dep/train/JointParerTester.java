@@ -31,6 +31,7 @@ import org.apache.commons.cli.Options;
 import org.fnlp.nlp.parser.Sentence;
 import org.fnlp.nlp.parser.Target;
 import org.fnlp.nlp.parser.dep.JointParser;
+import org.fnlp.nlp.parser.dep.analysis.AnalysisTest;
 import org.fnlp.nlp.parser.dep.reader.CoNLLReader;
 import org.fnlp.nlp.parser.dep.reader.FNLPReader;
 import org.fnlp.nlp.parser.dep.reader.Malt2Reader;
@@ -129,16 +130,19 @@ public class JointParerTester {
 		float time = (endTime - beginTime) / 1000.0f;
 		System.out.println("finish! =]");
 		System.out.printf("total time:\t%.2f(s)\n", time);
-		System.out.printf("accuracy(depClass):\t%.8f\ttotal(words):\t%d\n",  1.0-1.0
+		System.out.printf("average speed:\t%.4f(s/word)\t%.4f(s/sent)",  total
+				/ time, totsent / time);
+		System.out.println();
+		AnalysisTest at = new AnalysisTest();
+		at.test(resultFile);
+		/*System.out.printf("accuracy(depClass):\t%.8f\ttotal(words):\t%d\n",  1.0-1.0
 				* dError / total, total);
 		System.out.printf("accuracy(heads):\t%.8f\ttotal(words):\t%d\n",  1.0-1.0
 				* error / total, total);
 		System.out.printf("accuracy(sents):\t%.8f\ttotal(sents):\t%d\n", 1.0-1.0
 				* errsent / totsent, totsent);
 		System.out.printf("accuracy(root):\t%.8f\ttotal(root):\t%d\n", 1.0- 1.0
-				* errroot / totsent, totsent);
-		System.out.printf("average speed:\t%.4f(s/word)\t%.4f(s/sent)",  total
-				/ time, totsent / time);
+				* errroot / totsent, totsent);*/		
 	}
 
 	private void writeTo(BufferedWriter writer, Sentence instance, Target t)

@@ -96,10 +96,35 @@ public class JointParerTrainer{
 		System.out.print("生成训练数据 ...");
 
 		FNLPReader reader = new FNLPReader(file);
+		FNLPReader preReader = new FNLPReader(file);
 		InstanceSet instset = new InstanceSet();
 		
 		LabelAlphabet la = factory.DefaultLabelAlphabet();
+		IFeatureAlphabet fa = factory.DefaultFeatureAlphabet();
 		int count = 0;
+		
+		//preReader为了把ysize定下来
+		la.lookupIndex("S");
+		while(preReader.hasNext()){
+			Sentence sent = (Sentence) preReader.next();
+			Target targets = (Target)sent.getTarget();
+			for(int i=0; i<sent.length(); i++){
+				String label;
+				if(targets.getHead(i) != -1){
+					if(targets.getHead(i) < i){
+						label = "L" + targets.getDepClass(i);
+					}
+					//else if(targets.getHead(i) > i){
+					else{
+						label = "R" + targets.getDepClass(i);
+					}
+					la.lookupIndex(label);
+				}
+			}
+		}
+		int ysize = la.size();
+		la.setStopIncrement(true);
+				
 		while (reader.hasNext()) {
 			Sentence sent = (Sentence) reader.next();
 			//	int[] heads = (int[]) instance.getTarget();
@@ -143,23 +168,14 @@ public class JointParerTrainer{
 				int id = la.lookupIndex(label);				
 				Instance inst = new Instance();
 				inst.setTarget(id);
-				inst.setData(features);
+				int[] idx = JointParser.addFeature(fa, features, ysize);
+				inst.setData(idx);
 				instset.add(inst);
 			}
 			count++;
 //			System.out.println(count);
 		}
-		la.setStopIncrement(true);
 		
-		//重新生成特征
-		int ysize = la.size();		
-		IFeatureAlphabet fa = factory.DefaultFeatureAlphabet();
-		
-		for(Instance inst:instset){
-			ArrayList<String> data = (ArrayList<String>) inst.getData();
-			int[] idx = JointParser.addFeature(fa, data, ysize);
-			inst.setData(idx);
-		}
 		instset.setAlphabetFactory(factory);
 		System.out.printf("共生成实例:%d个\n", count);
 		return instset;
