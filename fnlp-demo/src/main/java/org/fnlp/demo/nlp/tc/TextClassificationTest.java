@@ -1,10 +1,8 @@
 package org.fnlp.demo.nlp.tc;
 
-import org.fnlp.data.reader.DocumentReader;
-import org.fnlp.data.reader.FileReader;
 import org.fnlp.data.reader.Reader;
-import org.fnlp.ml.classifier.Predict;
 import org.fnlp.ml.classifier.LabelParser.Type;
+import org.fnlp.ml.classifier.Predict;
 import org.fnlp.ml.classifier.bayes.BayesClassifier;
 import org.fnlp.ml.classifier.bayes.BayesTrainer;
 import org.fnlp.ml.classifier.knn.KNNClassifier;

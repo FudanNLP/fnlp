@@ -20,17 +20,5 @@ public class MyFilesTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@Test
-	public void testCombineStringStringArray() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCombineStringFileArray() throws Exception {
-		List<File> files = MyFiles.getAllFiles("../tmp/", ".cws");
-		MyFiles.combine("../tmp/all.cws",files.toArray(new File[files.size()]));  
-		System.out.println(new Date().toString());
-		System.out.println("Done!");
-	}
 
 }

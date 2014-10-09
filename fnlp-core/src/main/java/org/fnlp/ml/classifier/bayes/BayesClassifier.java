@@ -11,24 +11,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import org.fnlp.ml.classifier.AbstractClassifier;
-import org.fnlp.ml.classifier.LabelParser.Type;
-import org.fnlp.ml.classifier.linear.Linear;
 import org.fnlp.ml.classifier.LabelParser;
+import org.fnlp.ml.classifier.LabelParser.Type;
 import org.fnlp.ml.classifier.Predict;
-import org.fnlp.ml.classifier.TPredict;
 import org.fnlp.ml.feature.FeatureSelect;
 import org.fnlp.ml.types.Instance;
 import org.fnlp.ml.types.alphabet.AlphabetFactory;
 import org.fnlp.ml.types.sv.HashSparseVector;
 import org.fnlp.nlp.pipe.Pipe;
 import org.fnlp.util.exception.LoadModelException;
-import org.junit.Ignore;
 /**
  * 朴素贝叶斯分类器
  * @author sywu

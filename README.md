@@ -43,7 +43,11 @@ You can also use the following site to check the partial functionality.
 
 [FNLP入门教程](https://github.com/xpqiu/fnlp/wiki)
 
-大的模型文件和代码分离。相应的模型文件可以从release页面下载。
+除了源码文件，还需要下载FNLP模型文件。由于模型文件较大，不便于存放在源码库之中，请至[Release](https://github.com/xpqiu/fnlp/releases)页面下载，并将模型文件放在“models”目录。
+
+* seg.m 分词模型
+* pos.m 词性标注模型
+* dep.m 依存句法分析模型
 
 欢迎大家提供非Java语言的接口。
 

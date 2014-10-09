@@ -38,7 +38,7 @@ public class DepRun {
 		eval();
 
 		bw.println("优化");
-		float thres = 0.00001f;
+		float thres = 1.0E-5f;
 		bw.println(thres);
 
 		ModelOptimization op = new ModelOptimization(thres);
@@ -48,7 +48,7 @@ public class DepRun {
 		/////////////////////////////////////////
 
 		bw.println("优化");
-		thres = 0.001f;
+		thres = 1.0E-4f;
 		bw.println(thres);
 		op = new ModelOptimization(thres);
 		op.optimizeDep(model);
