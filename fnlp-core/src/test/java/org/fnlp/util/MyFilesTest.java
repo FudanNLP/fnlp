@@ -20,7 +20,5 @@ public class MyFilesTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	
-
 
 }
