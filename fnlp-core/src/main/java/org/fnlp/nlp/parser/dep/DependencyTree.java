@@ -246,13 +246,13 @@ public class DependencyTree implements Serializable {
 		}
 		
 	}
-	
+	//错误
 	public String[] getWords() {
 		String[] words = new String[size];
 		getWords(words);
 		return words;
 	}
-
+	//错误
 	private void getWords(String[] words) {
 		words[id] = word;
 		for (int i = 0; i < leftChilds.size(); i++) {
@@ -263,5 +263,47 @@ public class DependencyTree implements Serializable {
 		}
 		
 	}
+	/**
+	 * 得到依赖类型数组
+	 * @return
+	 */
+		
+	public String getTags()    {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < leftChilds.size(); i++) {
+			sb.append(leftChilds.get(i).getTags());
+		}
+		if(relation!=null)
+			sb.append(relation);	
+		else
+			sb.append("核心词");
+		sb.append(" ");
+		for (int i = 0; i < rightChilds.size(); i++) {
+			sb.append(rightChilds.get(i).getTags());
+		}
+		return sb.toString();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
