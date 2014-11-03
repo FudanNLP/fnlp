@@ -264,14 +264,16 @@ public class DependencyTree implements Serializable {
 		
 	}
 	/**
-	 * 得到依赖类型数组
+	 * 得到依赖类型字符串
 	 * @return
 	 */
 		
-	public String getTags()    {
+	public String getTypes()    {
 		StringBuffer sb = new StringBuffer();
+		String ste;
+		String[] str;
 		for (int i = 0; i < leftChilds.size(); i++) {
-			sb.append(leftChilds.get(i).getTags());
+			sb.append(leftChilds.get(i).getTypes());
 		}
 		if(relation!=null)
 			sb.append(relation);	
@@ -279,31 +281,10 @@ public class DependencyTree implements Serializable {
 			sb.append("核心词");
 		sb.append(" ");
 		for (int i = 0; i < rightChilds.size(); i++) {
-			sb.append(rightChilds.get(i).getTags());
+			sb.append(rightChilds.get(i).getTypes());
 		}
-		return sb.toString();
+				
+			return sb.toString();	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
