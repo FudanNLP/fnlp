@@ -21,7 +21,10 @@ package org.fnlp.ml.types.sv;
 
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
-
+/**
+ * 0/1取值的稀疏向量
+ * @author xpqiu
+ */
 public class BinarySparseVector implements ISparseVector {
 
 
@@ -42,7 +45,7 @@ public class BinarySparseVector implements ISparseVector {
 		float sum = 0f;
 		while(it.hasNext()){
 			int i = it.next();
-			if(i<0)
+			if(i<0||i>=vector.length)
 				continue;
 			sum += vector[i];
 		}

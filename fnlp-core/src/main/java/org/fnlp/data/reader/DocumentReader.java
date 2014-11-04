@@ -40,7 +40,6 @@ import org.fnlp.util.MyFiles;
  * 不同类别的文件放在不同的子文件夹下
  * 类别：子文件夹名
  * 数据：文件内所有字符
- * package edu.fudan.ml.data
  */
 public class DocumentReader extends Reader {
 
@@ -87,7 +86,8 @@ public class DocumentReader extends Reader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		cur = new Instance(buff.toString(), f.getPath());
+	String label = f.getParentFile().getName();
+		cur = new Instance(buff.toString(), label);
 		buff = null;
 	}
 }

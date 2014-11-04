@@ -41,6 +41,15 @@ public class NGram extends Pipe{
 
     private static final long serialVersionUID = -2329969202592736092L;
     int[] gramSizes = null;
+    /**
+     * 用基于字而不是词的Ngram
+     */
+	private boolean useCharacter = false;
+    
+    public NGram(int[] sizes,boolean useCharacter) {
+        this.gramSizes = sizes;
+        this.useCharacter = useCharacter;
+    }
 
     public NGram(int[] sizes) {
         this.gramSizes = sizes;
@@ -51,7 +60,12 @@ public class NGram extends Pipe{
         Object data = inst.getData();
         ArrayList<String> list = null;
         if (data instanceof String) {
-            list = ngram((String) data,gramSizes);
+        	if(useCharacter)
+        		list = ngramOnCharacter2List((String) data,gramSizes);
+        	else{ 
+        		 list = ngram((String) data,gramSizes);
+        	}
+        		
         }else if (data instanceof List) {
             list = ngram((List) data,gramSizes);
         }else if(data instanceof String[]){
@@ -63,7 +77,12 @@ public class NGram extends Pipe{
     }
     
     
-    /**
+    private ArrayList<String> ngram(String str, int[] gramSizes) {
+    	String[] toks = str.split("\\s+");
+    	return ngram(toks,gramSizes);
+	}
+
+	/**
      * 抽取ngram
      * @param strs
      * @param grams
@@ -123,10 +142,10 @@ public class NGram extends Pipe{
      * @param gramSizes
      * @return ngram字符串数组
      */
-    public static ArrayList<String> ngram(String data,int[] gramSizes) {
+    public static ArrayList<String> ngramOnCharacter2List(String data,int[] gramSizes) {
         // 提取ngram
         ArrayList<String> list = new ArrayList<String>();
-        ngram(data, gramSizes, list);
+        ngramOnCharacter(data, gramSizes, list);
         return list;
     }
     
@@ -136,10 +155,10 @@ public class NGram extends Pipe{
      * @param gramSizes
      * @return ngram字符串集合
      */
-    public static Set<String> ngramSet(String data,int[] gramSizes) {
+    public static Set<String> ngramOnCharacter2Set(String data,int[] gramSizes) {
         // 提取ngram
         Set<String> list = new HashSet<String>();
-        ngram(data, gramSizes, list);
+        ngramOnCharacter(data, gramSizes, list);
         return list;
     }
 
@@ -149,7 +168,7 @@ public class NGram extends Pipe{
      * @param gramSizes
      * @param list
      */
-    private static void ngram(String data, int[] gramSizes, Collection<String> list) {
+    private static void ngramOnCharacter(String data, int[] gramSizes, Collection<String> list) {
         for (int j = 0; j < gramSizes.length; j++) {
             int len = gramSizes[j];
             if (len <= 0 || len > data.length())

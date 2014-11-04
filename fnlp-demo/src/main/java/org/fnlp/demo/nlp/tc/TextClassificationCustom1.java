@@ -66,9 +66,10 @@ public class TextClassificationCustom1 {
 		Pipe targetpp = new Target2Label(af.DefaultLabelAlphabet());		
 		
 		//建立pipe组合
-		SeriesPipes pp = new SeriesPipes(new Pipe[]{ngrampp,targetpp,indexpp});
+		SeriesPipes pp = new SeriesPipes(new Pipe[]{targetpp,ngrampp,indexpp});
 		
 		InstanceSet trainset = new InstanceSet(pp,af);
+		
 		InstanceSet testset = new InstanceSet(pp,af);
 		
 		//用不同的Reader读取相应格式的文件
@@ -76,7 +77,7 @@ public class TextClassificationCustom1 {
 		
 		//读入数据，并进行数据处理
 		trainset.loadThruStagePipes(reader);
-		
+//		af.setStopIncrement(true);
 		reader = new DocumentReader(testDataPath);
 			
 		testset.loadThruStagePipes(reader);

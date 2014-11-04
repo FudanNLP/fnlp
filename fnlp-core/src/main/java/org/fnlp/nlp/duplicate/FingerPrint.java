@@ -56,7 +56,7 @@ public class FingerPrint {
 	}
 
 	public static String ngram(String ss,int n) {
-		List l = NGram.ngram(ss, new int[]{n});
+		List l = NGram.ngramOnCharacter2List(ss, new int[]{n});
 		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<l.size();i++){
 			sb.append(l.get(i));
@@ -66,7 +66,7 @@ public class FingerPrint {
 	}
 	
 	public static Set<String> ngramSet(String ss,int n) {
-		return NGram.ngramSet(ss, new int[]{n});		
+		return NGram.ngramOnCharacter2Set(ss, new int[]{n});		
 	}
 
 	public static String feature(String s, Type t) {
