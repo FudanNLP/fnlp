@@ -164,7 +164,7 @@ public class StopWords {
 	 */
 	public boolean isStopWord(String word) {		
 		
-		if (sWord.contains(word))
+		if (sWord.contains(word.toLowerCase()))
 			return true;
 
 		return false;
