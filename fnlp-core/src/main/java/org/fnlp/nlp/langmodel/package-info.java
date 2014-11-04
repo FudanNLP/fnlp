@@ -5,4 +5,4 @@
  * @author xpqiu
  *
  */
-package org.fnlp.app.lm;
+package org.fnlp.nlp.langmodel;

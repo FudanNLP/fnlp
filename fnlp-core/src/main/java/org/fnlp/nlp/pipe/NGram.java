@@ -63,12 +63,17 @@ public class NGram extends Pipe{
     }
     
     
-    
-    private ArrayList<String> ngram(String[] strs, int[] grams) {
+    /**
+     * 抽取ngram
+     * @param strs
+     * @param grams
+     * @return
+     */
+    public static ArrayList<String> ngram(String[] strs, int[] grams) {
         ArrayList<String> list = new ArrayList<String>();
         StringBuffer buf = new StringBuffer();
-        for (int j = 0; j < gramSizes.length; j++) {
-            int len = gramSizes[j];
+        for (int j = 0; j < grams.length; j++) {
+            int len = grams[j];
             if (len <= 0 || len > strs.length)
                 continue;
             for (int i = 0; i < strs.length - len+1; i++) {
