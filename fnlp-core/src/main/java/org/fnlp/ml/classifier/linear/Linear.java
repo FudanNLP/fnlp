@@ -52,7 +52,7 @@ public class Linear extends AbstractClassifier implements Serializable	{
 	private static final long serialVersionUID = -2626247109469506636L;
 
 	protected Inferencer inferencer;
-	protected AlphabetFactory factory;
+	
 	protected Pipe pipe;
 
 	public Linear(Inferencer inferencer, AlphabetFactory factory) {
@@ -126,9 +126,7 @@ public class Linear extends AbstractClassifier implements Serializable	{
 		this.inferencer = inferencer;
 	}
 
-	public AlphabetFactory getAlphabetFactory() {
-		return factory;
-	}
+	
 
 	public void setWeights(float[] weights) {
 		inferencer.setWeights(weights);

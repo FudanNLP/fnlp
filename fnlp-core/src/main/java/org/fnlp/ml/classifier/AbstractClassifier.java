@@ -24,6 +24,7 @@ import java.io.Serializable;
 import org.fnlp.ml.classifier.LabelParser.Type;
 import org.fnlp.ml.types.Instance;
 import org.fnlp.ml.types.InstanceSet;
+import org.fnlp.ml.types.alphabet.AlphabetFactory;
 
 /**
  * 分类器抽象类
@@ -35,7 +36,12 @@ import org.fnlp.ml.types.InstanceSet;
 public abstract class AbstractClassifier implements Serializable{
 
 	private static final long serialVersionUID = -175929257288466023L;
-
+	protected AlphabetFactory factory;
+	
+	
+	public AlphabetFactory getAlphabetFactory() {
+		return factory;
+	}
 
 	/**
 	 * 返回分类内部结果，标签为内部表示索引，需要还原处理

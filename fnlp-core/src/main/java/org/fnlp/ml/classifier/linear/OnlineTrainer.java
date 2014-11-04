@@ -72,6 +72,7 @@ public class OnlineTrainer extends AbstractTrainer {
 
 	public int iternum;
 	protected float[] weights;
+	AlphabetFactory af;
 
 	public OnlineTrainer(AlphabetFactory af, int iternum) {
 		//默认特征生成器
@@ -84,7 +85,8 @@ public class OnlineTrainer extends AbstractTrainer {
 		this.update = new LinearMaxPAUpdate(loss);
 		this.iternum = iternum;
 		this.c = 0.1f;
-		weights = (float[]) inferencer.getWeights();
+		this.af = af;
+		weights = (float[]) inferencer.getWeights();		
 		if (weights == null) {
 			weights = new float[af.getFeatureSize()];
 			inferencer.setWeights(weights);
@@ -283,7 +285,7 @@ public class OnlineTrainer extends AbstractTrainer {
 		System.out.println("time escape:" + (endTime - beginTime) / 1000.0
 				+ "s");
 		System.out.println();
-		Linear p = new Linear(inferencer, trainset.getAlphabetFactory());
+		Linear p = new Linear(inferencer,af);
 		return p;
 	}
 

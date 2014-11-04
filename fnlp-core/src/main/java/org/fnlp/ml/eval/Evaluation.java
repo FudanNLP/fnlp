@@ -50,8 +50,7 @@ public class Evaluation  {
 		for(int i=0;i<totnum;i++){
 			golden[i] = (Integer) test.getInstance(i).getTarget();
 		}
-		labels = test.getAlphabetFactory().DefaultLabelAlphabet();
-		numofclass = labels.size();
+		
 
 	}
 
@@ -82,6 +81,8 @@ public class Evaluation  {
 	 * @return
 	 */
 	public void eval(AbstractClassifier cl,int nbest){
+		labels = cl.getAlphabetFactory().DefaultLabelAlphabet();
+		numofclass = labels.size();
 		TPredict[] pred = cl.classify(test,nbest);
 		int[] acc = new int[nbest];
 		for(int i=0;i<totnum;i++){

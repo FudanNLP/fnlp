@@ -22,6 +22,7 @@ package org.fnlp.data.reader;
 import java.util.Iterator;
 
 import org.fnlp.ml.types.Instance;
+import org.fnlp.ml.types.InstanceSet;
 
 /**
  * @author xpqiu
@@ -34,5 +35,17 @@ public abstract class Reader implements Iterator<Instance> {
 
 	public void remove () {
 		throw new IllegalStateException ("This Iterator<Instance> does not support remove().");
+	}
+	
+	
+	public InstanceSet read(){
+		InstanceSet instSet = new InstanceSet();
+		while (hasNext()) {
+            Instance inst = next();
+            if(inst!=null){
+            	instSet.add(inst);
+            }
+		}
+		return instSet;
 	}
 }

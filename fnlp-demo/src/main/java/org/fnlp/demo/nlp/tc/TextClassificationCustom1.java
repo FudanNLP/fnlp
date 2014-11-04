@@ -59,35 +59,36 @@ public class TextClassificationCustom1 {
 		AlphabetFactory af = AlphabetFactory.buildFactory();
 		
 		//使用n元特征
-		Pipe ngrampp = new NGram(new int[] {2,3 });
+		Pipe ngrampp = new NGram(new int[] {1});
 		//将字符特征转换成字典索引
 		Pipe indexpp = new StringArray2IndexArray(af);
 		//将目标值对应的索引号作为类别
 		Pipe targetpp = new Target2Label(af.DefaultLabelAlphabet());		
 		
 		//建立pipe组合
-		SeriesPipes pp = new SeriesPipes(new Pipe[]{targetpp,ngrampp,indexpp});
-		
-		InstanceSet trainset = new InstanceSet(pp,af);
-		
-		InstanceSet testset = new InstanceSet(pp,af);
+		SeriesPipes pp = new SeriesPipes(new Pipe[]{ngrampp,indexpp});
 		
 		//用不同的Reader读取相应格式的文件
-		Reader reader = new DocumentReader(trainDataPath);
+		Reader reader = new DocumentReader(trainDataPath);		
+		InstanceSet trainset = reader.read();
 		
-		//读入数据，并进行数据处理
-		trainset.loadThruStagePipes(reader);
-//		af.setStopIncrement(true);
 		reader = new DocumentReader(testDataPath);
-			
-		testset.loadThruStagePipes(reader);
+		InstanceSet testset = reader.read();
+		
+		targetpp.process(trainset);
+		targetpp.process(testset);
+		
+		pp.process(trainset);
+		af.setStopIncrement(true);
+		pp.process(testset);		
+		
 		
 		
 		/**
 		 * 建立分类器
 		 */		
-		OnlineTrainer trainer = new OnlineTrainer(af);
-		Linear pclassifier = trainer.train(trainset);
+		OnlineTrainer trainer = new OnlineTrainer(af,50);
+		Linear pclassifier = trainer.train(trainset,testset);
 		pp.removeTargetPipe();
 		pclassifier.setPipe(pp);
 		af.setStopIncrement(true);
@@ -101,7 +102,7 @@ public class TextClassificationCustom1 {
 		
 		//性能评测
 		Evaluation eval = new Evaluation(testset);
-		eval.eval(cl,1);
+		eval.eval(cl,2);
 
 				
 		

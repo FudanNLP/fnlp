@@ -92,8 +92,5 @@ public class AnalysisTest {
 		System.out.printf("rate(UEM):\t%.8f\ttotal(sent):\t%d\n", 1 - 1.0
 				* errsent / sent_sum, sent_sum);
 	}
-	
-	
-	
 
 }

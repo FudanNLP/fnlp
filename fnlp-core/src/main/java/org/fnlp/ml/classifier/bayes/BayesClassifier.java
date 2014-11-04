@@ -31,7 +31,7 @@ import org.fnlp.util.exception.LoadModelException;
  *
  */
 public class BayesClassifier extends AbstractClassifier implements Serializable{
-	protected AlphabetFactory factory;
+	
 	protected ItemFrequency tf;
 	protected Pipe pipe;
 	protected FeatureSelect fs;
