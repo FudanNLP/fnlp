@@ -53,6 +53,8 @@ public class Linear extends AbstractClassifier implements Serializable	{
 
 	protected Inferencer inferencer;
 	
+	protected AlphabetFactory factory;
+	
 	protected Pipe pipe;
 
 	public Linear(Inferencer inferencer, AlphabetFactory factory) {
@@ -141,6 +143,10 @@ public class Linear extends AbstractClassifier implements Serializable	{
 	}
 	public Pipe getPipe() {
 		return pipe;		
+	}
+	
+	public AlphabetFactory getAlphabetFactory() {
+		return factory;
 	}
 
 }

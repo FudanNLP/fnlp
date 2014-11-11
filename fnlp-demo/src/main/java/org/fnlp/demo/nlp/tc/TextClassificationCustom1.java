@@ -59,7 +59,7 @@ public class TextClassificationCustom1 {
 		AlphabetFactory af = AlphabetFactory.buildFactory();
 		
 		//使用n元特征
-		Pipe ngrampp = new NGram(new int[] {1});
+		Pipe ngrampp = new NGram(new int[] {1,2},true);
 		//将字符特征转换成字典索引
 		Pipe indexpp = new StringArray2IndexArray(af);
 		//将目标值对应的索引号作为类别
@@ -88,7 +88,7 @@ public class TextClassificationCustom1 {
 		 * 建立分类器
 		 */		
 		OnlineTrainer trainer = new OnlineTrainer(af,50);
-		Linear pclassifier = trainer.train(trainset,testset);
+		Linear pclassifier = trainer.train(trainset);
 		pp.removeTargetPipe();
 		pclassifier.setPipe(pp);
 		af.setStopIncrement(true);

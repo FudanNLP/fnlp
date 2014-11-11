@@ -169,7 +169,8 @@ public class NGram extends Pipe{
      * @param list
      */
     private static void ngramOnCharacter(String data, int[] gramSizes, Collection<String> list) {
-        for (int j = 0; j < gramSizes.length; j++) {
+    	data = data.replaceAll("\\s+", "");
+    	for (int j = 0; j < gramSizes.length; j++) {
             int len = gramSizes[j];
             if (len <= 0 || len > data.length())
                 continue;
