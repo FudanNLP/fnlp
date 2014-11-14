@@ -50,6 +50,11 @@ public class TextClassificationSimple {
 		TextClassifier tc = new TextClassifier();
 		System.out.println("训练模型");
 		//用不同的Reader读取相应格式的文件
+		//比如，(1)每个目录表示一个类别，每个目录下的每篇文档表示一个样本，可以用DocumentReader
+		//(2)每个文件表示一个类别，每个文件下的每一行表示一个样本，可以用FileReader
+		//(3)LIBSVM训练文件格式，可以用svmFileReader
+		//(4)所有数据在一个文件，格式为： 类别 ＋ “分隔符” ＋ 数据，可以用SimpleFileReader
+		//(5)自定义Reader，继承Reader接口
 		Reader reader = new FileReader(trainDataPath,"UTF-8",".data");
 		tc.train(reader, modelFile);
 		/**
