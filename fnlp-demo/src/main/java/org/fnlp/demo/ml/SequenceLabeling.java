@@ -57,9 +57,9 @@ public class SequenceLabeling {
 	public static void main(String[] args) throws Exception {
 
 		
-		String train = "./example-data/sequence/train.txt";
-		String testfile = "./example-data/sequence/test.txt";
-		String templateFile="./example-data/sequence/template";
+		String train = "../example-data/sequence/train.txt";
+		String testfile = "../example-data/sequence/test.txt";
+		String templateFile="../example-data/sequence/template";
 		AlphabetFactory factory;
 		Pipe featurePipe;
 		TempletGroup templets;
