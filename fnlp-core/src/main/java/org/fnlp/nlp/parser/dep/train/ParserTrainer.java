@@ -191,11 +191,9 @@ public class ParserTrainer {
 
 		LabelAlphabet postagAlphabet = factory.buildLabelAlphabet("postag");
 
-		IFeatureAlphabet features = factory.DefaultFeatureAlphabet();
 
 		SFGenerator generator = new SFGenerator();
 		Linear[] models = new Linear[postagAlphabet.size()];
-		int fsize = features.size();
 
 		for (int i = 0; i < postagAlphabet.size(); i++) {
 			String pos = postagAlphabet.lookupString(i);
@@ -208,7 +206,7 @@ public class ParserTrainer {
 			ZeroOneLoss loss = new ZeroOneLoss();
 			Update update = new LinearMaxPAUpdate(loss);
 			OnlineTrainer trainer = new OnlineTrainer(solver, update, loss,
-					fsize, maxite, c);
+					factory, maxite, c);
 			models[i] = trainer.train(instset, null);
 			instset = null;
 			solver = null;

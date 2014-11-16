@@ -146,7 +146,7 @@ import org.fnlp.nlp.pipe.Target2Label;
 			ZeroOneLoss l = new ZeroOneLoss();
 			Inferencer ms = new LinearMax(gen, factory.getLabelSize());
 			Update update = new LinearMaxPAUpdate(l);
-			OnlineTrainer trainer = new OnlineTrainer(ms, update,l, factory.getFeatureSize(), 50,0.005f);
+			OnlineTrainer trainer = new OnlineTrainer(ms, update,l, factory, 50,0.005f);
 			Linear pclassifier = trainer.train(instset,instset);
 			pipe.removeTargetPipe();
 			pclassifier.setPipe(pipe);

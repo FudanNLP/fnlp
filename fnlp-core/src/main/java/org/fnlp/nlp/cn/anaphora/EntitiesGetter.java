@@ -49,7 +49,7 @@ public class EntitiesGetter {
 		NP.add(PartOfSpeech.限定词);
 		NP.add(PartOfSpeech.名词);
 		NP.add(PartOfSpeech.代词);
-		NP.add(PartOfSpeech.指示代词);
+		NP.add(PartOfSpeech.指示词);
 		NP.add(PartOfSpeech.人称代词);
 		NP.add(PartOfSpeech.疑问代词);
 		
@@ -218,7 +218,7 @@ public class EntitiesGetter {
 		NN.add(PartOfSpeech.机构名);
 		NN.add(PartOfSpeech.代词);
 		NN.add(PartOfSpeech.人称代词);
-		NN.add(PartOfSpeech.指示代词);
+		NN.add(PartOfSpeech.指示词);
 		NN.add(PartOfSpeech.疑问代词);
 	}
 	

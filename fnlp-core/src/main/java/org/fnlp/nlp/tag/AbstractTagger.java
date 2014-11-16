@@ -92,10 +92,10 @@ public abstract class AbstractTagger {
 		OnlineTrainer trainer;
 
 		if(cl!=null){
-			trainer = new OnlineTrainer(cl, update, loss, features.size(),iterNum, c);
+			trainer = new OnlineTrainer(cl, update, loss, factory,iterNum, c);
 		}else{
 			trainer = new OnlineTrainer(inference, update, loss,
-					features.size(), iterNum, c);
+					factory, iterNum, c);
 		}
 
 		cl = trainer.train(trainSet, testSet);

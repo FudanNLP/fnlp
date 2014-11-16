@@ -29,6 +29,7 @@ public enum PartOfSpeech {
 	人名,
 	地名,
 	机构名,
+	实体名,
 	型号名,
     事件名,
     网址,
@@ -41,7 +42,7 @@ public enum PartOfSpeech {
 	
 	代词,
 	人称代词, 
-	指示代词, 
+	指示词, 
 	疑问代词,
 	
 	
@@ -58,8 +59,8 @@ public enum PartOfSpeech {
     
     
     动词,
-    能愿动词,
-    趋向动词,
+    情态词,
+    趋向词,
     被动词,
     把动词,
     
@@ -104,7 +105,7 @@ public enum PartOfSpeech {
 	static{
 		Pronoun.add(代词);
 		Pronoun.add(人称代词);
-		Pronoun.add(指示代词);
+		Pronoun.add(指示词);
 		Pronoun.add(疑问代词);
 	}
 	/**
@@ -130,6 +131,7 @@ public enum PartOfSpeech {
 		entities.add(地名);
 		entities.add(机构名);
 		entities.add(专有名);
+		entities.add(实体名);
 	}
 	
 	/**
@@ -141,13 +143,18 @@ public enum PartOfSpeech {
 		return entities.contains(this);
 	}
 	/**
-	 * 判断词性是否为一个实体，包括：人名|地名|机构名|专有名。
+	 * 判断词性是否为一个实体，包括：人名|地名|机构名|专有名|实体名。
 	 * @param pos
 	 * @return
 	 */
 	public static boolean isEntiry(String pos) {
-		PartOfSpeech p = valueOf(pos);
-		
+		PartOfSpeech p;
+		try {
+			p = valueOf(pos);
+		} catch (Exception e) {
+			System.err.println(pos+"不存在");
+			return false;
+		}		
 		return p.isEntiry();
 	}
     

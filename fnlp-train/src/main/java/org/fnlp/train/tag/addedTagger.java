@@ -311,7 +311,7 @@ public class addedTagger {
 		}
 
 		OnlineTrainer trainer = new OnlineTrainer(inference, update, loss,
-				features.size(), iterNum, c1);
+				factory, iterNum, c1);
 		
 		trainer.innerOptimized = false;
 		trainer.finalOptimized = true;

@@ -36,6 +36,7 @@ import org.fnlp.ml.types.alphabet.AlphabetFactory;
 public abstract class AbstractClassifier implements Serializable{
 
 	private static final long serialVersionUID = -175929257288466023L;
+	
 	protected AlphabetFactory factory;
 	
 	

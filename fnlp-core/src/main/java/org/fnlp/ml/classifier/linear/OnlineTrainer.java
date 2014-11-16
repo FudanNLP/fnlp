@@ -40,7 +40,7 @@ import org.fnlp.util.MyArrays;
 /**
  * 在线参数训练类，
  * 可能问题：收敛控制，参数c设置过小，可能会导致“假收敛”的情况 2012.8.6
- *
+ * @author xpqiu
  */
 public class OnlineTrainer extends AbstractTrainer {
 
@@ -61,7 +61,6 @@ public class OnlineTrainer extends AbstractTrainer {
 	public boolean interim = false;
 
 	public float c=0.1f;
-
 	public float threshold = 0.99f;
 
 	protected Linear classifier;
@@ -74,6 +73,15 @@ public class OnlineTrainer extends AbstractTrainer {
 	protected float[] weights;
 	AlphabetFactory af;
 
+	
+	/**
+	 * 构造函数
+	 * @param af 字典
+	 */
+	public OnlineTrainer(AlphabetFactory af) {
+		this(af,50);
+	}
+	
 	public OnlineTrainer(AlphabetFactory af, int iternum) {
 		//默认特征生成器
 		Generator gen = new SFGenerator();
@@ -84,21 +92,13 @@ public class OnlineTrainer extends AbstractTrainer {
 		//默认参数更新策略
 		this.update = new LinearMaxPAUpdate(loss);
 		this.iternum = iternum;
-		this.c = 0.1f;
 		this.af = af;
 		weights = (float[]) inferencer.getWeights();		
 		if (weights == null) {
 			weights = new float[af.getFeatureSize()];
 			inferencer.setWeights(weights);
 		}
-		random = new Random(1l);
-	}
-	/**
-	 * 构造函数
-	 * @param af 字典
-	 */
-	public OnlineTrainer(AlphabetFactory af) {
-		this(af,50);
+		random = new Random(1l);		
 	}
 
 	/**
@@ -106,23 +106,24 @@ public class OnlineTrainer extends AbstractTrainer {
 	 * @param inferencer 推理算法
 	 * @param update 参数更新方法
 	 * @param loss 损失计算方法
-	 * @param fsize 特征数量
+	 * @param af 特征标签词典
 	 * @param iternum 最大迭代次数
 	 * @param c 步长阈值
 	 */
 	public OnlineTrainer(Inferencer inferencer, Update update,
-			Loss loss, int fsize, int iternum, float c) {
+			Loss loss, AlphabetFactory af, int iternum, float c) {
 		this.inferencer = inferencer;
 		this.update = update;
 		this.loss = loss;
 		this.iternum = iternum;
 		this.c = c;
+		this.af =af;
 		weights = (float[]) inferencer.getWeights();
 		if (weights == null) {
-			weights = new float[fsize];
+			weights = new float[af.getFeatureSize()];
 			inferencer.setWeights(weights);
-		}else if(weights.length<fsize){
-			weights = Arrays.copyOf(weights, fsize);
+		}else if(weights.length<af.getFeatureSize()){
+			weights = Arrays.copyOf(weights, af.getFeatureSize());
 			inferencer.setWeights(weights);
 		}
 		random = new Random(1l);
@@ -133,12 +134,12 @@ public class OnlineTrainer extends AbstractTrainer {
 	 * @param classifier 分类器
 	 * @param update 参数更新方法
 	 * @param loss 损失计算方法
-	 * @param fsize 特征数量
+	 * @param af  特征标签词典
 	 * @param iternum 最大迭代次数
 	 * @param c 步长阈值
 	 */
-	public OnlineTrainer(Linear classifier, Update update, Loss loss, int fsize, int iternum, float c) {
-		this(classifier.getInferencer(), update, loss, fsize, iternum, c);
+	public OnlineTrainer(Linear classifier, Update update, Loss loss, AlphabetFactory af, int iternum, float c) {
+		this(classifier.getInferencer(), update, loss, af, iternum, c);
 	}
 
 	/**
@@ -252,7 +253,7 @@ public class OnlineTrainer extends AbstractTrainer {
 			System.out.println();			
 
 			if (interim) {
-				Linear p = new Linear(inferencer, trainset.getAlphabetFactory());
+				Linear p = new Linear(inferencer, af);
 				try {
 					p.saveTo("tmp.model");
 				} catch (IOException e) {

@@ -195,10 +195,8 @@ public class JointParerTrainer{
 	public void train(String dataFile, int maxite, float c) throws IOException {
 		
 		InstanceSet instset =  buildInstanceList(dataFile);
-		IFeatureAlphabet features = factory.DefaultFeatureAlphabet();
 
 		SFGenerator generator = new SFGenerator();
-		int fsize = features.size();
 		
 		LabelAlphabet la = factory.DefaultLabelAlphabet();
 		int ysize = la.size();
@@ -207,7 +205,7 @@ public class JointParerTrainer{
 		ZeroOneLoss loss = new ZeroOneLoss();
 		Update update = new LinearMaxPAUpdate(loss);
 		OnlineTrainer trainer = new OnlineTrainer(solver, update, loss,
-				fsize, maxite, c);
+				factory, maxite, c);
 		Linear models = trainer.train(instset, null);
 		instset = null;
 		solver = null;

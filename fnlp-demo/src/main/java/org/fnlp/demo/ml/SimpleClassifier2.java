@@ -59,7 +59,7 @@ public class SimpleClassifier2 {
 		
 		long start = System.currentTimeMillis();
 
-		path = "./example-data/data-classification.txt";
+		path = "../example-data/data-classification.txt";
 
 		Pipe lpipe = new Target2Label(al);
 		Pipe fpipe = new StringArray2IndexArray(factory, true);
@@ -90,7 +90,7 @@ public class SimpleClassifier2 {
 		
 		
 		Inferencer msolver = new LinearMax(featureGen, al.size() );
-		OnlineTrainer trainer = new OnlineTrainer(msolver, update, loss, af.size(), round,
+		OnlineTrainer trainer = new OnlineTrainer(msolver, update, loss, factory, round,
 				c);
 
 		Linear classify = trainer.train(train, test);

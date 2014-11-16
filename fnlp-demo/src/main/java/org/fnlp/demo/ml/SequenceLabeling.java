@@ -104,7 +104,7 @@ public class SequenceLabeling {
 
 
 		OnlineTrainer trainer = new OnlineTrainer(inference, update, loss,
-				features.size(), 50,0.1f);
+				factory, 50,0.1f);
 
 		Linear cl = trainer.train(trainSet);
 
