@@ -63,6 +63,18 @@ public class POSTagger extends AbstractTagger {
 		super(str);
 		cws = new CWSTagger(cwsmodel);
 	}
+	
+	/**
+	 * 构造函数
+	 * @param cwsmodel 分词模型文件
+	 * @param str 词性模型文件
+	 * @throws Exception
+	 */
+	public POSTagger(CWSTagger cwsmodel, POSTagger posmodel) throws LoadModelException {
+		super(posmodel);
+		prePipe = posmodel.prePipe;
+		cws = new CWSTagger(cwsmodel);
+	}
 
 	//分词词典也被dict指定
 	public POSTagger(String cwsmodel, String str, Dictionary dict) throws LoadModelException {
