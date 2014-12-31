@@ -75,9 +75,6 @@ public class KNN extends AbstractClassifier{
 
 	/**
 	 * 初始化
-	 * @param instset
-	 * @param i 
-	 * @param p 
 	 */
 	public KNN(InstanceSet instset,Pipe p, ISimilarity sim, int k){
 		prototypes = instset;
@@ -113,7 +110,6 @@ public class KNN extends AbstractClassifier{
 	 * 分类，返回标签，格式可自定义
 	 * @param instance
 	 * @return
-	 * @throws Exception 
 	 */
 	public TPredict classify(Instance instance, int n){
 		LinkedPredict<String>  pred = new LinkedPredict<String>(k);
@@ -142,6 +138,7 @@ public class KNN extends AbstractClassifier{
 	public TPredict classify(Instance instance, Type type, int n) {
 		return  classify(instance, n);
 	}
+	
 	/**
 	 * 将分类器保存到文件
 	 * @param file

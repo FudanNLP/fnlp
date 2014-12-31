@@ -72,7 +72,6 @@ public class StopWords {
 	 * 读取stopword
 	 * @param dicPath
 	 *       stopword所在地址
-	 * @throws FileNotFoundException
 	 */
 
 	public void read(String dicPath) {

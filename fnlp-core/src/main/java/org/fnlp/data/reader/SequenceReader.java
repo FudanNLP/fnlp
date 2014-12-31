@@ -42,8 +42,8 @@ import org.fnlp.util.UnicodeReader;
  * x4	y4
  * 每行数据用\t隔开， * 不同样本以空行分开
  * 输出数据格式为：
- * 		data：ArrayList<ArrayList<String>>
- * 		target: ArrayList<String>
+ * 		data：ArrayList&lt;ArrayList&lt;String&gt;&gt;
+ * 		target: ArrayList&lt;String&gt;
  * @author xpqiu
  *
  */

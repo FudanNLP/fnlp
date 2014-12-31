@@ -26,7 +26,7 @@ import org.fnlp.ml.types.Instance;
 import org.fnlp.ml.types.alphabet.AlphabetFactory;
 /**
  * 将字符数组类型的数据转换成特征索引
- * 数据类型：List\<String\> -\> int[]
+ * 数据类型：List&lt;String&gt; -&gt; int[]
  * @author xpqiu
  */
 public class StringArray2IndexArray extends StringArray2SV{

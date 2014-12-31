@@ -229,7 +229,7 @@ public class InstanceSet extends ArrayList<Instance> {
      * 
      * 分步骤批量处理数据，每个Pipe处理完所有数据再进行下一个Pipe
      * 
-     * @param reader
+     * @param readers
      * @throws Exception
      */
     public void loadThruStagePipesForMultiCorpus(Reader[] readers, String[] corpusNames) throws Exception {

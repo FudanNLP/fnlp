@@ -57,7 +57,6 @@ public class CNFactory {
 	/**
 	 * 设置自定义词典
 	 * @param path
-	 * @throws IOException
 	 * @throws LoadModelException
 	 */
 	public static void loadDict(String... path) throws LoadModelException {
@@ -70,10 +69,9 @@ public class CNFactory {
 	}
 	/**
 	 * 
-	 * @param al 字典 ArrayList<String[]>
+	 * @param al 字典 ArrayList&lt;String[]&gt;
 	 * 						每一个元素为一个单元String[].
 	 * 						String[] 第一个元素为单词，后面为对应的词性
-	 * @throws LoadModelException 
 	 */
 	public static void addDict(ArrayList<String[]> al)  {
 		dict.add(al);

@@ -224,7 +224,7 @@ public class EntitiesGetter {
 	
 	/**
 	 * 是否为NN
-	 * @param strtag
+	 * @param pos
 	 * @return
 	 */
 	public boolean isNN(PartOfSpeech pos) {

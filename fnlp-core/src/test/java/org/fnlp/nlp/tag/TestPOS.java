@@ -34,11 +34,7 @@ public class TestPOS {
 	static POSTagger tag;
 
 
-	/**
-	 * @param args
-	 * @throws IOException 
-	 * @throws  
-	 */
+	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		tag = new POSTagger("models/seg.m","models/pos.m");

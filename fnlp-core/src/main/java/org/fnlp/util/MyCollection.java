@@ -58,7 +58,7 @@ public class MyCollection {
 
 	/**
 	 * 由大到小排序
-	 * @param map
+	 * @param tmap
 	 * @return 数组下标
 	 */
 	public static int[] sort(TIntFloatHashMap tmap) {
@@ -111,7 +111,7 @@ public class MyCollection {
 
 	}
 	/**
-	 * 输出List<Entry>到文件
+	 * 输出List&lt;Map#Entry&gt;到文件
 	 * @param entryList
 	 * @param file
 	 * @param b 是否输出值域
@@ -238,7 +238,6 @@ public class MyCollection {
 	/**
 	 * 去除重复的集合
 	 * @param path
-	 * @return
 	 * @throws IOException
 	 */
 	public static void cleanSet(String path) throws IOException{
@@ -519,18 +518,16 @@ public class MyCollection {
 	
 	
 	/**
-	 * 写多值Map,Map结构为HashMap<String, HashSet<String>>
-	 * @param map HashMap<String, HashSet<String>>
+	 * 写多值Map,Map结构为HashMap &lt; String, HashSet&lt;,String&gt;&gt;
+	 * @param map 
 	 * @param file
-	 * @see MyCollection#write(HashMap, String, boolean)
 	 */
 	public static void writeMultiValueMap(Map map,	String file) {
 		writeMultiValueMap(map, file,true,"\t");
 	}
 
 	/**
-	 * 写多值Map,Map结构为HashMap<String, Collection<String>>
-	 * @param map HashMap<String, Collection<String>>
+	 * @param map 
 	 * @param file
 	 */
 	public static void writeMultiValueMap(Map<String, Collection<String>> map,	String file,boolean hasKey,String delim) {
@@ -571,8 +568,6 @@ public class MyCollection {
 	}
 
 	/**
-	 * 写多值Map,Map结构为HashMap<String, HashSet<String>>
-	 * @param map HashMap<String, HashSet<String>>
 	 * @param file
 	 * @return 
 	 * @throws IOException 

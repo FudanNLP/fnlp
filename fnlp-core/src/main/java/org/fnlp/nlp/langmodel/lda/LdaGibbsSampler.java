@@ -125,7 +125,7 @@ public class LdaGibbsSampler {
      * 
      * @param V
      *            vocabulary size
-     * @param data
+     * @param documents
      */
     public LdaGibbsSampler(int[][] documents, int V) {
 
@@ -140,7 +140,7 @@ public class LdaGibbsSampler {
      * 
      * @param K
      *            number of topics
-     * @return z assignment of topics to words
+     *  z assignment of topics to words
      */
     public void initialState(int K) {
         int i;
@@ -312,7 +312,7 @@ public class LdaGibbsSampler {
     }
 
     /**
-     * Retrieve estimated document--topic associations. If sample lag > 0 then
+     * Retrieve estimated document--topic associations. If sample lag &gt; 0 then
      * the mean value of all sampled statistics for theta[][] is taken.
      * 
      * @return theta multinomial mixture of document topics (M x K)
@@ -339,7 +339,7 @@ public class LdaGibbsSampler {
     }
 
     /**
-     * Retrieve estimated topic--word associations. If sample lag > 0 then the
+     * Retrieve estimated topic--word associations. If sample lag &gt; 0 then the
      * mean value of all sampled statistics for phi[][] is taken.
      * 
      * @return phi multinomial mixture of topic words (K x V)
@@ -369,7 +369,7 @@ public class LdaGibbsSampler {
      *            vector of evidence
      * @param fmax
      *            max frequency in display
-     * @return the scaled histogram bin values
+     *  the scaled histogram bin values
      */
     public static void hist(float[] data, int fmax) {
 

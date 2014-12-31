@@ -84,7 +84,7 @@ public class SimpleFileReader extends Reader {
 	 * @param file 数据路径
 	 * @param s 自定义分隔符
 	 * @param b 是否以空格分隔数据
-	 * @param o 数据格式类型
+	 * @param t 数据格式类型
 	 */
 	public SimpleFileReader(String file, String s,boolean b,Type t) {
 		init(file);

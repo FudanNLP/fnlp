@@ -95,7 +95,6 @@ public class SparseMatrix<T> {
 	
 	/**
 	 * 将多维索引转换为列排序索引 
-	 * @param indices
 	 * @return
 	 * Jul 29, 2009
 	 */

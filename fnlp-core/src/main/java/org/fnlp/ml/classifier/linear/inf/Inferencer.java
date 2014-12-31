@@ -40,7 +40,6 @@ public abstract class Inferencer implements Serializable	{
 	/**
 	 * 得到前n个最可能的预测值
 	 * @param inst 
-	 * @param n 返回个数
 	 * @return
 	 * Sep 9, 2009
 	 */

@@ -419,7 +419,6 @@ public class WordCluster implements Serializable{
 	 * 
 	 * @param c1
 	 * @param c2
-	 * @param window
 	 * @return
 	 */
 	public float calcL(int c1, int c2) {

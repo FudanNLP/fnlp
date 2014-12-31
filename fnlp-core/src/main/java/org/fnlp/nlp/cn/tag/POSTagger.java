@@ -57,7 +57,7 @@ public class POSTagger extends AbstractTagger {
 	 * 构造函数
 	 * @param cwsmodel 分词模型文件
 	 * @param str 词性模型文件
-	 * @throws Exception
+	 * @throws LoadModelException
 	 */
 	public POSTagger(String cwsmodel, String str) throws LoadModelException {
 		super(str);
@@ -75,7 +75,7 @@ public class POSTagger extends AbstractTagger {
 	/**
 	 * 构造函数
 	 * @param str 词性模型文件
-	 * @throws Exception
+	 * @throws LoadModelException
 	 */
 	public POSTagger(String str) throws LoadModelException {
 		super(str);
@@ -124,7 +124,6 @@ public class POSTagger extends AbstractTagger {
 	/**
 	 * 设置词典, 参数指定是否同时设置分词词典
 	 * @param dict 词典
-	 * @throws LoadModelException 
 	 */
 	public void setDictionary(Dictionary dict, boolean isSetSegDict)   {
 		removeDictionary(isSetSegDict);

@@ -104,14 +104,14 @@ public class ClusterTemplet implements Templet {
     }
 
     /**
-     * @see org.fnlp.nlp.pipe.templet.Templet#getVars()
+     * @see org.fnlp.nlp.pipe.seq.templet.Templet#getVars()
      */
     public int[] getVars() {
         return this.vars;
     }
 
     /**
-     * @see org.fnlp.nlp.pipe.templet.Templet#getOrder()
+     * @see org.fnlp.nlp.pipe.seq.templet.Templet#getOrder()
      */
     public int getOrder() {
         return this.order;

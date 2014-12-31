@@ -110,10 +110,9 @@ public class Dictionary {
 
 	/**
 	 * 
-	 * @param al 词典 ArrayList<String[]>
+	 * @param al 词典 ArrayList&lt;String[]&gt;
 	 * 						每一个元素为一个单元String[].
 	 * 						String[] 第一个元素为单词，后面为对应的词性
-	 * @return 
 	 */
 	public void add(ArrayList<String[]> al) {
 		for(String[] pos: al) {
@@ -125,7 +124,7 @@ public class Dictionary {
 	/**
 	 * 在目前词典中增加新的词典信息
 	 * @param path
-	 * @throws FileNotFoundException 
+	 * @throws LoadModelException 
 	 */
 	public void addFile(String path) throws LoadModelException{
 		try {

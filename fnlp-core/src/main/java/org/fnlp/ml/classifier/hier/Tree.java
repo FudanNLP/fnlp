@@ -55,7 +55,7 @@ public class Tree implements Serializable {
 	 */
 	HashMap<Integer,Set<Integer>> edges = new HashMap<Integer,Set<Integer>>();
 	/**
-	 * 子节点->父节点
+	 * 子节点-&gt;父节点
 	 */
 	HashMap<Integer,Integer> edgesInv = new HashMap<Integer,Integer>();
 	/**

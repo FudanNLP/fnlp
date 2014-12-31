@@ -56,5 +56,22 @@ public class CWSTaggerTest {
 		s = tag.tag(str);
 		assertTrue(s.equals("江苏省 兴化市 沈伦镇 樊荣村委会"));
 	}
+	@Test
+	public void testTagString1() {
+		String str = "以及在电视 电影反各类艺术图形的生成和处理过程中 微机图形功能都是很重要的 随着高分辨率图形显示设备的增加和普及 对空间物体进行三维彩色图形表示的要求日趋增高 尤其是在工业设计 建筑设计 地形图绘制";
+		
+		String s = tag.tag(str);
+		System.out.println(s);
+//		assertTrue(s.equals("江苏省 兴化市 沈伦镇 樊荣 村委会"));
+		
+		ArrayList<String> al = new ArrayList<String>();
+		al.add("图形显示");
+		Dictionary dict = new Dictionary(false);
+		dict.addSegDict(al);
+		tag.setDictionary(dict);
+		s = tag.tag(str);
+		System.out.println(s);
+		assertTrue(s.indexOf("图形显示")!=-1);
+	}
 
 }

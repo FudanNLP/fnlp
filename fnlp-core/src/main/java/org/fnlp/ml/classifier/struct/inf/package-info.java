@@ -22,6 +22,6 @@
  * @author <a href="mailto:xpqiu@fudan.edu.cn">fnlp.org</a>  
  * @since FudanNLP 1.5
  * @version 1.0.0  
- * @date 2012-11-14
+ * 
  */
 package org.fnlp.ml.classifier.struct.inf;

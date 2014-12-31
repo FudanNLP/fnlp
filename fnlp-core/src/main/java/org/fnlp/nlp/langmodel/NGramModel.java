@@ -105,9 +105,7 @@ public class NGramModel {
 
 	/**
 	 * 训练数据，得到每个词对的出现次数
-	 * @param ngram
-	 * @param inputFile训练数据文件
-	 * @param outputFile
+	 * @param inputFile 训练数据文件
 	 * @throws Exception 
 	 */
 	public void build(String... inputFile) throws Exception {
@@ -207,8 +205,7 @@ public class NGramModel {
 
 	/**
 	 * 加载模型数据文件
-	 * @param loadModelFile
-	 * @throws FileNotFoundException
+	 * @param modelFile
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */

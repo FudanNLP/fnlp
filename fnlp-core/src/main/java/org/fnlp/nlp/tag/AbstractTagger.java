@@ -66,7 +66,6 @@ public abstract class AbstractTagger {
 	
 	/**
 	 * 训练
-	 * @param b 是否增量训练
 	 * @throws Exception
 	 */
 	public void train() throws Exception {

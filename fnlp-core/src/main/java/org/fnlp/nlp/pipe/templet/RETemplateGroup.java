@@ -107,7 +107,7 @@ public class RETemplateGroup implements Serializable {
 	/**
 	 * 根据句子得到匹配的模板
 	 * @param str
-	 * @returnJul 16, 2009
+	 * @return
 	 */
 	public List<RETemplate> getTemplate(String str){
 
@@ -135,7 +135,6 @@ public class RETemplateGroup implements Serializable {
 
 	/**
 	 * 读入对应目录下所有模板
-	 * @param fileName
 	 * Jul 16, 2009
 	 */
 	public synchronized void  loadAll(){

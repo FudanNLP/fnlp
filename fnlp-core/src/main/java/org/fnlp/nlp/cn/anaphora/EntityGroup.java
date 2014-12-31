@@ -46,8 +46,6 @@ public class EntityGroup {
 	
 	/**
 	 * 用标注工具的最后结果
-	 * @param str 句子
-	 * @throws Exception
 	 */
 	public String toString(){
 		

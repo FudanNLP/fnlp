@@ -64,8 +64,6 @@ public class ModelAnalysis {
 
 	/**
 	 * 统计信息，计算删除非0特征后，权重的长度
-	 * 
-	 * @throws IOException
 	 */
 	public void removeZero() {
 		boolean freeze = false;

@@ -154,7 +154,7 @@ public class LinkedPredict<T> implements TPredict<T> {
 
 	/**
 	 * 合并重复标签，并重新排序
-	 * @param true 用得分; false 计数
+	 * @param useScore true 用得分; false 计数
 	 * @return
 	 */
 	public LinkedPredict<T> mergeDuplicate(boolean useScore) {

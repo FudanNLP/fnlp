@@ -52,9 +52,6 @@ public class BaseTemplet implements Templet {
 		this.dims = dims;
 	}
 
-	/**
-	 * @see Templet#generateAt(Instance, IFeatureAlphabet, int...)
-	 */
 	public int[] generateAt(Instance instance, IFeatureAlphabet features,
 			int numLabels) throws Exception {
 

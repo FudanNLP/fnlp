@@ -38,11 +38,6 @@ import org.fnlp.util.MyCollection;
 public class TestNER {	
 
 
-	/**
-	 * @param args
-	 * @throws IOException 
-	 * @throws  
-	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		NERTagger tag = new NERTagger("./models/seg.m","./models/pos.m");

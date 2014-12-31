@@ -225,8 +225,6 @@ public class JointParser implements Serializable{
 	 * 得到依存句法树
 	 * @param words 词数组
 	 * @param pos 词性数组
-	 * @return
-	 * @throws UnsupportedDataTypeException 
 	 */
 	public DependencyTree parse2T(String[] words, String[] pos){
 		return parse2T(new Sentence(words, pos));

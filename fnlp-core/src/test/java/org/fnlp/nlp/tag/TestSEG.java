@@ -30,11 +30,7 @@ import org.fnlp.util.MyCollection;
  *
  */
 public class TestSEG {
-	/**
-	 * @param args
-	 * @throws IOException 
-	 * @throws  
-	 */
+	
 	public static void main(String[] args) throws Exception {
 		CWSTagger tag = new CWSTagger("./models/seg.m");
 		ArrayList<String> str = MyCollection.loadList("./testcase/seg.txt",null);

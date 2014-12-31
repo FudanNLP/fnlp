@@ -43,8 +43,6 @@ public class HigherOrderViterbi extends AbstractViterbi {
 	/**
 	 * 构造函数
 	 * 
-	 * @param features
-	 *            特征
 	 * @param numLabels
 	 *            标记
 	 * @param templets

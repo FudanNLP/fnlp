@@ -65,8 +65,6 @@ public class CharClassDictionary implements Serializable{
 
 	/**
 	 * 返回词典标签
-	 * @param word
-	 * @return 词典列表
 	 */
 	public boolean contains(char c) {
 		return dict.contains(c);

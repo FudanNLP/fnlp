@@ -32,7 +32,7 @@ import org.fnlp.ml.types.alphabet.LabelAlphabet;
 import org.fnlp.ml.types.sv.HashSparseVector;
 /**
  * 将字符数组类型的数据转换成稀疏向量
- * 数据类型：List\<String\> -\> SparseVector
+ * 数据类型：List&lt;&gt;String;&gt; -;&gt; SparseVector
  * @author xpqiu
  */
 public class StringArray2SV extends Pipe implements Serializable {

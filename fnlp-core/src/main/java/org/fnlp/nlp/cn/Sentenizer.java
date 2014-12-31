@@ -29,7 +29,7 @@ import org.fnlp.util.MyStrings;
  * 简单中文文本的断句
  * @author xpqiu
  * @version 1.0
- * @since FudanNLP 1.5
+ * @since FNLP 1.5
  */
 public class Sentenizer {
 
@@ -37,8 +37,7 @@ public class Sentenizer {
 	
 	/**
 	 * 根据标点符号进行断句
-	 * @param sent
-	 * @return
+	 * @param puncs
 	 */
 
     public static void setPuncs(char[] puncs) {

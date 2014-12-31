@@ -32,8 +32,8 @@ import org.fnlp.util.exception.UnsupportedDataTypeException;
 
 /**
  * 由输入序列生成ngram特征，data类型转为List
- * 输入数据类型：String[],List<String>,String
- * 输出数据类型：List<String>
+ * 输入数据类型：String[],List&lt;String&gt;,String
+ * 输出数据类型：List&lt;String&gt;
  * @author xpqiu
  *
  */

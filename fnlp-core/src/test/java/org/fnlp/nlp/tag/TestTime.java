@@ -82,8 +82,6 @@ public class TestTime {
 	static DecimalFormat  df = new DecimalFormat("0");
 	/**
 	 * 批量测试
-	 * @param tag
-	 * @param file 文件名
 	 * @throws Exception
 	 */
 	public static void test() throws Exception{

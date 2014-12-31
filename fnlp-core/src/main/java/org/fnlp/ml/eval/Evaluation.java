@@ -78,7 +78,6 @@ public class Evaluation  {
 	 * 
 	 * @param cl 
 	 * @param nbest top n性能
-	 * @return
 	 */
 	public void eval(AbstractClassifier cl,int nbest){
 		labels = cl.getAlphabetFactory().DefaultLabelAlphabet();

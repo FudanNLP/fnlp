@@ -74,7 +74,6 @@ public class TimeUnit {
      * 时间表达式单元构造方法
      * 该方法作为时间表达式单元的入口，将时间表达式字符串传入
      * @param exp_time 时间表达式字符串 
-     * @param n
      */
     public TimeUnit(String exp_time, Date timeBase) {
         Time_Expression = exp_time;

@@ -73,7 +73,7 @@ public class FNLPSent {
 	/**
 	 * @param list 一个句子，每行是一组标记 上海	{"NR	2	NMOD", "浦东	NR	6	NMOD"}
 	 * @param pos 标记开始位置，默认是1
-	 * @param p 第一列是否为序列标记
+	 * @param b 第一列是否为序列标记
 	 */
 	public void parse(List<String> list,int pos,boolean b) {
 

@@ -144,7 +144,6 @@ public class Instance implements Serializable{
 	}
 	/**
 	 * 删除临时数据
-	 * @return
 	 */
 	public void deleteTempData() {
 		if(!tempDataLock){

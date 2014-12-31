@@ -88,7 +88,6 @@ public class SeqEval {
 
 	/**
 	 * 读取评测结果文件，并输出到outputPath
-	 * @param filePath			待评测文件路径
 	 * @param outputPath		评测结果的输出路径
 	 * @throws IOException 
 	 */
@@ -574,7 +573,7 @@ public class SeqEval {
 
 	/**
 	 * 从reader中提取实体，存到相应的队列中，并统计固定长度实体的个数，存到相应的map中
-	 * @param reader		结果文件的流
+	 * @param filePath	结果文件
 	 * @throws IOException 
 	 */
 	public void read(String filePath) throws IOException{

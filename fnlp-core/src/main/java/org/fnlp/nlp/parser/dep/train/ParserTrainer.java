@@ -78,7 +78,6 @@ public class ParserTrainer {
 	 * 构造函数 
 	 * @param data
 	 *            训练文件的目录
-	 * @throws Exception
 	 */
 	public ParserTrainer(String data) {
 		this(data, "UTF-8");
@@ -92,7 +91,6 @@ public class ParserTrainer {
 	 *            训练文件的目录
 	 * @param charset
 	 *            文件编码
-	 * @throws Exception
 	 */
 	public ParserTrainer(String dataPath, String charset) {
 		this.modelfile = dataPath;
@@ -181,7 +179,6 @@ public class ParserTrainer {
 	 * @param maxite
 	 *            最大迭代次数
 	 * @throws IOException
-	 * @throws Exception
 	 */
 	public void train(String dataFile, int maxite, float c) throws IOException {
 
@@ -276,10 +273,8 @@ public class ParserTrainer {
 	 * 
 	 * @param models
 	 *            模型参数
-	 * @param factory 
-	 * @param pos
-	 *            词性
-	 * @throws Exception
+	 * @param factory
+	 * @throws IOException
 	 */
 	public static void saveModels(String modelfile, Linear[] models, AlphabetFactory factory) throws IOException {
 

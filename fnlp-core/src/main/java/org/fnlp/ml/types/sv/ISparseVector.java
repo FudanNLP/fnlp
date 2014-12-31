@@ -44,19 +44,14 @@ public interface ISparseVector extends Serializable {
 	
 	/**
 	 * 增加元素
-	 * @param vector
-	 * @return
 	 */
 	public void put(int i);
 	/**
 	 * 增加多个元素
-	 * @param vector
-	 * @return
 	 */
 	public void put(int[] idx);
 	/**
 	 * L2模
-	 * @return
 	 */
 	public float l2Norm2();
 

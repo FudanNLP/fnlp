@@ -85,7 +85,6 @@ public abstract class AbstractTagger {
 	/**
 	 * 抽象标注器构造函数，不是复制，仅仅是重构
 	 * @param tagger 另一个标注器
-	 * @throws LoadModelException
 	 */
 	public AbstractTagger(AbstractTagger tagger){
 		

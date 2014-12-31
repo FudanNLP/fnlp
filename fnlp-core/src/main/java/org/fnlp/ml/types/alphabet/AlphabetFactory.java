@@ -93,7 +93,6 @@ public final class AlphabetFactory implements Serializable {
 
 	/**
 	 * 建立缺省的特征字典
-	 * @return 缺省特征词典
 	 */
 	public void setDefaultFeatureAlphabet(IFeatureAlphabet alphabet)	{
 		maps.put(DefalutFeatureName, alphabet);

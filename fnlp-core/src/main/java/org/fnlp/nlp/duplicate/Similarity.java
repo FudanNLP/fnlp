@@ -42,7 +42,7 @@ import org.fnlp.nlp.duplicate.FingerPrint.Type;
  */
 public class Similarity {
 	/**
-	 * 相似度矩阵<a,<b,sim>>
+	 * 相似度矩阵&lt;a,&lt;b,sim&gt;&gt;
 	 */
 	public TIntIntHashMap[] similarityMap;
 	public TreeSet<DocSim> dsMap;

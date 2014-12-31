@@ -90,7 +90,6 @@ public class JointParsingState{
 	 * 
 	 * @param instance
 	 *            句子实例
-	 * @param factory2 
 	 */
 
 	public JointParsingState(Sentence instance) {
@@ -116,7 +115,6 @@ public class JointParsingState{
 	 * 得到当前状态的特征
 	 * 
 	 * @return 特征表
-	 * @throws Exception
 	 */
 	public ArrayList<String> getFeatures() {
 		if (isFinalState())

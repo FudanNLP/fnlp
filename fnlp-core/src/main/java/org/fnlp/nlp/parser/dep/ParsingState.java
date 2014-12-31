@@ -105,7 +105,6 @@ public class ParsingState {
 	 * 得到当前状态的特征
 	 * 
 	 * @return 特征表，其中key是有用的，value没有用
-	 * @throws Exception
 	 */
 	public HashSparseVector getFeatures() {
 		if (isFinalState())

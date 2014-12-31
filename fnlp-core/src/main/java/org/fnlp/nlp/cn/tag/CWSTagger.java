@@ -83,11 +83,7 @@ public class CWSTagger extends AbstractTagger {
 		//		dv.setDynamicTemplets(DynamicTagger.getDynamicTemplet("example-data/structure/template_dynamic"));
 		//		cl.setInferencer(dv);
 	}
-	/**
-	 * 
-	 * @param str
-	 * @throws LoadModelException
-	 */
+
 	public CWSTagger(CWSTagger tagger){
 		super(tagger);
 		prePipe = tagger.prePipe;
@@ -195,7 +191,7 @@ public class CWSTagger extends AbstractTagger {
 	/**
 	 * 得到分词结果 List，不进行断句
 	 * @param src 字符串
-	 * @return ArrayList<String> 词数组，每个元素为一个词
+	 * @return ArrayList&lt;String&gt; 词数组，每个元素为一个词
 	 */
 	public ArrayList<String> tag2List(String src) {
 		if(src==null||src.length()==0)

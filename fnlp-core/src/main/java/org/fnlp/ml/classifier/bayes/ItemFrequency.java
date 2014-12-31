@@ -101,7 +101,7 @@ public class ItemFrequency implements Serializable{
 	}
 	/**
 	 * 统计数据集词频
-	 * @param set 数据集
+	 * @param instSet 数据集
 	 */
 	public void statistic(InstanceSet instSet){	
 		int numSamples = instSet.size();

@@ -79,7 +79,7 @@ public abstract class AbstractClassifier implements Serializable{
 	/**
 	 * 对单个样本进行分类，返回得分最高的标签
 	 * @param instance
-	 * @param type 返回标签类型
+	 * @param t 返回标签类型
 	 * @return
 	 */
 	public TPredict classify(Instance instance,LabelParser.Type t){

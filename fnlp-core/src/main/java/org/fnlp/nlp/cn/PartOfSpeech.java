@@ -136,8 +136,6 @@ public enum PartOfSpeech {
 	
 	/**
 	 * 判断词性是否为一个实体，包括：人名|地名|机构名|专有名。
-	 * @param pos 词性
-	 * @return true,false
 	 */
 	public boolean isEntiry() {
 		return entities.contains(this);

@@ -27,7 +27,7 @@ import org.fnlp.ml.types.InstanceSet;
 /**
  * 数据类型转换管道，通过一系列的组合将数据从原始方式转为需要的数据类型
  * Pipe只能每次连续流水处理一个样本，不能按阶段多遍执行
- * 要分阶段多遍执行参见 {@link org.fnlp.ml.types.InstanceSet#loadThruStagePipes(edu.fudan.data.reader.Reader)}
+ * 要分阶段多遍执行参见 {@link org.fnlp.ml.types.InstanceSet#loadThruStagePipes(org.fnlp.data.reader.Reader)}
  * @author xpqiu
  *
  */

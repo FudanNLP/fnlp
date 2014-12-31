@@ -60,7 +60,6 @@ public class JointParerTrainer{
 	 * 构造函数 
 	 * @param data
 	 *            训练文件的目录
-	 * @throws Exception
 	 */
 	public JointParerTrainer(String data) {
 		this(data, "UTF-8");
@@ -74,7 +73,6 @@ public class JointParerTrainer{
 	 *            训练文件的目录
 	 * @param charset
 	 *            文件编码
-	 * @throws Exception
 	 */
 	public JointParerTrainer(String dataPath, String charset) {
 		this.modelfile = dataPath;
@@ -190,7 +188,6 @@ public class JointParerTrainer{
 	 * @param maxite
 	 *            最大迭代次数
 	 * @throws IOException
-	 * @throws Exception
 	 */
 	public void train(String dataFile, int maxite, float c) throws IOException {
 		

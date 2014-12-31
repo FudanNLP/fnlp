@@ -59,10 +59,6 @@ public class RETemplate implements Serializable{
 	}
 
 
-	/**
-	 * @param qm
-	 * @throws Exception 
-	 */
 	public void addTemplates(ArrayList<String> templatesList) throws Exception {
 		Iterator<String> it = templatesList.iterator();
 		while(it.hasNext()){
