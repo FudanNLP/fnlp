@@ -21,7 +21,7 @@
 	<scm>
 		<url>scm:git:git@github.com:xpqiu/fnlp.git</url>
 		<connection>scm:git:git@github.com:xpqiu/fnlp.git</connection>
-		<tag>fnlp-core-2.0</tag>
+		<tag>fnlp-core-2.1</tag>
 	</scm>
 
 	<properties>
