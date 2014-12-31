@@ -87,12 +87,15 @@ public abstract class AbstractTagger {
 	 * @param tagger 另一个标注器
 	 */
 	public AbstractTagger(AbstractTagger tagger){
+		//modify for parallel
+		Linear originClassifier = tagger.getClassifier();
+		Linear newClassifier = new Linear(originClassifier.getInferencer(),originClassifier.getAlphabetFactory());
+		setClassifier(newClassifier);
 		
-		setClassifier(tagger.getClassifier());
 		factory = getClassifier().getAlphabetFactory();
 		labels = factory.DefaultLabelAlphabet();
 		IFeatureAlphabet features = factory.DefaultFeatureAlphabet();
-		featurePipe = new Sequence2FeatureSequence(templets, features,
+		featurePipe = new Sequence2FeatureSequence(tagger.templets, features,
 				labels);
 	}
 

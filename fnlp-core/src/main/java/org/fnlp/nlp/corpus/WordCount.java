@@ -46,7 +46,7 @@ public class WordCount {
 	public static void main(String[] args) throws Exception {
 		
 		WordCount wc = new WordCount();
-		 wc.seg = new CWSTagger("./models/seg.m");
+		 wc.seg = new CWSTagger("../models/seg.m");
 		
 		wc.count("./tmp/filterTweets.y");
 		wc.count("./tmp/filterTweets.n");		
