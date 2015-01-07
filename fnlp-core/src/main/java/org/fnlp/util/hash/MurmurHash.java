@@ -19,10 +19,7 @@
 
 package org.fnlp.util.hash;
 
-import java.io.UnsupportedEncodingException;
-
-
-/** 
+/**
  *
  * murmur hash 2.0.
  * 
@@ -40,12 +37,27 @@ import java.io.UnsupportedEncodingException;
  *
  */
 public final class MurmurHash extends AbstractHashCode {
+	
+	private static final long serialVersionUID = 4342869264396184799L;
 
 	// all methods static; private constructor. 
 	public MurmurHash() {}
 
+    protected byte[] toBytesWithoutEncoding(String str) {
+        int len = str.length();
+        int pos = 0;
+        byte[] buf = new byte[len << 1];
+        for (int i = 0; i < len; i++) {
+            char c = str.charAt(i);
+            buf[pos++] = (byte) (c & 0xFF);
+            buf[pos++] = (byte) (c >> 8);
+        }
+        return buf;
+    }
+
 	public int hashcode(String str) {
-		return hash32(str);
+        byte[] bytes = toBytesWithoutEncoding(str);
+        return hash32(bytes, bytes.length);
 	}
 
 	/** 
@@ -103,31 +115,6 @@ public final class MurmurHash extends AbstractHashCode {
 	 */
 	public int hash32( final byte[] data, int length) {
 		return hash32( data, length, 0x9747b28c); 
-	}
-
-
-	/** 
-	 * Generates 32 bit hash from a string.
-	 * 
-	 * @param text string to hash
-	 * @return 32 bit hash of the given string
-	 */
-	public int hash32( final String text) {
-		final byte[] bytes = text.getBytes(); 
-		return hash32( bytes, bytes.length);
-	}
-
-
-	/** 
-	 * Generates 32 bit hash from a substring.
-	 * 
-	 * @param text string to hash
-	 * @param from starting index
-	 * @param length length of the substring to hash
-	 * @return 32 bit hash of the given string
-	 */
-	public int hash32( final String text, int from, int length) {
-		return hash32( text.substring( from, from+length));
 	}
 
 
@@ -192,44 +179,4 @@ public final class MurmurHash extends AbstractHashCode {
 		return hash64( data, length, 0xe17a1465);
 	}
 
-
-	/** 
-	 * Generates 64 bit hash from a string.
-	 * 
-	 * @param text string to hash
-	 * @return 64 bit hash of the given string
-	 */
-	public long hash64( final String text) {
-
-		final byte[] bytes;
-		try {
-			bytes = text.getBytes("utf-8");
-
-			return hash32( bytes, bytes.length);
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("utf-8 encoding should be available on system.", e);
-		}
-	}
-
-
-
-	/** 
-	 * Generates 64 bit hash from a substring.
-	 * 
-	 * @param text string to hash
-	 * @param from starting index
-	 * @param length length of the substring to hash
-	 * @return 64 bit hash of the given array
-	 */
-	public long hash64( final String text, int from, int length) {
-
-		final byte[] bytes;
-		try {
-			bytes = text.getBytes("utf-8");
-
-			return hash64( bytes, bytes.length);
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("utf-8 encoding should be available on system.", e);
-		}
-	}
 }

@@ -229,8 +229,8 @@ public class CWSTagger extends AbstractTagger {
 			HelpFormatter f = new HelpFormatter();
 			f.printHelp(
 					"SEG:\n"
-							+ "java edu.fudan.nlp.tag.CWSTagger -f model_file input_file output_file;\n"
-							+ "java edu.fudan.nlp.tag.CWSTagger -s model_file string_to_segement",
+							+ "java org.fnlp.tag.CWSTagger -f model_file input_file output_file;\n"
+							+ "java org.fnlp.tag.CWSTagger -s model_file string_to_segement",
 							opt);
 			return;
 		}

@@ -1,21 +1,21 @@
 /**
-*  This file is part of FNLP (formerly FudanNLP).
-*  
-*  FNLP is free software: you can redistribute it and/or modify
-*  it under the terms of the GNU Lesser General Public License as published by
-*  the Free Software Foundation, either version 3 of the License, or
-*  (at your option) any later version.
-*  
-*  FNLP is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU Lesser General Public License for more details.
-*  
-*  You should have received a copy of the GNU General Public License
-*  along with FudanNLP.  If not, see <http://www.gnu.org/licenses/>.
-*  
-*  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
-*/
+ *  This file is part of FNLP (formerly FudanNLP).
+ *  
+ *  FNLP is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *  
+ *  FNLP is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *  
+ *  You should have received a copy of the GNU General Public License
+ *  along with FudanNLP.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+ *  Copyright 2009-2014 www.fnlp.org. All rights reserved. 
+ */
 
 package org.fnlp.util;
 
@@ -116,9 +116,9 @@ public class MyStrings {
 				sb.append(delim);
 		}
 		return sb.toString();
-		
+
 	}
-	
+
 	/**
 	 * 字符在字符串中出现的次数
 	 * 
@@ -156,7 +156,27 @@ public class MyStrings {
 		}
 		return sb.toString();
 	}
+	/**
+	 * 统计文本中某个字符串出现的次数
+	 * @param str
+	 * @param target
+	 * @return
+	 * 下午5:33:24
+	 */
+	public static int count(String str,String target){
+		int count=0; 
+		int index=0; 
+		while(true){ 
+			index=str.indexOf(target,index+1); 
+			if(index>0){ 
+				count++; 
+			}else{ 
+				break; 
+			} 
+		} 
+		return count; 
+	}
 
-	
+
 
 }
