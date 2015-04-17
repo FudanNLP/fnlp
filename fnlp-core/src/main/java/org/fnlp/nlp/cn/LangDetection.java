@@ -21,6 +21,11 @@ package org.fnlp.nlp.cn;
 
 import java.lang.Character.UnicodeBlock;
 
+/**
+ * 判断语言是否为中英文
+ * @author Xipeng Qiu  E-mail: xpqiu@fudan.edu.cn
+ * @version 创建时间：2015年4月17日 上午10:44:19
+ */
 public class LangDetection {
 
 	public static String detect(String str){
