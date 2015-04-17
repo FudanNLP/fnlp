@@ -573,6 +573,12 @@ public class SeqEval {
 
 	/**
 	 * 从reader中提取实体，存到相应的队列中，并统计固定长度实体的个数，存到相应的map中
+	 * 格式为： 字+预测标签+正确标签
+	 * 中	B	B
+	 * 国	E	S
+	 * 队	S	B
+	 * 赢	S	E
+	 * 了	S	S
 	 * @param filePath	结果文件
 	 * @throws IOException 
 	 */
