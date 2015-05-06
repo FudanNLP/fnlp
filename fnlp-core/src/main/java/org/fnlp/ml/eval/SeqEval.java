@@ -86,6 +86,9 @@ public class SeqEval {
 	}
 
 
+
+
+
 	/**
 	 * 读取评测结果文件，并输出到outputPath
 	 * @param outputPath		评测结果的输出路径
@@ -371,6 +374,8 @@ public class SeqEval {
 		return toString("OOVRate",mpc, mp, mc, oov);
 	}
 
+
+
 	private String toString(String mark, Map mpc,
 			Map mp, Map mc, Map oov) {
 		//输出统计数据
@@ -512,7 +517,65 @@ public class SeqEval {
 
 		return toString("Type",mpc, mp, mc,oov);
 	}
-	
+	/**
+	 * 计算Precision, Recall, F1值
+	 * @return
+	 * 下午5:24:53
+	 */
+	public double[] calcPRF() {
+
+		/**
+		 * 估计的中正确的，key是字符串长度，value是这种长度的个数
+		 */
+		Map<String,Double> mpc = new TreeMap<String,Double>();
+		/**
+		 * 估计的，key是字符串长度，value是这种长度的个数
+		 */
+		Map<String,Double> mp = new TreeMap<String,Double>();		
+		/**
+		 * 正确的，key是字符串长度，value是这种长度的个数
+		 */
+		Map<String,Double> mc = new TreeMap<String,Double>();	
+
+		/**
+		 * OOV
+		 */
+		Map<String,Double> oov = new TreeMap<String,Double>();	
+
+		for(int i=0;i<entityCs.size();i++){
+			LinkedList<Entity>  cList =  entityCs.get(i);
+			LinkedList<Entity>  pList =  entityPs.get(i);
+			LinkedList<Entity>  cpList =  entityCinPs.get(i);
+
+			for(Entity entity:cList){
+
+				adjust(mc, "", 1.0);
+				if(dict!=null&&dict.size()>0){					
+					String s = entity.getEntityStr();
+					if(!dict.contains(s)){
+						adjust(oov, "", 1.0);
+					}
+				}
+			}
+
+			for(Entity entity:pList){
+				adjust(mp, "", 1.0);
+			}
+
+			for(Entity entity:cpList){
+				adjust(mpc, "", 1.0);
+			}	
+		}
+
+		String key = "";
+		double pre = (Double) mpc.get(key)/(Double) mp.get(key)*100;
+		double recall = (Double)mpc.get(key)/(Double)mc.get(key)*100;				
+		double FB1 = (pre*recall*2)/(recall+pre)*100;
+
+		return new double[]{pre,recall,FB1};
+
+	}
+
 	public String calcByType2() {
 
 		/**
@@ -603,6 +666,7 @@ public class SeqEval {
 		//从文件中提取实体并存入队列中
 
 		while ((line = reader.readLine()) != null) {
+			line = line.trim();
 			if(line.equals("")){
 
 				newextract(words, markP, typeP, markC, typeC);
@@ -612,13 +676,16 @@ public class SeqEval {
 				//判断实体,实体开始的边界为B-***或者S-***，结束的边界为E-***或N（O）或空白字符或B-***
 				//predict
 				String[] toks = line.split("\\s+");
-				
+
 				int ci = 1;
 				int cj=2;
-				
+
 				if(toks.length>3){//如果列数大于三，默认取最后两列
 					ci=toks.length-2;
 					cj=toks.length-1;
+				}else if(toks.length<3){
+					System.out.println(line);
+					return;
 				}
 
 				String[] marktype = getMarkType(toks[ci]);
@@ -691,7 +758,7 @@ public class SeqEval {
 
 	private boolean isStart(ArrayList<String> marks, ArrayList<String> types,
 			int i) {
-		
+
 		if(NoSegLabel)
 			return true;
 
@@ -766,8 +833,8 @@ public class SeqEval {
 
 		return end;
 	}
-	
-	
+
+
 
 	/**
 	 * 得到标记类型，BMES-后面的标记
@@ -776,13 +843,13 @@ public class SeqEval {
 	 */
 	private String[] getMarkType(String label) {
 		String[] types = new String[2];
-		
+
 		if(NoSegLabel){
 			types[0] = "";
 			types[1] = label;
 			return types;
 		}
-		
+
 		int idx = label.indexOf('-');
 		if(idx!=-1){
 			types[0] = label.substring(0,idx);
@@ -881,29 +948,7 @@ public class SeqEval {
 		ne1.getRightOOV("./paperdata/ctb6-seg/right-pattern.txt");
 		ne1.NeEvl(null);
 
-		//		ne1 = new NESatistic();
-		//		ne1.readOOV("./paperdata/exp-data/msr_training_words.utf8");
-		//		ne1.read("./paperdata/exp-data/msr_三列式结果_0.txt");
-		//		ne1.getWrongOOV("./paperdata/exp-data/msr_OOV-Wrong.txt");
-		//		ne1.NeEvl(null);
-		//		
-		//		ne1 = new NESatistic();
-		//		ne1.readOOV("./paperdata/exp-data/as_training_words.utf8");
-		//		ne1.read("./paperdata/exp-data/as_三列式结果_0.txt");
-		//		ne1.getWrongOOV("./paperdata/exp-data/as_OOV-Wrong.txt");
-		//		ne1.NeEvl(null);
-		//		
-		//		ne1 = new NESatistic();
-		//		ne1.readOOV("./paperdata/exp-data/pku_training_words.utf8");
-		//		ne1.read("./paperdata/exp-data/pku_三列式结果_0.txt");
-		//		ne1.getWrongOOV("./paperdata/exp-data/pku_OOV-Wrong.txt");
-		//		ne1.NeEvl(null);
-		//		
-		//		ne1 = new NESatistic();
-		//		ne1.readOOV("./paperdata/exp-data/cityu_training_words.utf8");
-		//		ne1.read("./paperdata/exp-data/cityu_三列式结果_0.txt");
-		//		ne1.getWrongOOV("./paperdata/exp-data/cityu_OOV-Wrong.txt");
-		//		ne1.NeEvl(null);
+
 
 	}
 
@@ -949,7 +994,7 @@ public class SeqEval {
 	}
 
 
-	private void getRightOOV(String string) {
+	void getRightOOV(String string) {
 
 		if(dict==null||dict.size()==0)
 			return;
