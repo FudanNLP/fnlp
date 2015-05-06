@@ -38,7 +38,7 @@ public final class SentenceTokenizer extends Tokenizer {
   /**
    * Space-like characters that need to be skipped: such as space, tab, newline, carriage return.
    */
-  public static final String SPACES = " 　\t\r\n";
+  public static final String SPACES = " \t\r\n";
 
   private final StringBuilder buffer = new StringBuilder();
 
