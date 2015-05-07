@@ -48,8 +48,8 @@ public class DICT {
 	 */
 	public static void main(String[] args) throws Exception {
 		DICT dic = new DICT();
-		String file = "./tmpdata/FNLPDATA/all.cws";
-		String dicfile = "./tmpdata/FNLPDATA/all.dict";
+		String file = "D:\\项目\\9.评测\\NLPCC2015分词\\data21_No_0\\trainSeg.txt";
+		String dicfile = "D:\\项目\\9.评测\\NLPCC2015分词\\data21_No_0\\all.dict";
 		BMES2DICT(file,dicfile);
 
 		System.out.println(new Date().toString());

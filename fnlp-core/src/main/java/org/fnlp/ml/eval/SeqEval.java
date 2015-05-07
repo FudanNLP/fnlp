@@ -525,54 +525,70 @@ public class SeqEval {
 	public double[] calcPRF() {
 
 		/**
-		 * 估计的中正确的，key是字符串长度，value是这种长度的个数
+		 * 估计的中正确的
 		 */
-		Map<String,Double> mpc = new TreeMap<String,Double>();
+		int mpc = 0;
 		/**
-		 * 估计的，key是字符串长度，value是这种长度的个数
+		 * 估计的
 		 */
-		Map<String,Double> mp = new TreeMap<String,Double>();		
+		int  mp = 0;		
 		/**
-		 * 正确的，key是字符串长度，value是这种长度的个数
+		 * 正确的
 		 */
-		Map<String,Double> mc = new TreeMap<String,Double>();	
+		int  mc = 0;
 
 		/**
 		 * OOV
 		 */
-		Map<String,Double> oov = new TreeMap<String,Double>();	
+		int oov = 0;
+		int coov =0;
 
 		for(int i=0;i<entityCs.size();i++){
 			LinkedList<Entity>  cList =  entityCs.get(i);
 			LinkedList<Entity>  pList =  entityPs.get(i);
 			LinkedList<Entity>  cpList =  entityCinPs.get(i);
 
-			for(Entity entity:cList){
-
-				adjust(mc, "", 1.0);
-				if(dict!=null&&dict.size()>0){					
+			for(Entity entity:cList){				
+				if(dict!=null&&dict.size()>0){
 					String s = entity.getEntityStr();
 					if(!dict.contains(s)){
-						adjust(oov, "", 1.0);
+						oov++;
 					}
 				}
 			}
 
-			for(Entity entity:pList){
-				adjust(mp, "", 1.0);
+			for(Entity entity:cpList){				
+				if(dict!=null&&dict.size()>0){
+					String s = entity.getEntityStr();
+					if(!dict.contains(s)){
+						coov++;
+					}
+				}
 			}
 
-			for(Entity entity:cpList){
-				adjust(mpc, "", 1.0);
-			}	
+
+
+			mc+=cList.size();
+			mp+=pList.size();
+			mpc+=cpList.size();
 		}
 
-		String key = "";
-		double pre = (Double) mpc.get(key)/(Double) mp.get(key)*100;
-		double recall = (Double)mpc.get(key)/(Double)mc.get(key)*100;				
-		double FB1 = (pre*recall*2)/(recall+pre)*100;
+		double pre =0;
+		if(mp!=0)
+			pre = (double) mpc/(double) mp*100;
+		double recall = 0;
+		if(mc!=0)
+			recall = (double)mpc/(double)mc*100;	
+		
+		double FB1=0;
+		if(recall+pre!=0)
+			FB1 = (pre*recall*2)/(recall+pre)*100;
+		
+		double oovrecall = 0;
+		if(oov!=0)
+			oovrecall = (double)coov/(double)oov*100;		
 
-		return new double[]{pre,recall,FB1};
+		return new double[]{pre,recall,FB1,oovrecall};
 
 	}
 
