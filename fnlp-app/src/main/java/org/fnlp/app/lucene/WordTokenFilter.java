@@ -81,8 +81,9 @@ public final class WordTokenFilter extends TokenFilter {
 				posBuffer = Arrays.asList(p);
 				tokenIter = tokenBuffer.iterator();
 				posIter = posBuffer.iterator();
-				idx = 0;
-				/* 
+//				idx = 0;
+				idx = tokStart;
+				/*
 				 * it should not be possible to have a sentence with 0 words, check just in case.
 				 * returning EOS isn't the best either, but its the behavior of the original code.
 				 */
@@ -103,7 +104,7 @@ public final class WordTokenFilter extends TokenFilter {
 		if (hasIllegalOffsets) {
 			offsetAtt.setOffset(tokStart, tokEnd);
 		} else {
-			offsetAtt.setOffset(idx, end-1);
+			offsetAtt.setOffset(idx, end);
 		}
 		idx = end;
 		typeAtt.setType("word");
