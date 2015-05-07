@@ -39,7 +39,7 @@ public class LabelAlphabetEnumTest {
 	@Test
 	public void test() {
 		System.out.println(label.lookupIndex(PartOfSpeech.人称代词.name()));
-		System.out.println(label.lookupIndex("人称"));
+		System.out.println(label.lookupIndex("人称代词"));
 	}
 
 }
