@@ -582,7 +582,7 @@ public class SeqEval {
 		
 		double FB1=0;
 		if(recall+pre!=0)
-			FB1 = (pre*recall*2)/(recall+pre)*100;
+			FB1 = (pre*recall*2)/(recall+pre);
 		
 		double oovrecall = 0;
 		if(oov!=0)
