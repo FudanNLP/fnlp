@@ -64,7 +64,7 @@ public class AR_Reader extends Reader{
 				s2 = (Entity)it.next();				
 				eg = new EntityGroup(ss,s2);
 				fp = new FeatureGeter(eg);
-				String[] tokens = this.intArrayToString(fp.getFeatrue()).split("\\t+|\\s+");
+				String[] tokens = this.intArrayToString(fp.getFeature()).split("\\t+|\\s+");
 				newdata= Arrays.asList(tokens);
 				in = new Instance(newdata,null);
 				in.setSource(eg);

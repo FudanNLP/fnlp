@@ -32,7 +32,7 @@ public class ARInstanceGetter {
 
 	private Instance instance;
 	public ARInstanceGetter(FeatureGeter fBuilder){	
-		this.instance = new Instance(fBuilder.getFeatrue(),
+		this.instance = new Instance(fBuilder.getFeature(),
 				fBuilder.getInst().getTarget());
 		this.instance.setSource(fBuilder.getInst().getData());
 	}
