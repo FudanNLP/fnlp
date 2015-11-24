@@ -39,8 +39,8 @@ public class SeqEvalTest {
 
 
 //		String filePath = "./paperdata/ctb6-seg/work/ctb_三列式结果_0.txt";
-		String dictpath =  "D:\\项目\\9.评测\\NLPCC2015分词\\data21_No_0\\all.dict";
-		String filePath = "D:\\项目\\9.评测\\NLPCC2015分词\\data21_No_0\\testSeg.txt";
+		String dictpath =  "D:\\项目\\9.评测\\NLPCC2015分词\\data_4.0.1\\all.dict";
+		String filePath = "D:\\项目\\9.评测\\NLPCC2015分词\\data_4.0.1\\testSeg.txt";
 //		String dictpath =  "D:\\项目\\9.评测\\NLPCC2015分词\\data21_No_0\\all.dict";
 
 		//		filePath = "./example-data/sequence/seq.res";
