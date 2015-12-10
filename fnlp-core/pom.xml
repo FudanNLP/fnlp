@@ -58,18 +58,14 @@
     <profile>
         <id>release</id>
         <distributionManagement>
-        
-        	<repository>
-    			<id>com.gubnoi.fnlp</id>
-    			<name>Gubnoi NLP</name>
-    			<url>git:releases://git@github.com:jing-zhou/fnlp.git</url>
-  			</repository>
-  			
-  			<snapshotRepository>
-    			<id>com.gubnoi.fnlp</id>
-    			<name>Gubnoi NLP</name>
-    			<url>git:snapshots://git@github.com:jing-zhou/fnlp.git</url>
-  			</snapshotRepository>
+        	<snapshotRepository>
+                <id>sonatype-nexus-snapshots</id>
+                <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            </snapshotRepository>
+            <repository>
+                <id>sonatype-nexus-staging</id>
+                <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            </repository>
         </distributionManagement>
         <build>
             <plugins>
@@ -119,7 +115,21 @@
         </build>
     </profile>
 </profiles>
-	
+
+	<distributionManagement>
+        
+        	<repository>
+    			<id>com.gubnoi.fnlp</id>
+    			<name>Gubnoi NLP</name>
+    			<url>git:releases://git@github.com:jing-zhou/fnlp.git</url>
+  			</repository>
+  			
+  			<snapshotRepository>
+    			<id>com.gubnoi.fnlp</id>
+    			<name>Gubnoi NLP</name>
+    			<url>git:snapshots://git@github.com:jing-zhou/fnlp.git</url>
+  			</snapshotRepository>
+    </distributionManagement>
 	<build>
 		<extensions>
     		<extension>
