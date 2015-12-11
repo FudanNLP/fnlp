@@ -9,7 +9,7 @@ FNLP主要是为中文自然语言处理而开发的工具包，也包含为实�
 FNLP is developed for Chinese natural language processing (NLP), which also includes some machine learning algorithms and [DataSet data sets] to achieve the NLP tasks. FudanNLP is distributed under LGPL3.0.
 
 
-If you're new to FNLP, check out the [Quick Start (使用说明)](http://www.fnlp.org/fnlp-intro) page, or [Java-docs](https://fudannlp.googlecode.com/svn/FudanNLP-1.5-API/java-docs/index.html).
+If you're new to FNLP, check out the [Quick Start (使用说明)](http://xpqiu.github.io/fnlp/) page, or [Java-docs](https://fudannlp.googlecode.com/svn/FudanNLP-1.5-API/java-docs/index.html).
 
 原FudanNLP项目地址：http://code.google.com/p/fudannlp 
 
@@ -34,7 +34,7 @@ You can also use the following site to check the partial functionality.
 
 有遇到FNLP不能处理的例子，请到这里提交: [协同数据收集](http://code.google.com/p/fudannlp/wiki/CollaborativeCollection)。
 
-有问题请查看[FAQ](http://www.fnlp.org/fnlp-faq)或到 QQ群（253541693）讨论。
+有问题请查看[FAQ](faq)或到 QQ群（253541693）讨论。
 
 
 
