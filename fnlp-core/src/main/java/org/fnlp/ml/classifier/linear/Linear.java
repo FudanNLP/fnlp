@@ -108,10 +108,10 @@ public class Linear extends AbstractClassifier implements Serializable	{
 	public static Linear loadFrom(String file) throws LoadModelException{
 		Linear cl = null;
 		try {
-			ObjectInputStream in = new ObjectInputStream(new GZIPInputStream(
-					new BufferedInputStream(new FileInputStream(file))));
-			cl = (Linear) in.readObject();
-			in.close();
+				ObjectInputStream in = new ObjectInputStream(new GZIPInputStream(
+					new BufferedInputStream(Linear.class.getClassLoader().getResourceAsStream(file))));
+				cl = (Linear) in.readObject();
+				in.close();
 		} catch (Exception e) {
 			throw new LoadModelException(e,file);
 		}

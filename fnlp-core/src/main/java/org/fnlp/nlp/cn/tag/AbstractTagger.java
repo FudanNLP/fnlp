@@ -199,11 +199,11 @@ public abstract class AbstractTagger {
 
 	public void loadFrom(String modelfile) throws LoadModelException{
 		try {
-			ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(
-					new GZIPInputStream(new FileInputStream(modelfile))));
-			templets = (TempletGroup) in.readObject();
-			setClassifier((Linear) in.readObject());
-			in.close();
+				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(
+					new GZIPInputStream(this.getClass().getClassLoader().getResourceAsStream(modelfile))));
+				templets = (TempletGroup) in.readObject();
+				setClassifier((Linear) in.readObject());
+				in.close();
 		} catch (Exception e) {
 			throw new LoadModelException(e,modelfile);
 		}
