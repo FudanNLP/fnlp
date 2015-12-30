@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.fnlp</groupId>
 	<artifactId>fnlp-core</artifactId>
-	<version>2.1-SNAPSHOT-gubnoi-v4</version>
+	<version>2.1-SNAPSHOT-gubnoi-v5</version>
 	<name>fnlp-core</name>
 	<url>https://github.com/xpqiu/fnlp/</url>
 	<description>FNLP is developed for Chinese natural language processing (NLP), which also includes some machine learning algorithms and data sets to achieve the NLP tasks. FNLP is distributed under LGPL3.0.</description>
@@ -121,13 +121,13 @@
         	<repository>
     			<id>com.gubnoi.fnlp</id>
     			<name>Gubnoi NLP</name>
-    			<url>git:releases://git@github.com:jing-zhou/fnlp.git</url>
+    			<url>git:releases://git@bitbucket.org:teamgubnoi/fnlp-core.git</url>
   			</repository>
   			
   			<snapshotRepository>
     			<id>com.gubnoi.fnlp</id>
     			<name>Gubnoi NLP</name>
-    			<url>git:snapshots://git@github.com:jing-zhou/fnlp.git</url>
+    			<url>git:snapshots://git@bitbucket.org:teamgubnoi/fnlp-core.git</url>
   			</snapshotRepository>
     </distributionManagement>
 	<build>
