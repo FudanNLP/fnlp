@@ -178,8 +178,8 @@ public class ChineseTrans {
 	 * 半角转全角的函数(SBC case)
 	 * 全角空格为12288，半角空格为32
 	 * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
-	 * @param input 任意字符串 全角字符串
-	 * @return 半角字符串
+	 * @param input 任意字符串 半角字符串
+	 * @return 全角字符串
 	 */
 	public static String toFullWidth(String input) {
 		char[] c = input.toCharArray();
@@ -202,8 +202,8 @@ public class ChineseTrans {
 	 * 转半角的函数(DBC case)
 	 * 全角空格为12288，半角空格为32
 	 * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
-	 * @param input 任意字符串 半角字符串
-	 * @return 全角字符串
+	 * @param input 任意字符串 全角字符串
+	 * @return 半角字符串
 	 */
 	public static String toHalfWidth(String input) {
 

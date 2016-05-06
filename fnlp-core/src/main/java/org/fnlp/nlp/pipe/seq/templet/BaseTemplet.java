@@ -32,7 +32,6 @@ import org.fnlp.ml.types.alphabet.IFeatureAlphabet;
  * 格式为： 
  *  0: %x[-1,0]%x[1,0]%y[0];
  *  1: %y[-1]%y[0]
- * @author Feng Ji
  */
 public class BaseTemplet implements Templet {
 
@@ -160,6 +159,7 @@ public class BaseTemplet implements Templet {
 			sb.append("/");
 		}
 		int index = features.lookupIndex(sb.toString(), (int) Math.pow(numLabels[0], order + 1));
+//		System.out.println(sb.toString());
 		return index;
 	}
 

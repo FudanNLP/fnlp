@@ -48,12 +48,15 @@ public class SegTrain extends AbstractTagger{
 
 		if(cl!=null){
 			factory = cl.getAlphabetFactory();
+
 		}else{
 			factory = AlphabetFactory.buildFactory();
+		}
+		if(templateFile!=null){
 			templets = new TempletGroup();
 			templets.load(templateFile);
 			for(Templet templet:templets){
-				((BaseTemplet) templet).minLen = 0;
+				((BaseTemplet) templet).minLen = 5;
 			}
 			//Dictionary d = new Dictionary();
 			// d.loadWithWeigth("D:/xpqiu/项目/自选/CLP2010/CWS/av-b-lut.txt",
@@ -61,10 +64,10 @@ public class SegTrain extends AbstractTagger{
 			// templets.add(new DictionaryTemplet(d, gid++, 0, 1));
 			// templets.add(new DictionaryTemplet(d, gid++, -1,0, 1));
 			// templets.add(new DictionaryTemplet(d, gid++, -2,-1,0, 1));
-//			CharClassDictionary dsurname = new CharClassDictionary();
-//			dsurname.load("../data/knowledge/百家姓.txt", "姓");
-//			templets.add(new CharClassTemplet(templets.gid++, new CharClassDictionary[]{dsurname}));
-//			templets.add(new CustomTemplet(templets.gid++));
+			//			CharClassDictionary dsurname = new CharClassDictionary();
+			//			dsurname.load("../data/knowledge/百家姓.txt", "姓");
+			//			templets.add(new CharClassTemplet(templets.gid++, new CharClassDictionary[]{dsurname}));
+			//			templets.add(new CustomTemplet(templets.gid++));
 		}
 
 

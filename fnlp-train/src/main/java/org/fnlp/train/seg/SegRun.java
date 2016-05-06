@@ -20,7 +20,7 @@ public class SegRun {
 	static String trainfile = "../data/FNLPDATA/train.seg";
 	static String testfile = "../data/FNLPDATA/test.seg";
 	static String output = "../data/FNLPDATA/res.3col";
-	static String templates = "../data/template-seg";
+	static String templates = "../data/template-seg-1";
 	static PrintWriter bw;
 
 	public static void main(String[] args) throws Exception {		
@@ -30,15 +30,19 @@ public class SegRun {
 		SegTrain seg;
 		
 		
-		seg = new SegTrain();
+		seg = new SegTrain();		
 		seg.model = model;
 		seg.train = trainfile;
+		seg.testfile =testfile;
 		seg.templateFile = templates;
-		seg.iterNum = 100;
+		seg.iterNum = 16;
 		seg.c = 0.01f;
 		seg.train();		
 		
-
+		seg.loadFrom(model);
+		seg.templateFile = "../data/template-seg-2";;
+		seg.iterNum = 16;
+		seg.c = 0.005f;
 		eval(seg);		
 		
 		/////////////////////////////////////////

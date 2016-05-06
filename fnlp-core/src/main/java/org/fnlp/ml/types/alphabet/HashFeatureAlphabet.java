@@ -33,7 +33,6 @@ import gnu.trove.map.hash.TIntIntHashMap;
 
 /**
  * 特征词典
- * @author Feng Ji
  *
  */
 public final class HashFeatureAlphabet implements IFeatureAlphabet {
