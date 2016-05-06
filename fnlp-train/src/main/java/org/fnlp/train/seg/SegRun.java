@@ -33,6 +33,7 @@ public class SegRun {
 		seg = new SegTrain();
 		seg.model = model;
 		seg.train = trainfile;
+		seg.testfile =testfile;
 		seg.templateFile = templates;
 		seg.iterNum = 100;
 		seg.c = 0.01f;

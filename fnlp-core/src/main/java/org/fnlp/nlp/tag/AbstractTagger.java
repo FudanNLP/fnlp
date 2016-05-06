@@ -33,7 +33,7 @@ import org.fnlp.nlp.pipe.Pipe;
 import org.fnlp.nlp.pipe.seq.templet.TempletGroup;
 
 public abstract class AbstractTagger {
-	
+
 	public Linear cl;
 	public String train;
 	public String testfile = null;
@@ -50,27 +50,27 @@ public abstract class AbstractTagger {
 	public Pipe featurePipe;
 	public TempletGroup templets;
 	public String newmodel;
-	public boolean hasLabel;
+	public boolean hasLabel = true;
 	protected LabelAlphabet labels;
 	protected IFeatureAlphabet features;
-	
+
 	protected InstanceSet trainSet =null;
 	protected InstanceSet testSet = null;
-	
-	
+
+
 	public void setFile(String templateFile, String train, String model) {
 		this.templateFile = templateFile;
 		this.train = train;
 		this.model = model;
 	}
-	
+
 	/**
 	 * 训练
 	 * @throws Exception
 	 */
 	public void train() throws Exception {
-		
-		loadTrainingData();
+
+		loadData();
 		/**
 		 * 
 		 * 更新参数的准则
@@ -190,19 +190,23 @@ public abstract class AbstractTagger {
 		cl = (Linear) in.readObject();
 		in.close();
 	}
-	
-	
 
-	public void loadTrainingData() throws Exception{
+
+	/**
+	 * 读入数据
+	 * @throws Exception
+	 * 10:16:18 PM
+	 */
+	public void loadData() throws Exception{
 
 		System.out.print("Loading training data ...");
 		long beginTime = System.currentTimeMillis();
 
 		Pipe pipe = createProcessor();
 
-		
+
 		trainSet = new InstanceSet(pipe, factory);
-		 labels = factory.DefaultLabelAlphabet();
+		labels = factory.DefaultLabelAlphabet();
 		features = factory.DefaultFeatureAlphabet();
 		features.setStopIncrement(false);
 		labels.setStopIncrement(false);
@@ -225,16 +229,10 @@ public abstract class AbstractTagger {
 		features.setStopIncrement(true);
 		labels.setStopIncrement(true);
 
-	}
-	
-	
-	public void loadTestData() throws Exception{
-		System.out.print("Loading test data ...");
-		Pipe pipe = createProcessor();
-		
-		
-		// /////////////////
+
+		// 读入测试数据
 		if (testfile != null) {
+			System.out.print("Loading test data ...");
 			boolean hasTarget = true;;
 			if (!hasTarget) {// 如果test data没有标注
 				pipe = featurePipe;
