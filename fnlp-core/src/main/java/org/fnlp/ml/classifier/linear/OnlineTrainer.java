@@ -169,11 +169,9 @@ public class OnlineTrainer extends AbstractTrainer {
 		//平均化感知器需要减去的权重
 		float[] extraweight = null;
 		extraweight = new float[weights.length];
-		
 			
 		
 		beginTime = System.currentTimeMillis();
-
 		
 		
 		//遍历的总样本数

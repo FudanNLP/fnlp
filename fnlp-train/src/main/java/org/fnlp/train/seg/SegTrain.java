@@ -43,6 +43,8 @@ import org.fnlp.ontology.CharClassDictionary;
  */
 public class SegTrain extends AbstractTagger{
 
+	public  int minLen = 0;
+
 	@Override
 	public Pipe createProcessor() throws Exception {
 
@@ -56,7 +58,7 @@ public class SegTrain extends AbstractTagger{
 			templets = new TempletGroup();
 			templets.load(templateFile);
 			for(Templet templet:templets){
-				((BaseTemplet) templet).minLen = 5;
+				((BaseTemplet) templet).minLen = minLen;
 			}
 			//Dictionary d = new Dictionary();
 			// d.loadWithWeigth("D:/xpqiu/项目/自选/CLP2010/CWS/av-b-lut.txt",

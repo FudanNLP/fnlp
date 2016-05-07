@@ -1,4 +1,4 @@
-FNLP (formerly FudanNLP)
+FudanNLP (FNLP)
 ====
 
 介绍(Introduction)

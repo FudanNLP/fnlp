@@ -20,7 +20,7 @@ public class SegRun {
 	static String trainfile = "../data/FNLPDATA/train.seg";
 	static String testfile = "../data/FNLPDATA/test.seg";
 	static String output = "../data/FNLPDATA/res.3col";
-	static String templates = "../data/template-seg-1";
+	
 	static PrintWriter bw;
 
 	public static void main(String[] args) throws Exception {		
@@ -34,15 +34,26 @@ public class SegRun {
 		seg.model = model;
 		seg.train = trainfile;
 		seg.testfile =testfile;
-		seg.templateFile = templates;
-		seg.iterNum = 16;
+		
+		seg.templateFile = "../data/template-seg-0";
+		seg.iterNum = 3;
+		seg.c = 0.001f;
+		seg.minLen = 5;
+		seg.train();		
+		
+		seg.templateFile = "../data/template-seg-1";
+		seg.iterNum = 10;
 		seg.c = 0.01f;
+		seg.minLen = 5;
 		seg.train();		
 		
 		seg.loadFrom(model);
 		seg.templateFile = "../data/template-seg-2";;
-		seg.iterNum = 16;
+		seg.iterNum = 5;
 		seg.c = 0.005f;
+		seg.minLen = 2;
+		seg.train();		
+		
 		eval(seg);		
 		
 		/////////////////////////////////////////
@@ -69,10 +80,13 @@ public class SegRun {
 
 	}
 
-	private static void eval(SegTrain seg)
+	static void eval(SegTrain seg)
 			throws UnsupportedEncodingException, FileNotFoundException,
 			Exception, IOException {
 		SeqEval ne;		
+		
+		if(bw==null)
+			bw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outputPath,true), "utf8"));		
 		
 		File modelF = new File(model);
 		bw.println("模型大小:"+modelF.length()/1000000.0);
