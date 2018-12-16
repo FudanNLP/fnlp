@@ -1,6 +1,7 @@
 FudanNLP (FNLP)
 
 2018.12.16 我们很高兴发布了FudanNLP的后续版本，一个全新的自然语言处理工具[FastNLP](https://github.com/fastnlp/fastNLP)。FudanNLP不再更新。
+
 2018.12.16 We are delighted to announce a new brand toolkit [FastNLP](https://github.com/fastnlp/fastNLP), a major update of the FudanNLP. The FudanNLP is no longer updated.
 
 ====
