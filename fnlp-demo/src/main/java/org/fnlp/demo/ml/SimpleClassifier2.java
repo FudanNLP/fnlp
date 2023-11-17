@@ -101,6 +101,5 @@ public class SimpleClassifier2 {
 		System.out.println("Total Time: " + (end - start));
 		System.out.println("End!");
 		(new File(modelFile)).deleteOnExit();
-		System.exit(0);
 	}
 }
