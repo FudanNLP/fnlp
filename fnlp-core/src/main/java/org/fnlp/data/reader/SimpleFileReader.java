@@ -113,6 +113,9 @@ public class SimpleFileReader extends Reader {
 		
 		try {
 			while(true){
+				if (reader==null) {
+					return false;
+				}
 			content = reader.readLine();
 			line++;
 			if(content==null){
